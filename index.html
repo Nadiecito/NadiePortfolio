@@ -60,7 +60,8 @@
       transition: background var(--t), color var(--t);
     }
 
-    a { color: inherit; }
+    a { color: var(--yellow); text-decoration: none; }
+    a:hover { text-decoration: underline; }
     img { display: block; }
 
     /* ═══════════════════════════════════════
@@ -316,9 +317,6 @@
       line-height: 1.8;
     }
 
-    .card-label--green  { background: #1a7a1a; }
-    .card-label--yellow { background: var(--yellow); color: #111; }
-    .card-label--blue   { background: var(--blue); }
 
     /* ═══════════════════════════════════════
        WHO — HEADER BAR
@@ -460,8 +458,7 @@
     }
 
     .bio-text strong { color: var(--fg); }
-    .bio-text a { color: var(--blue); font-weight: bold; text-decoration: none; }
-    .bio-text a:hover { text-decoration: underline; }
+    .bio-text a { font-weight: bold; }
 
     .bio-stats {
       display: flex;
@@ -523,10 +520,9 @@
 
     .trait:hover {
       transform: scale(1.1);
-      box-shadow: 4px 4px 0 var(--yellow);
+      box-shadow: 4px 4px 0 var(--border);
       filter: none !important;
       opacity: 1 !important;
-      border-color: var(--yellow) !important;
     }
 
     .trait--canceled { filter: grayscale(100%); opacity: 0.6; border-color: #444; }
@@ -596,8 +592,7 @@
 
     .artwork-card:hover {
       transform: translate(-3px, -3px);
-      box-shadow: 5px 5px 0 var(--yellow);
-      border-color: var(--yellow);
+      box-shadow: 5px 5px 0 var(--border);
     }
 
     .artwork-img {
@@ -651,8 +646,7 @@
 
     .contrib-card:hover {
       transform: translate(-3px, -3px);
-      box-shadow: 5px 5px 0 var(--yellow);
-      border-color: var(--yellow);
+      box-shadow: 5px 5px 0 var(--border);
     }
 
     .contrib-img {
@@ -919,7 +913,7 @@
       transition: border-color var(--t);
     }
 
-    .ch-photo:hover { border-color: var(--yellow); }
+    .ch-photo:hover { opacity: 0.85; }
 
     .ch-photo img {
       width: 100%;
@@ -1095,12 +1089,12 @@
         <div class="card-body who-residency-body">
           <div>
             <p style="font-size:0.9rem;color:var(--fg-muted);line-height:1.75;margin-bottom:0.75rem;">
-              En 2024, Nouns DAO aprobó la <strong style="color:var(--fg);">Prop #840</strong> —
+              En 2024, Nouns DAO aprobó la <strong>Prop #840</strong> —
               una residencia artística para un creador en Colombia. El modelo: financiamiento directo
               desde el DAO, libertad creativa total, y anclaje en la escena cultural local.
             </p>
             <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;">
-              La primera residente es <strong style="color:var(--yellow);">Nadiecito</strong>,
+              La primera residente es <strong>Nadiecito</strong>,
               pixel artista, ilustradora y gestora cultural de Cali. Su trabajo está documentado
               en la crónica de esta página — y su historia es solo el comienzo.
             </p>
@@ -1318,7 +1312,7 @@
       </div>
 
       <!-- ── NOC CARD ── -->
-      <div class="who-card">
+      <div class="who-card" style="grid-column:1 / -1;">
         <div class="card-label">NOC — Noun O'Clock Contributor</div>
         <div class="card-body">
           <div style="display:flex;align-items:flex-start;gap:1.25rem;margin-bottom:1rem;">
@@ -1341,8 +1335,8 @@
       </div>
 
       <!-- ── ABACUS CARD ── -->
-      <div class="who-card">
-        <div class="card-label card-label--green">✓ Part of the Infinite Artwork</div>
+      <div class="who-card" style="grid-column:1 / -1;">
+        <div class="card-label">✓ Part of the Infinite Artwork</div>
         <div class="card-body">
           <div style="display:grid;grid-template-columns:90px 1fr;gap:1rem;align-items:start;">
             <div style="border:3px solid var(--green);aspect-ratio:1;overflow:hidden;background:var(--bg-alt);">
@@ -1352,7 +1346,7 @@
             <div>
               <h4 style="font-family:var(--font-pixel);font-size:0.95rem;margin-bottom:0.25rem;color:var(--fg);">ABACUS HEAD</h4>
               <a href="https://www.nouns.camp/proposals/922" target="_blank" rel="noopener"
-                 style="font-size:0.75rem;color:var(--green);font-weight:bold;display:block;margin-bottom:0.5rem;text-decoration:none;">
+                 style="font-size:0.75rem;font-weight:bold;display:block;margin-bottom:0.5rem;">
                 Prop #922 · Executed ✓ ↗
               </a>
               <p style="font-size:0.8rem;color:var(--fg-muted);line-height:1.55;">
@@ -1364,8 +1358,8 @@
       </div>
 
       <!-- ── TOP 5 PROPOSER CARD ── -->
-      <div class="who-card" style="grid-column:1 / -1;border-color:var(--yellow);">
-        <div class="card-label card-label--yellow">⌐◨-◨ Top 5 Most Active Nouns Proposer</div>
+      <div class="who-card" style="grid-column:1 / -1;">
+        <div class="card-label">⌐◨-◨ Top 5 Most Active Nouns Proposer</div>
         <div class="card-body" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;">
           <div style="text-align:center;">
             <div style="font-family:var(--font-pixel);font-size:4rem;color:var(--yellow);line-height:1;">#5</div>
@@ -1374,8 +1368,8 @@
           <div>
             <h4 style="font-family:var(--font-pixel);font-size:1rem;margin-bottom:0.5rem;color:var(--fg);">15 On-Chain Proposals — 2 Approved</h4>
             <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.6;margin-bottom:1rem;">
-              With 15 on-chain proposals to Nouns DAO, Nadiecito ranks in the <strong style="color:var(--yellow);">Top 5 most active proposers</strong> in the entire ecosystem — a testament to persistent community engagement, creative contribution, and belief in the process.
-              2 proposals executed: <strong style="color:var(--fg);">Prop #840</strong> (Residency) &amp; <strong style="color:var(--green);">Prop #922</strong> (Abacus Head — now part of the infinite artwork).
+              With 15 on-chain proposals to Nouns DAO, Nadiecito ranks in the <strong>Top 5 most active proposers</strong> in the entire ecosystem — a testament to persistent community engagement, creative contribution, and belief in the process.
+              2 proposals executed: <strong>Prop #840</strong> (Residency) &amp; <strong>Prop #922</strong> (Abacus Head — now part of the infinite artwork).
             </p>
             <a href="https://www.nouns.game/gamers" target="_blank" rel="noopener" class="btn"
                style="font-size:0.45rem;padding:0.5rem 1.25rem;">
@@ -1387,7 +1381,7 @@
 
       <!-- ── NOUNDRY CARD ── -->
       <div class="who-card" style="grid-column:1 / -1;">
-        <div class="card-label card-label--blue">Noundry Gallery</div>
+        <div class="card-label">Noundry Gallery</div>
         <div class="card-body" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;">
           <div style="text-align:center;">
             <div class="noundry-num">200+</div>
@@ -1621,7 +1615,7 @@
       Started in 2024, funded by Nouns Amigos. In 2025 we brought it back — funded by Nouns DAO — bigger and with more artists.
     </p>
     <p style="margin-bottom:1.5rem;font-size:0.85rem;">
-      Full archive at <a href="https://ferianounish.xyz" target="_blank" style="color:#000;font-weight:bold;">ferianounish.xyz ↗</a>
+      Full archive at <a href="https://ferianounish.xyz" target="_blank" style="font-weight:bold;">ferianounish.xyz ↗</a>
     </p>
 
     <div class="feria-tabs">
@@ -1815,7 +1809,7 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Feria Gráfica Nounish — Primera Edición · Cali</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">First edition of the Nounish Graphic Fair, funded by Nouns Amigos. Local artists with their own stands, each designing a nounish-inspired sticker. The foundation of what became a recurring community gathering. Full archive at <a href="https://ferianounish.xyz" target="_blank" rel="noopener" style="color:var(--yellow);">ferianounish.xyz ↗</a></p>
+          <p class="ch-desc">First edition of the Nounish Graphic Fair, funded by Nouns Amigos. Local artists with their own stands, each designing a nounish-inspired sticker. The foundation of what became a recurring community gathering. Full archive at <a href="https://ferianounish.xyz" target="_blank" rel="noopener">ferianounish.xyz ↗</a></p>
           <div class="ch-photos">
             <!-- <img src="assets/events/feria2024-1.jpg" alt="Feria 2024" loading="lazy"> -->
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
@@ -1972,7 +1966,7 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Feria Gráfica Nounish 2.0 — Segunda Edición · Cali</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">Second edition funded through the Nouns DAO residency proposal. Bigger scale, more artists, more products, wider reach. Full archive at <a href="https://ferianounish.xyz" target="_blank" rel="noopener" style="color:var(--yellow);">ferianounish.xyz ↗</a></p>
+          <p class="ch-desc">Second edition funded through the Nouns DAO residency proposal. Bigger scale, more artists, more products, wider reach. Full archive at <a href="https://ferianounish.xyz" target="_blank" rel="noopener">ferianounish.xyz ↗</a></p>
           <div class="ch-photos">
             <!-- <img src="assets/events/feria2025-1.jpg" alt="Feria 2025" loading="lazy"> -->
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
@@ -2017,7 +2011,7 @@
     <div class="prop-pill">⌐◨ Cali, Colombia</div>
   </div>
   <p style="margin-bottom:1.5rem;color:#aaa;">
-    <strong style="color:var(--yellow);">What I'll do:</strong><br>
+    <strong>What I'll do:</strong><br>
     Graphic support for community projects · Content for key dates &amp; moments ·
     Social media strategy for Nouns Colombia · Artist networking in Cali ·
     Groundwork for Feria Nounish 3 · Prop for the fair by mid-year.
@@ -2025,7 +2019,7 @@
   <a href="#" class="btn">View Proposal on Nouns →</a>
   <br><br>
   <p style="font-size:0.8rem;color:#555;">
-    Questions? Find me on Warpcast or Discord as <strong style="color:var(--yellow);">@nadiecito</strong>
+    Questions? Find me on Warpcast or Discord as <strong>@nadiecito</strong>
   </p>
 </div>
 
