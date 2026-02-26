@@ -316,6 +316,10 @@
       line-height: 1.8;
     }
 
+    .card-label--green  { background: #1a7a1a; }
+    .card-label--yellow { background: var(--yellow); color: #111; }
+    .card-label--blue   { background: var(--blue); }
+
     /* ═══════════════════════════════════════
        WHO — HEADER BAR
     ═══════════════════════════════════════ */
@@ -363,6 +367,45 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 2.5rem 2rem;
+    }
+
+    .who-intro {
+      font-size: 0.95rem;
+      color: var(--fg-muted);
+      line-height: 1.8;
+      max-width: 780px;
+      margin-bottom: 2rem;
+    }
+
+    .who-residency-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .who-residency-divider {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0.5rem 0 0.25rem;
+    }
+
+    .who-residency-divider::before,
+    .who-residency-divider::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .who-residency-divider span {
+      font-family: var(--font-accent);
+      font-size: 0.38rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--yellow);
+      white-space: nowrap;
     }
 
     .who-grid {
@@ -718,6 +761,56 @@
     }
 
     /* ═══════════════════════════════════════
+       MURAL
+    ═══════════════════════════════════════ */
+    .mural-intro {
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      align-items: start;
+    }
+
+    .mural-meta-box {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 3px solid var(--border);
+    }
+
+    .mural-stat {
+      background: var(--bg-card);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .mural-stat-n {
+      display: block;
+      font-family: var(--font-pixel);
+      font-size: 1.8rem;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .mural-stat-l {
+      display: block;
+      font-family: var(--font-accent);
+      font-size: 0.38rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--fg-muted);
+    }
+
+    .mural-collab {
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      border-left: 4px solid var(--yellow);
+      background: var(--bg-alt);
+    }
+
+    /* ═══════════════════════════════════════
        CHRONICLE / TIMELINE
     ═══════════════════════════════════════ */
     .chronicle {
@@ -923,6 +1016,9 @@
       .who-header-inner { flex-direction: column; gap: 1rem; }
       .chronicle { padding-left: 2rem; }
       .bio-stats { gap: 1rem; }
+      .who-residency-body { grid-template-columns: 1fr; gap: 1rem; }
+      .mural-intro { grid-template-columns: 1fr; }
+      .mural-meta-box { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (max-width: 480px) {
@@ -943,11 +1039,12 @@
     <span class="nav-logo-text">Nouns Colombia</span>
   </a>
   <ul>
-    <li><a href="#who">Who</a></li>
-    <li><a href="#work">Work</a></li>
+    <li><a href="#who">Comunidad</a></li>
+    <li><a href="#work">Galería</a></li>
     <li><a href="#feria">Feria</a></li>
-    <li><a href="#chronicle">Chronicle</a></li>
-    <li><a href="#proposal">Proposal</a></li>
+    <li><a href="#mural">Mural</a></li>
+    <li><a href="#chronicle">Crónica</a></li>
+    <li><a href="#proposal">Propuesta</a></li>
   </ul>
   <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">☀ Light</button>
 </nav>
@@ -956,18 +1053,12 @@
      HERO
 ════════════════════════════════ -->
 <div id="hero">
-  <div class="hero-tag">Nouns DAO — Resident Artist</div>
+  <div class="hero-tag">Nouns Colombia ⌐◨-◨</div>
   <h1>Building <span>Nounish</span><br>Culture in Colombia</h1>
   <p class="hero-sub">
-    40+ artworks · 4 IRL events · Pixel art, illustration &amp; graphic design
-    for the Nouns ecosystem — from Cali to the world.
+    Una comunidad construyendo cultura en web3 desde Colombia,<br>
+    con el apoyo de Nouns DAO.
   </p>
-  <div class="hero-meta">
-    <span class="hero-pill">⌐◨-◨ Aug 2024 – Feb 2026</span>
-    <span class="hero-pill">📍 Cali, Colombia</span>
-    <span class="hero-pill">🎨 Pixel Art · Illustration · Graphic Design</span>
-    <span class="hero-pill">🏛 Noun O'Clock Contributor</span>
-  </div>
 </div>
 
 <div class="divider"></div>
@@ -981,15 +1072,57 @@
     <div class="who-header-inner">
       <img src="assets/nouns-colombia-logo.svg" alt="Nouns Colombia">
       <div class="who-header-text">
-        <div class="section-label">Who</div>
-        <h2>Nadiecito</h2>
-        <p>Pixel Artist · Illustrator · Community Builder · Cali, Colombia ⌐◨-◨</p>
+        <div class="section-label">Quiénes somos</div>
+        <h2>Nouns Colombia</h2>
+        <p>Arte · Cultura · Web3 · Cali, Colombia ⌐◨-◨</p>
       </div>
     </div>
   </div>
 
   <div class="who-body">
+
+    <p class="who-intro">
+      Nouns Colombia es una comunidad que lleva la cultura nounish a Colombia — ferias de arte gráfico,
+      murales colaborativos, encuentros IRL y un programa de residencia artística financiado por Nouns DAO.
+      Lo que sucede aquí es replicable en cualquier lugar del mundo.
+    </p>
+
     <div class="who-grid">
+
+      <!-- ── RESIDENCY PROGRAM CARD ── -->
+      <div class="who-card who-residency" style="grid-column:1 / -1;">
+        <div class="card-label">Programa de Residencia Artística</div>
+        <div class="card-body who-residency-body">
+          <div>
+            <p style="font-size:0.9rem;color:var(--fg-muted);line-height:1.75;margin-bottom:0.75rem;">
+              En 2024, Nouns DAO aprobó la <strong style="color:var(--fg);">Prop #840</strong> —
+              una residencia artística para un creador en Colombia. El modelo: financiamiento directo
+              desde el DAO, libertad creativa total, y anclaje en la escena cultural local.
+            </p>
+            <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;">
+              La primera residente es <strong style="color:var(--yellow);">Nadiecito</strong>,
+              pixel artista, ilustradora y gestora cultural de Cali. Su trabajo está documentado
+              en la crónica de esta página — y su historia es solo el comienzo.
+            </p>
+          </div>
+          <div>
+            <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;margin-bottom:0.75rem;">
+              <strong style="color:var(--fg);">¿Qué cabe en Nouns Colombia?</strong>
+            </p>
+            <ul style="font-size:0.83rem;color:var(--fg-muted);line-height:2.1;list-style:none;padding:0;">
+              <li>⌐◨ Residencias artísticas con respaldo de Nouns DAO</li>
+              <li>⌐◨ Ferias de arte gráfico con artistas locales</li>
+              <li>⌐◨ Murales, instalaciones y activaciones IRL</li>
+              <li>⌐◨ Galerías de distintos artistas en el tiempo</li>
+              <li>⌐◨ Participación en la escena artística de la ciudad</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="who-residency-divider">
+        <span>Artista Residente — Nadiecito</span>
+      </div>
 
       <!-- ── BIO CARD ── -->
       <div class="who-bio">
@@ -1209,7 +1342,7 @@
 
       <!-- ── ABACUS CARD ── -->
       <div class="who-card">
-        <div class="card-label" style="background:#1a7a1a;">✓ Part of the Infinite Artwork</div>
+        <div class="card-label card-label--green">✓ Part of the Infinite Artwork</div>
         <div class="card-body">
           <div style="display:grid;grid-template-columns:90px 1fr;gap:1rem;align-items:start;">
             <div style="border:3px solid var(--green);aspect-ratio:1;overflow:hidden;background:var(--bg-alt);">
@@ -1232,7 +1365,7 @@
 
       <!-- ── TOP 5 PROPOSER CARD ── -->
       <div class="who-card" style="grid-column:1 / -1;border-color:var(--yellow);">
-        <div class="card-label" style="background:var(--yellow);color:#111;">⌐◨-◨ Top 5 Most Active Nouns Proposer</div>
+        <div class="card-label card-label--yellow">⌐◨-◨ Top 5 Most Active Nouns Proposer</div>
         <div class="card-body" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;">
           <div style="text-align:center;">
             <div style="font-family:var(--font-pixel);font-size:4rem;color:var(--yellow);line-height:1;">#5</div>
@@ -1254,7 +1387,7 @@
 
       <!-- ── NOUNDRY CARD ── -->
       <div class="who-card" style="grid-column:1 / -1;">
-        <div class="card-label" style="background:var(--blue);">Noundry Gallery</div>
+        <div class="card-label card-label--blue">Noundry Gallery</div>
         <div class="card-body" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;">
           <div style="text-align:center;">
             <div class="noundry-num">200+</div>
@@ -1524,6 +1657,60 @@
         <div class="sticker-card"><div class="sticker-img"><span class="sticker-ph">⌐◨-◨</span></div><div class="sticker-artist">Artista 6</div></div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════
+     MURAL
+════════════════════════════════ -->
+<div class="section" id="mural">
+  <div class="section-label">Proyecto IRL · Dic 2024</div>
+  <h2>Mural "Amar y ya" — 60m²</h2>
+
+  <div class="mural-intro">
+    <div>
+      <p style="font-size:0.92rem;color:var(--fg-muted);line-height:1.8;margin-bottom:1rem;">
+        Un mural colaborativo de 15m × 4m en Cali, creado junto a 3 artistas locales entre el 11
+        y el 21 de diciembre de 2024. El tema: personas en situación de calle y sus vínculos
+        profundos con animales compañeros.
+      </p>
+      <p style="font-size:0.88rem;color:var(--fg-muted);line-height:1.8;margin-bottom:1rem;">
+        La frase <em style="color:var(--fg);">"Amar y ya"</em> (To love, and that's it) suena
+        como <em style="color:var(--fg);">"Amarilla"</em> (Yellow) — amor incondicional, sin condiciones.
+      </p>
+      <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;">
+        Los fondos de la residencia aseguraron una pared de 15m²; la colaboración con
+        <strong style="color:var(--fg);">Yellow Collective (Prop #18 Executed)</strong>
+        la expandió a 60m² totales. La inauguración del 21 de diciembre reunió a la comunidad:
+        empanadas, lulada, y una colecta de
+        <strong style="color:var(--fg);">28kg de alimento + 5 bolsas</strong>
+        para la Fundación Familia Cuatro Huellas.
+      </p>
+    </div>
+    <div class="mural-meta-box">
+      <div class="mural-stat"><span class="mural-stat-n">60m²</span><span class="mural-stat-l">Superficie total</span></div>
+      <div class="mural-stat"><span class="mural-stat-n">4</span><span class="mural-stat-l">Artistas</span></div>
+      <div class="mural-stat"><span class="mural-stat-n">28kg</span><span class="mural-stat-l">Comida donada</span></div>
+    </div>
+  </div>
+
+  <div class="ch-photos" style="margin-top:1.5rem;">
+    <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
+    <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
+    <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
+    <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
+  </div>
+
+  <div class="mural-collab">
+    <span class="ch-tag ch-tag--milestone" style="display:inline-block;margin-bottom:0.5rem;">Colaboración</span>
+    <p style="font-size:0.82rem;color:var(--fg-muted);line-height:1.7;">
+      <strong style="color:var(--fg);">Yellow Collective</strong> · Prop #18 Executed ·
+      Financiamiento cruzado que multiplicó la escala del proyecto ×4.
+      Un ejemplo de cómo la infraestructura de Nouns DAO permite que proyectos locales
+      se potencien entre sí.
+    </p>
   </div>
 </div>
 
