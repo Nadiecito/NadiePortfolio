@@ -431,7 +431,7 @@ h3 {
 .portrait-ph {
   text-align: center;
   padding: 1.5rem 1rem;
-  color: #555;
+  color: var(--fg-muted);
 }
 
 .who-bio-right {
@@ -514,7 +514,7 @@ h3 {
   opacity: 1 !important;
 }
 
-.trait--canceled { filter: grayscale(100%); opacity: 0.6; border-color: #444; }
+.trait--canceled { filter: grayscale(100%); opacity: 0.6; border-color: var(--border-hi); }
 .trait--defeated { border-color: var(--red); }
 .trait--executed { border-color: var(--green); }
 
@@ -1008,7 +1008,7 @@ footer span { color: var(--yellow); }
    RESPONSIVE
 ═══════════════════════════════════════ */
 @media (max-width: 700px) {
-  nav ul a { font-size: 0.4rem; padding: 0.5rem; }
+  nav ul a { font-size: 0.72rem; padding: 0.5rem; }
   .who-grid { grid-template-columns: 1fr; }
   .who-bio  { grid-column: 1; grid-template-columns: 1fr; }
   .who-portrait {
