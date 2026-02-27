@@ -18,14 +18,14 @@ function toggleTheme() {
 const langBtn = document.getElementById('lang-btn');
 const savedLang = localStorage.getItem('nc-lang') || 'en';
 root.setAttribute('data-lang', savedLang);
-langBtn.textContent = savedLang === 'en' ? 'ESP' : 'ENG';
+langBtn.textContent = savedLang === 'en' ? '🌐 ES' : '🌐 EN';
 
 langBtn.addEventListener('click', () => {
   const cur  = root.getAttribute('data-lang');
   const next = cur === 'en' ? 'es' : 'en';
   root.setAttribute('data-lang', next);
   localStorage.setItem('nc-lang', next);
-  langBtn.textContent = next === 'en' ? 'ESP' : 'ENG';
+  langBtn.textContent = next === 'en' ? '🌐 ES' : '🌐 EN';
 });
 
 // ── Feria tabs ──
