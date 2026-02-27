@@ -995,11 +995,11 @@ h3 {
 ═══════════════════════════════════════ */
 footer {
   background: #0a0a0a;
-  color: #444;
+  color: #666;
   text-align: center;
   padding: 2rem;
   font-size: 0.75rem;
-  border-top: 3px solid #222;
+  border-top: 3px solid #1e1e1e;
 }
 
 footer span { color: var(--yellow); }
@@ -1026,7 +1026,9 @@ footer span { color: var(--yellow); }
 }
 
 @media (max-width: 480px) {
-  nav ul { display: none; }
+  nav { flex-wrap: wrap; height: auto; padding: 0.5rem 1rem; gap: 0.5rem; }
+  nav ul { flex-wrap: wrap; gap: 0; }
+  nav ul a { font-size: 0.6rem; padding: 0.35rem 0.4rem; }
   .who-grid { grid-template-columns: 1fr; }
 }
 
