@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,1019 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/nouns-colombia-logo.svg">
-  <style>
-
-    /* ═══════════════════════════════════════
-       DESIGN TOKENS
-    ═══════════════════════════════════════ */
-    :root {
-      --yellow: #f8d03a;
-      --red:    #e83b3b;
-      --blue:   #4965ff;
-      --green:  #2a9d2a;
-      --font-pixel:  'VT323', 'Courier New', monospace;
-      --font-accent: 'Pixelify Sans', monospace;
-      --font-body:   'Courier New', monospace;
-      --t: 0.2s;
-    }
-
-    /* DARK (default) */
-    :root, [data-theme="dark"] {
-      --bg:       #111111;
-      --bg-alt:   #181818;
-      --bg-card:  #1c1c1c;
-      --fg:       #f0f0f0;
-      --fg-muted: #888888;
-      --border:   #2e2e2e;
-      --border-hi:#555555;
-    }
-
-    /* LIGHT */
-    [data-theme="light"] {
-      --bg:       #f8f8f0;
-      --bg-alt:   #ffffff;
-      --bg-card:  #ffffff;
-      --fg:       #111111;
-      --fg-muted: #666666;
-      --border:   #111111;
-      --border-hi:#111111;
-    }
-
-    /* ═══════════════════════════════════════
-       RESET & BASE
-    ═══════════════════════════════════════ */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.6;
-      transition: background var(--t), color var(--t);
-    }
-
-    a { color: var(--yellow); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    img { display: block; }
-
-    /* ═══════════════════════════════════════
-       NAV
-    ═══════════════════════════════════════ */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: #0a0a0a;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1.5rem;
-      height: 60px;
-      border-bottom: 3px solid var(--yellow);
-      gap: 1rem;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--yellow);
-      flex-shrink: 0;
-    }
-
-    .nav-logo img {
-      width: 42px;
-      height: 42px;
-      image-rendering: pixelated;
-    }
-
-    .nav-logo-text {
-      font-family: var(--font-pixel);
-      font-size: 1.5rem;
-      color: var(--yellow);
-      line-height: 1;
-      letter-spacing: 1px;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-
-    nav ul a {
-      color: var(--fg-muted);
-      text-decoration: none;
-      font-family: var(--font-accent);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 0.5rem 0.75rem;
-      transition: color var(--t);
-      white-space: nowrap;
-    }
-
-    nav ul a:hover { color: var(--yellow); }
-
-    .theme-btn {
-      background: none;
-      border: 2px solid var(--yellow);
-      color: var(--yellow);
-      font-family: var(--font-accent);
-      font-size: 0.8rem;
-      padding: 0.45rem 0.75rem;
-      cursor: pointer;
-      flex-shrink: 0;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: background var(--t), color var(--t);
-      white-space: nowrap;
-    }
-
-    .theme-btn:hover { background: var(--yellow); color: #111; }
-
-    /* ═══════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════ */
-    #hero {
-      background: #0a0a0a;
-      color: #f0f0f0;
-      padding: 5rem 2rem 4rem;
-      text-align: center;
-      border-bottom: 6px solid var(--yellow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    #hero::before {
-      content: '⌐◨-◨';
-      position: absolute;
-      font-family: var(--font-pixel);
-      font-size: 14rem;
-      opacity: 0.03;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      background: var(--yellow);
-      color: #111;
-      font-family: var(--font-accent);
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      margin-bottom: 1.75rem;
-    }
-
-    #hero h1 {
-      font-family: var(--font-pixel);
-      font-size: clamp(2.2rem, 6vw, 4.5rem);
-      font-weight: normal;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-      color: #fff;
-    }
-
-    #hero h1 span { color: var(--yellow); }
-
-    .hero-sub {
-      font-size: 1rem;
-      color: #aaa;
-      max-width: 560px;
-      margin: 0 auto 2rem;
-    }
-
-    .hero-meta {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .hero-pill {
-      border: 1px solid #333;
-      color: #777;
-      padding: 4px 12px;
-      font-size: 0.75rem;
-    }
-
-    /* ═══════════════════════════════════════
-       DIVIDER
-    ═══════════════════════════════════════ */
-    .divider {
-      width: 100%;
-      height: 6px;
-      background: repeating-linear-gradient(
-        90deg,
-        #111 0, #111 24px,
-        var(--yellow) 24px, var(--yellow) 48px
-      );
-    }
-
-    /* ═══════════════════════════════════════
-       SECTION WRAPPER
-    ═══════════════════════════════════════ */
-    .section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-
-    .section-label {
-      font-family: var(--font-accent);
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 0.75rem;
-    }
-
-    h2 {
-      font-family: var(--font-pixel);
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: normal;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      color: var(--fg);
-    }
-
-    h3 {
-      font-family: var(--font-pixel);
-      font-size: 1.2rem;
-      font-weight: normal;
-      margin-bottom: 0.4rem;
-    }
-
-    /* ═══════════════════════════════════════
-       CARD SYSTEM — shared
-    ═══════════════════════════════════════ */
-    .card {
-      background: var(--bg-card);
-      border: 3px solid var(--border);
-      overflow: hidden;
-    }
-
-    .card-label {
-      background: #111;
-      color: var(--yellow);
-      font-family: var(--font-accent);
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 0.65rem 1rem;
-      border-bottom: 2px solid var(--border);
-    }
-
-    .card-body { padding: 1.25rem; }
-
-    /* ═══════════════════════════════════════
-       STATS
-    ═══════════════════════════════════════ */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 3px solid var(--border);
-      margin-top: 2rem;
-    }
-
-    .stat-cell {
-      background: var(--bg-card);
-      padding: 1.75rem 1rem;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-family: var(--font-pixel);
-      font-size: 2.8rem;
-      color: var(--yellow);
-      line-height: 1;
-      display: block;
-    }
-
-    .stat-lbl {
-      font-family: var(--font-accent);
-      font-size: 0.75rem;
-      color: var(--fg-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 0.5rem;
-      display: block;
-      line-height: 1.8;
-    }
-
-
-    /* ═══════════════════════════════════════
-       WHO — HEADER BAR
-    ═══════════════════════════════════════ */
-    #who-header {
-      background: var(--yellow);
-      border-top: 6px solid #111;
-      border-bottom: 6px solid #111;
-      padding: 2.5rem 2rem;
-    }
-
-    .who-header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .who-header-inner > img {
-      width: 100px;
-      height: 100px;
-      image-rendering: pixelated;
-      flex-shrink: 0;
-      border: 3px solid #111;
-    }
-
-    .who-header-text .section-label { color: rgba(0,0,0,0.4); }
-
-    .who-header-text h2 {
-      color: #111;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      margin-bottom: 0.2rem;
-    }
-
-    .who-header-text p {
-      font-size: 0.9rem;
-      color: #444;
-      font-family: var(--font-body);
-    }
-
-    /* ═══════════════════════════════════════
-       WHO — BODY GRID
-    ═══════════════════════════════════════ */
-    .who-body {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2.5rem 2rem;
-    }
-
-    .who-intro {
-      font-size: 0.95rem;
-      color: var(--fg-muted);
-      line-height: 1.8;
-      max-width: 780px;
-      margin-bottom: 2rem;
-    }
-
-    .who-residency-body {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    .who-residency-divider {
-      grid-column: 1 / -1;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 0.5rem 0 0.25rem;
-    }
-
-    .who-residency-divider::before,
-    .who-residency-divider::after {
-      content: '';
-      flex: 1;
-      height: 2px;
-      background: var(--border);
-    }
-
-    .who-residency-divider span {
-      font-family: var(--font-accent);
-      font-size: 0.38rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--yellow);
-      white-space: nowrap;
-    }
-
-    .who-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    /* ── Bio card ── */
-    .who-bio {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      background: var(--bg-card);
-      border: 3px solid var(--border);
-      overflow: hidden;
-    }
-
-    .who-portrait {
-      background: var(--bg-alt);
-      border-right: 3px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 260px;
-      overflow: hidden;
-    }
-
-    .who-portrait img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      image-rendering: pixelated;
-    }
-
-    .portrait-ph {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      color: #555;
-    }
-
-    .who-bio-right {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .bio-text {
-      font-size: 0.88rem;
-      color: var(--fg-muted);
-      line-height: 1.7;
-      margin-bottom: 0.75rem;
-    }
-
-    .bio-text strong { color: var(--fg); }
-    .bio-text a { font-weight: bold; }
-
-    .bio-stats {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      padding-top: 1rem;
-      margin-top: 0.5rem;
-      border-top: 2px solid var(--border);
-    }
-
-    .bio-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-
-    .bio-stat-n {
-      font-family: var(--font-pixel);
-      font-size: 1.5rem;
-      color: var(--yellow);
-      line-height: 1;
-    }
-
-    .bio-stat-l {
-      font-family: var(--font-accent);
-      font-size: 0.75rem;
-      color: var(--fg-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-align: center;
-      line-height: 1.8;
-    }
-
-    /* ── WHO generic card ── */
-    .who-card {
-      background: var(--bg-card);
-      border: 3px solid var(--border);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ── Props card ── */
-    .who-props { grid-column: 1 / -1; }
-
-    .traits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-    }
-
-    .trait {
-      border: 3px solid var(--border);
-      background: var(--bg-alt);
-      text-align: center;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s, border-color 0.2s, opacity 0.2s;
-    }
-
-    .trait:hover {
-      transform: scale(1.1);
-      box-shadow: 4px 4px 0 var(--border);
-      filter: none !important;
-      opacity: 1 !important;
-    }
-
-    .trait--canceled { filter: grayscale(100%); opacity: 0.6; border-color: #444; }
-    .trait--defeated { border-color: var(--red); }
-    .trait--executed { border-color: var(--green); }
-
-    .trait-img {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1;
-      background: #222;
-      overflow: hidden;
-    }
-
-    [data-theme="light"] .trait-img { background: #e0e0e0; }
-
-    .trait-img img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      image-rendering: pixelated;
-    }
-
-    .trait-info {
-      padding: 0.35rem 0.4rem;
-      font-size: 0.6rem;
-      border-top: 2px solid var(--border);
-      background: var(--bg-card);
-    }
-
-    .trait--defeated .trait-info { border-top-color: var(--red); }
-    .trait--executed .trait-info { border-top-color: var(--green); }
-
-    .trait-name { font-weight: bold; color: var(--fg); display: block; line-height: 1.3; }
-    .trait-prop { color: var(--fg-muted); display: block; }
-    .trait-status { display: block; }
-    .trait--defeated .trait-status { color: var(--red); }
-    .trait--canceled .trait-status { color: var(--fg-muted); }
-    .trait--executed .trait-status { color: var(--green); font-weight: bold; }
-
-    /* ── Noundry big num ── */
-    .noundry-num {
-      font-family: var(--font-pixel);
-      font-size: 3.5rem;
-      color: var(--yellow);
-      line-height: 1;
-    }
-
-    /* ═══════════════════════════════════════
-       WORK / PORTFOLIO
-    ═══════════════════════════════════════ */
-    .artwork-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .artwork-card {
-      background: var(--bg-card);
-      border: 3px solid var(--border);
-      overflow: hidden;
-      transition: transform var(--t), box-shadow var(--t), border-color var(--t);
-    }
-
-    .artwork-card:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: 5px 5px 0 var(--border);
-    }
-
-    .artwork-img {
-      width: 100%;
-      aspect-ratio: 1;
-      background: var(--bg-alt);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .artwork-img img,
-    .artwork-img video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      image-rendering: pixelated;
-      display: block;
-    }
-
-    .ph-icon {
-      font-family: var(--font-pixel);
-      font-size: 2rem;
-      color: var(--border-hi);
-    }
-
-    .artwork-caption {
-      padding: 0.6rem 0.75rem;
-      font-size: 0.75rem;
-      border-top: 2px solid var(--border);
-      color: var(--fg-muted);
-    }
-
-    /* ═══════════════════════════════════════
-       CONTRIBUTIONS
-    ═══════════════════════════════════════ */
-    .contrib-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .contrib-card {
-      background: var(--bg-card);
-      border: 3px solid var(--border);
-      overflow: hidden;
-      transition: transform var(--t), box-shadow var(--t), border-color var(--t);
-    }
-
-    .contrib-card:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: 5px 5px 0 var(--border);
-    }
-
-    .contrib-img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: var(--bg-alt);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 2px solid var(--border);
-      overflow: hidden;
-    }
-
-    .contrib-img img { width: 100%; height: 100%; object-fit: cover; }
-
-    .contrib-body { padding: 0.75rem; }
-
-    .contrib-name {
-      font-family: var(--font-pixel);
-      font-size: 0.9rem;
-      color: var(--fg);
-      display: block;
-      margin-bottom: 0.25rem;
-    }
-
-    .contrib-desc { font-size: 0.78rem; color: var(--fg-muted); }
-
-    /* ═══════════════════════════════════════
-       FERIA — always yellow bg
-    ═══════════════════════════════════════ */
-    #feria {
-      background: var(--yellow);
-      padding: 4rem 2rem;
-      border-top: 6px solid #111;
-      border-bottom: 6px solid #111;
-    }
-
-    #feria .inner { max-width: 1100px; margin: 0 auto; }
-
-    #feria h2 { color: #111; }
-    #feria .section-label { color: rgba(0,0,0,0.4); }
-    #feria p { color: #333; }
-
-    .feria-tabs {
-      display: flex;
-      border: 3px solid #111;
-      width: fit-content;
-      margin: 1.5rem 0 1rem;
-    }
-
-    .feria-tab {
-      padding: 0.5rem 1.25rem;
-      font-family: var(--font-accent);
-      font-size: 0.5rem;
-      cursor: pointer;
-      border: none;
-      background: #fff;
-      border-right: 3px solid #111;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .feria-tab:last-child { border-right: none; }
-    .feria-tab.active { background: #111; color: var(--yellow); }
-
-    .feria-panel { display: none; }
-    .feria-panel.active { display: block; }
-
-    .sticker-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 1rem;
-    }
-
-    .sticker-card {
-      background: #fff;
-      border: 3px solid #111;
-      overflow: hidden;
-      text-align: center;
-      transition: transform var(--t), box-shadow var(--t);
-    }
-
-    .sticker-card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #111; }
-
-    .sticker-img {
-      width: 100%;
-      aspect-ratio: 1;
-      background: #f0f0f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .sticker-img img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
-    .sticker-ph { font-family: var(--font-pixel); font-size: 1.8rem; color: #ccc; }
-
-    .sticker-artist {
-      padding: 0.4rem 0.5rem;
-      font-family: var(--font-accent);
-      font-size: 0.4rem;
-      letter-spacing: 1px;
-      border-top: 2px solid #111;
-      color: #111;
-    }
-
-    /* ═══════════════════════════════════════
-       MURAL
-    ═══════════════════════════════════════ */
-    .mural-intro {
-      display: grid;
-      grid-template-columns: 1fr 240px;
-      gap: 2rem;
-      margin-top: 1.5rem;
-      align-items: start;
-    }
-
-    .mural-meta-box {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 3px solid var(--border);
-    }
-
-    .mural-stat {
-      background: var(--bg-card);
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .mural-stat-n {
-      display: block;
-      font-family: var(--font-pixel);
-      font-size: 1.8rem;
-      color: var(--yellow);
-      line-height: 1;
-      margin-bottom: 0.25rem;
-    }
-
-    .mural-stat-l {
-      display: block;
-      font-family: var(--font-accent);
-      font-size: 0.38rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--fg-muted);
-    }
-
-    .mural-collab {
-      margin-top: 1.5rem;
-      padding: 1rem 1.25rem;
-      border-left: 4px solid var(--yellow);
-      background: var(--bg-alt);
-    }
-
-    /* ═══════════════════════════════════════
-       CHRONICLE / TIMELINE
-    ═══════════════════════════════════════ */
-    .chronicle {
-      position: relative;
-      margin-top: 2.5rem;
-      padding-left: 3rem;
-    }
-
-    /* Vertical yellow line */
-    .chronicle::before {
-      content: '';
-      position: absolute;
-      left: 0.85rem;
-      top: 0.5rem;
-      bottom: 0;
-      width: 4px;
-      background: var(--yellow);
-    }
-
-    .ch-entry {
-      position: relative;
-      margin-bottom: 2.5rem;
-    }
-
-    /* Yellow square bullet */
-    .ch-entry::before {
-      content: '';
-      position: absolute;
-      left: -2.25rem;
-      top: 0.45rem;
-      width: 14px;
-      height: 14px;
-      background: var(--yellow);
-      border: 3px solid var(--bg);
-      outline: 2px solid var(--yellow);
-    }
-
-    .ch-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .ch-date {
-      font-family: var(--font-accent);
-      font-size: 0.72rem;
-      color: var(--fg-muted);
-      letter-spacing: 1px;
-      font-weight: bold;
-    }
-
-    .ch-tag {
-      font-family: var(--font-accent);
-      font-size: 0.62rem;
-      padding: 3px 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .ch-tag--milestone { background: var(--yellow); color: #111; }
-    .ch-tag--event     { background: var(--blue);   color: #fff; }
-    .ch-tag--artwork   { background: var(--green);  color: #fff; }
-
-    .ch-card {
-      background: var(--bg-card);
-      border: 3px solid var(--border);
-      overflow: hidden;
-      transition: border-color var(--t);
-    }
-
-    .ch-card-head {
-      padding: 0.75rem 1rem;
-      border-bottom: 2px solid var(--border);
-    }
-
-    .ch-card-head h3 { margin: 0; }
-
-    .ch-card-body { padding: 0.75rem 1rem; }
-
-    .ch-desc {
-      font-size: 0.85rem;
-      color: var(--fg-muted);
-      line-height: 1.65;
-    }
-
-    /* Photo grid inside chronicle */
-    .ch-photos {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-top: 0.75rem;
-    }
-
-    .ch-photo {
-      width: 120px;
-      height: 90px;
-      border: 2px solid var(--border);
-      background: var(--bg-alt);
-      overflow: hidden;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color var(--t);
-    }
-
-    .ch-photo:hover { opacity: 0.85; }
-
-    .ch-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .ch-photo-ph { font-size: 1.2rem; color: var(--border-hi); }
-
-    /* ═══════════════════════════════════════
-       PROPOSAL
-    ═══════════════════════════════════════ */
-    #proposal {
-      background: #0a0a0a;
-      color: #f0f0f0;
-      text-align: center;
-      padding: 5rem 2rem;
-    }
-
-    #proposal h2 {
-      color: var(--yellow);
-      font-size: clamp(1.6rem, 4vw, 2.8rem);
-      margin-bottom: 1rem;
-    }
-
-    #proposal > p {
-      max-width: 560px;
-      margin: 0 auto 2rem;
-      color: #999;
-      font-size: 0.95rem;
-    }
-
-    .prop-pills {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-    }
-
-    .prop-pill {
-      border: 2px solid var(--yellow);
-      color: var(--yellow);
-      padding: 0.45rem 1rem;
-      font-family: var(--font-accent);
-      font-size: 0.4rem;
-      letter-spacing: 1px;
-    }
-
-    .btn {
-      display: inline-block;
-      background: var(--yellow);
-      color: #111;
-      font-family: var(--font-accent);
-      font-size: 0.5rem;
-      letter-spacing: 1px;
-      padding: 0.8rem 2rem;
-      text-decoration: none;
-      border: 3px solid var(--yellow);
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background var(--t), color var(--t);
-    }
-
-    .btn:hover { background: transparent; color: var(--yellow); }
-
-    /* ═══════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════ */
-    footer {
-      background: #0a0a0a;
-      color: #444;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.75rem;
-      border-top: 3px solid #222;
-    }
-
-    footer span { color: var(--yellow); }
-
-    /* ═══════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════ */
-    @media (max-width: 700px) {
-      nav ul a { font-size: 0.4rem; padding: 0.5rem; }
-      .who-grid { grid-template-columns: 1fr; }
-      .who-bio  { grid-column: 1; grid-template-columns: 1fr; }
-      .who-portrait {
-        border-right: none;
-        border-bottom: 3px solid var(--border);
-        min-height: 160px;
-      }
-      .traits-grid { grid-template-columns: repeat(2, 1fr); }
-      .who-header-inner { flex-direction: column; gap: 1rem; }
-      .chronicle { padding-left: 2rem; }
-      .bio-stats { gap: 1rem; }
-      .who-residency-body { grid-template-columns: 1fr; gap: 1rem; }
-      .mural-intro { grid-template-columns: 1fr; }
-      .mural-meta-box { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    @media (max-width: 480px) {
-      nav ul { display: none; }
-      .who-grid { grid-template-columns: 1fr; }
-    }
-
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -1033,13 +21,14 @@
     <span class="nav-logo-text">Nouns Colombia</span>
   </a>
   <ul>
-    <li><a href="#who">Comunidad</a></li>
-    <li><a href="#work">Galería</a></li>
+    <li><a href="#who"><span class="t-en">Community</span><span class="t-es">Comunidad</span></a></li>
+    <li><a href="#work"><span class="t-en">Gallery</span><span class="t-es">Galería</span></a></li>
     <li><a href="#feria">Feria</a></li>
     <li><a href="#mural">Mural</a></li>
-    <li><a href="#chronicle">Crónica</a></li>
-    <li><a href="#proposal">Propuesta</a></li>
+    <li><a href="#chronicle"><span class="t-en">Chronicle</span><span class="t-es">Crónica</span></a></li>
+    <li><a href="#proposal"><span class="t-en">Proposal</span><span class="t-es">Propuesta</span></a></li>
   </ul>
+  <button class="theme-btn" id="lang-btn" aria-label="Toggle language">ESP</button>
   <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">☀ Light</button>
 </nav>
 
@@ -1050,8 +39,8 @@
   <div class="hero-tag">Nouns Colombia ⌐◨-◨</div>
   <h1>Building <span>Nounish</span><br>Culture in Colombia</h1>
   <p class="hero-sub">
-    Una comunidad construyendo cultura en web3 desde Colombia,<br>
-    con el apoyo de Nouns DAO.
+    <span class="t-en">A community building web3 culture from Colombia,<br>with the support of Nouns DAO.</span>
+    <span class="t-es">Una comunidad construyendo cultura en web3 desde Colombia,<br>con el apoyo de Nouns DAO.</span>
   </p>
 </div>
 
@@ -1066,16 +55,21 @@
     <div class="who-header-inner">
       <img src="assets/nouns-colombia-logo.svg" alt="Nouns Colombia">
       <div class="who-header-text">
-        <div class="section-label">Quiénes somos</div>
+        <div class="section-label"><span class="t-en">Who we are</span><span class="t-es">Quiénes somos</span></div>
         <h2>Nouns Colombia</h2>
-        <p>Arte · Cultura · Web3 · Cali, Colombia ⌐◨-◨</p>
+        <p><span class="t-en">Art · Culture · Web3 · Cali, Colombia ⌐◨-◨</span><span class="t-es">Arte · Cultura · Web3 · Cali, Colombia ⌐◨-◨</span></p>
       </div>
     </div>
   </div>
 
   <div class="who-body">
 
-    <p class="who-intro">
+    <p class="who-intro t-en">
+      Nouns Colombia is a community bringing nounish culture to Colombia — graphic art fairs,
+      collaborative murals, IRL events, and an artist residency program funded by Nouns DAO.
+      What happens here can happen anywhere.
+    </p>
+    <p class="who-intro t-es">
       Nouns Colombia es una comunidad que lleva la cultura nounish a Colombia — ferias de arte gráfico,
       murales colaborativos, encuentros IRL y un programa de residencia artística financiado por Nouns DAO.
       Lo que sucede aquí es replicable en cualquier lugar del mundo.
@@ -1085,15 +79,25 @@
 
       <!-- ── RESIDENCY PROGRAM CARD ── -->
       <div class="who-card who-residency" style="grid-column:1 / -1;">
-        <div class="card-label">Programa de Residencia Artística</div>
+        <div class="card-label"><span class="t-en">Artist Residency Program</span><span class="t-es">Programa de Residencia Artística</span></div>
         <div class="card-body who-residency-body">
           <div>
-            <p style="font-size:0.9rem;color:var(--fg-muted);line-height:1.75;margin-bottom:0.75rem;">
+            <p style="font-size:0.9rem;color:var(--fg-muted);line-height:1.75;margin-bottom:0.75rem;" class="t-en">
+              In 2024, Nouns DAO approved <strong>Prop #840</strong> —
+              an artist residency for a creator in Colombia. The model: direct DAO funding,
+              full creative freedom, and roots in the local cultural scene.
+            </p>
+            <p style="font-size:0.9rem;color:var(--fg-muted);line-height:1.75;margin-bottom:0.75rem;" class="t-es">
               En 2024, Nouns DAO aprobó la <strong>Prop #840</strong> —
               una residencia artística para un creador en Colombia. El modelo: financiamiento directo
               desde el DAO, libertad creativa total, y anclaje en la escena cultural local.
             </p>
-            <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;">
+            <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;" class="t-en">
+              The first resident is <strong>Nadiecito</strong>,
+              pixel artist, illustrator, and cultural organizer from Cali. Her work is documented
+              in this page's chronicle — and her story is just the beginning.
+            </p>
+            <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;" class="t-es">
               La primera residente es <strong>Nadiecito</strong>,
               pixel artista, ilustradora y gestora cultural de Cali. Su trabajo está documentado
               en la crónica de esta página — y su historia es solo el comienzo.
@@ -1101,21 +105,21 @@
           </div>
           <div>
             <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;margin-bottom:0.75rem;">
-              <strong style="color:var(--fg);">¿Qué cabe en Nouns Colombia?</strong>
+              <strong><span class="t-en">What fits in Nouns Colombia?</span><span class="t-es">¿Qué cabe en Nouns Colombia?</span></strong>
             </p>
             <ul style="font-size:0.83rem;color:var(--fg-muted);line-height:2.1;list-style:none;padding:0;">
-              <li>⌐◨ Residencias artísticas con respaldo de Nouns DAO</li>
-              <li>⌐◨ Ferias de arte gráfico con artistas locales</li>
-              <li>⌐◨ Murales, instalaciones y activaciones IRL</li>
-              <li>⌐◨ Galerías de distintos artistas en el tiempo</li>
-              <li>⌐◨ Participación en la escena artística de la ciudad</li>
+              <li><span class="t-en">⌐◨ Artist residencies backed by Nouns DAO</span><span class="t-es">⌐◨ Residencias artísticas con respaldo de Nouns DAO</span></li>
+              <li><span class="t-en">⌐◨ Graphic art fairs with local artists</span><span class="t-es">⌐◨ Ferias de arte gráfico con artistas locales</span></li>
+              <li><span class="t-en">⌐◨ Murals, installations and IRL activations</span><span class="t-es">⌐◨ Murales, instalaciones y activaciones IRL</span></li>
+              <li><span class="t-en">⌐◨ Galleries from different artists over time</span><span class="t-es">⌐◨ Galerías de distintos artistas en el tiempo</span></li>
+              <li><span class="t-en">⌐◨ Participation in the city's art scene</span><span class="t-es">⌐◨ Participación en la escena artística de la ciudad</span></li>
             </ul>
           </div>
         </div>
       </div>
 
       <div class="who-residency-divider">
-        <span>Artista Residente — Nadiecito</span>
+        <span><span class="t-en">Artist in Residence — Nadiecito</span><span class="t-es">Artista Residente — Nadiecito</span></span>
       </div>
 
       <!-- ── BIO CARD ── -->
@@ -1405,17 +409,17 @@
      STATS
 ════════════════════════════════ -->
 <div class="section" id="stats">
-  <div class="section-label">By the numbers</div>
-  <h2>Residency in Review</h2>
+  <div class="section-label"><span class="t-en">By the numbers</span><span class="t-es">En cifras</span></div>
+  <h2><span class="t-en">Residency in Review</span><span class="t-es">La Residencia en Cifras</span></h2>
   <div class="stats-grid">
-    <div class="stat-cell"><span class="stat-num">40+</span><span class="stat-lbl">Artworks &amp;<br>Animations*</span></div>
-    <div class="stat-cell"><span class="stat-num">15</span><span class="stat-lbl">On-Chain<br>Proposals</span></div>
-    <div class="stat-cell"><span class="stat-num">4</span><span class="stat-lbl">IRL Events<br>in Cali*</span></div>
-    <div class="stat-cell"><span class="stat-num">500+</span><span class="stat-lbl">Event<br>Attendees*</span></div>
-    <div class="stat-cell"><span class="stat-num">8</span><span class="stat-lbl">Projects<br>Supported</span></div>
-    <div class="stat-cell"><span class="stat-num">1</span><span class="stat-lbl">Head in the<br>Collection ✓</span></div>
+    <div class="stat-cell"><span class="stat-num">40+</span><span class="stat-lbl"><span class="t-en">Artworks &amp;<br>Animations*</span><span class="t-es">Obras &amp;<br>Animaciones*</span></span></div>
+    <div class="stat-cell"><span class="stat-num">15</span><span class="stat-lbl"><span class="t-en">On-Chain<br>Proposals</span><span class="t-es">Propuestas<br>On-Chain</span></span></div>
+    <div class="stat-cell"><span class="stat-num">4</span><span class="stat-lbl"><span class="t-en">IRL Events<br>in Cali*</span><span class="t-es">Eventos IRL<br>en Cali*</span></span></div>
+    <div class="stat-cell"><span class="stat-num">500+</span><span class="stat-lbl"><span class="t-en">Event<br>Attendees*</span><span class="t-es">Asistentes<br>a eventos*</span></span></div>
+    <div class="stat-cell"><span class="stat-num">8</span><span class="stat-lbl"><span class="t-en">Projects<br>Supported</span><span class="t-es">Proyectos<br>apoyados</span></span></div>
+    <div class="stat-cell"><span class="stat-num">1</span><span class="stat-lbl"><span class="t-en">Head in the<br>Collection ✓</span><span class="t-es">Cabeza en la<br>Colección ✓</span></span></div>
   </div>
-  <p style="font-size:0.7rem;color:var(--fg-muted);margin-top:0.75rem;">* During the residency period. Total body of work across 2+ years is significantly larger.</p>
+  <p style="font-size:0.7rem;color:var(--fg-muted);margin-top:0.75rem;"><span class="t-en">* During the residency period. Total body of work across 2+ years is significantly larger.</span><span class="t-es">* Durante el período de residencia. El total de obra a lo largo de 2+ años es significativamente mayor.</span></p>
 </div>
 
 <div class="divider"></div>
@@ -1424,10 +428,11 @@
      WORK / PORTFOLIO
 ════════════════════════════════ -->
 <div class="section" id="work">
-  <div class="section-label">Portfolio</div>
-  <h2>Artworks, Animations &amp; Graphic Pieces</h2>
+  <div class="section-label"><span class="t-en">Portfolio</span><span class="t-es">Portafolio</span></div>
+  <h2><span class="t-en">Artworks, Animations &amp; Graphic Pieces</span><span class="t-es">Obras, Animaciones y Piezas Gráficas</span></h2>
   <p style="color:var(--fg-muted);font-size:0.9rem;margin-bottom:0.25rem;">
-    Pixel art, illustration, and motion graphics created during the residency.
+    <span class="t-en">Pixel art, illustration, and motion graphics created during the residency.</span>
+    <span class="t-es">Pixel art, ilustración y motion graphics creados durante la residencia.</span>
   </p>
   <p style="font-size:0.75rem;color:var(--fg-muted);margin-top:0.4rem;padding:0.5rem 0.75rem;border-left:3px solid var(--yellow);">
     <strong style="color:var(--fg);">CC0</strong> — All artwork by Nadiecito is released to the public domain (CC0) unless a third-party client is involved.
@@ -1471,47 +476,88 @@
   -->
 
   <div class="artwork-grid">
-
+    <!-- PROJECTS:START -->
+    <a href="https://www.nouns.camp/proposals/922" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="artwork-card">
+        <div class="artwork-img">
+          <img src="assets/work/abacus-head-v2.png" alt="Abacus Head — Prop #922" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <span class="ph-icon" style="display:none;">⌐◨-◨</span>
+        </div>
+        <div class="artwork-caption">
+          <span class="t-en">Abacus Head · Prop #922 · ✓ In the collection forever</span><span class="t-es">Cabeza Ábaco · Prop #922 · ✓ En la colección para siempre</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://warpcast.com/nadiecito" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="artwork-card">
+        <div class="artwork-img">
+          <img src="assets/work/noc-sample.gif" alt="NOC Animation — Daily Pixel" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <span class="ph-icon" style="display:none;">⌐◨-◨</span>
+        </div>
+        <div class="artwork-caption">
+          <span class="t-en">NOC · Almost daily, barely animated</span><span class="t-es">NOC · Casi diaria, apenas animada</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.nouns.camp/proposals/925" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="artwork-card">
+        <div class="artwork-img">
+          <img src="assets/head-direwolf.svg" alt="Direwolf Head — Prop #925" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <span class="ph-icon" style="display:none;">⌐◨-◨</span>
+        </div>
+        <div class="artwork-caption">
+          <span class="t-en">Direwolf Head · Prop #925 · Defeated</span><span class="t-es">Cabeza Lobo · Prop #925 · Derrotada</span>
+        </div>
+      </div>
+    </a>
+    <a href="https://www.nouns.camp/proposals/935" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+      <div class="artwork-card">
+        <div class="artwork-img">
+          <img src="assets/head-bananasplit.svg" alt="Banana Split Head — Prop #935" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <span class="ph-icon" style="display:none;">⌐◨-◨</span>
+        </div>
+        <div class="artwork-caption">
+          <span class="t-en">Banana Split Head · Prop #935 · Defeated</span><span class="t-es">Cabeza Banana Split · Prop #935 · Derrotada</span>
+        </div>
+      </div>
+    </a>
     <div class="artwork-card">
-      <div class="artwork-img"><span class="ph-icon">⌐◨-◨</span></div>
-      <div class="artwork-caption">→ Artwork / GIF / Animation</div>
+      <div class="artwork-img">
+        <img src="assets/work/devconnect-live.png" alt="Devconnect Live Piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <span class="ph-icon" style="display:none;">⌐◨-◨</span>
+      </div>
+      <div class="artwork-caption">
+        <span class="t-en">Created live at Devconnect Argentina · Nov 2024 · Risograph printed</span><span class="t-es">Creada en vivo en Devconnect Argentina · Nov 2024 · Impresa en risógrafo</span>
+      </div>
     </div>
-
     <div class="artwork-card">
-      <div class="artwork-img"><span class="ph-icon">⌐◨-◨</span></div>
-      <div class="artwork-caption">→ Artwork / GIF / Animation</div>
+      <div class="artwork-img">
+        <img src="assets/work/mural-sketch.png" alt="Mural Amarillo — Boceto" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <span class="ph-icon" style="display:none;">⌐◨-◨</span>
+      </div>
+      <div class="artwork-caption">
+        <span class="t-en">Mural concept sketch · \"Amar y ya\" · Cali, Dec 2024</span><span class="t-es">Boceto del mural · \"Amar y ya\" · Cali, dic 2024</span>
+      </div>
     </div>
-
     <div class="artwork-card">
-      <div class="artwork-img"><span class="ph-icon">⌐◨-◨</span></div>
-      <div class="artwork-caption">→ Artwork / GIF / Animation</div>
+      <div class="artwork-img">
+        <img src="assets/work/eth-denver-art.png" alt="ETH Denver · OnchainCreators Art" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <span class="ph-icon" style="display:none;">⌐◨-◨</span>
+      </div>
+      <div class="artwork-caption">
+        <span class="t-en">ETH Denver artwork · Feb 2026 · Made for Nouns props that didn't pass</span><span class="t-es">Arte para ETH Denver · Feb 2026 · Creado para props que no pasaron</span>
+      </div>
     </div>
-
     <div class="artwork-card">
-      <div class="artwork-img"><span class="ph-icon">⌐◨-◨</span></div>
-      <div class="artwork-caption">→ Artwork / GIF / Animation</div>
+      <div class="artwork-img">
+        <img src="assets/work/noundry-winner.png" alt="Noundry Contest Winner" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <span class="ph-icon" style="display:none;">⌐◨-◨</span>
+      </div>
+      <div class="artwork-caption">
+        <span class="t-en">Noundry Studio Live Contest · Winner · Aug 8, 2025</span><span class="t-es">Concurso en vivo Noundry Studio · Ganadora · 8 ago 2025</span>
+      </div>
     </div>
-
-    <div class="artwork-card">
-      <div class="artwork-img"><span class="ph-icon">⌐◨-◨</span></div>
-      <div class="artwork-caption">→ Artwork / GIF / Animation</div>
-    </div>
-
-    <div class="artwork-card">
-      <div class="artwork-img"><span class="ph-icon">⌐◨-◨</span></div>
-      <div class="artwork-caption">→ Artwork / GIF / Animation</div>
-    </div>
-
-    <div class="artwork-card">
-      <div class="artwork-img"><span class="ph-icon">⌐◨-◨</span></div>
-      <div class="artwork-caption">→ Artwork / GIF / Animation</div>
-    </div>
-
-    <div class="artwork-card">
-      <div class="artwork-img"><span class="ph-icon">⌐◨-◨</span></div>
-      <div class="artwork-caption">→ Artwork / GIF / Animation</div>
-    </div>
-
+    <!-- PROJECTS:END -->
   </div>
 
   <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--fg-muted);">
@@ -1604,12 +650,13 @@
 <div id="feria">
   <div class="inner">
     <div class="section-label">Feria Gráfica Nounish</div>
-    <h2>The Graphic Fair</h2>
+    <h2><span class="t-en">The Graphic Fair</span><span class="t-es">La Feria Gráfica</span></h2>
     <p style="margin-bottom:0.5rem;">
-      Started in 2024, funded by Nouns Amigos. In 2025 we brought it back — funded by Nouns DAO — bigger and with more artists.
+      <span class="t-en">Started in 2024, funded by Nouns Amigos. In 2025 we brought it back — funded by Nouns DAO — bigger and with more artists.</span>
+      <span class="t-es">Comenzó en 2024, financiada por Nouns Amigos. En 2025 volvió — financiada por Nouns DAO — más grande y con más artistas.</span>
     </p>
     <p style="margin-bottom:1.5rem;font-size:0.85rem;">
-      Full archive at <a href="https://ferianounish.xyz" target="_blank" style="font-weight:bold;">ferianounish.xyz ↗</a>
+      <span class="t-en">Full archive at</span><span class="t-es">Archivo completo en</span> <a href="https://ferianounish.xyz" target="_blank" style="font-weight:bold;">ferianounish.xyz ↗</a>
     </p>
 
     <div class="feria-tabs">
@@ -1654,26 +701,41 @@
      MURAL
 ════════════════════════════════ -->
 <div class="section" id="mural">
-  <div class="section-label">Proyecto IRL · Dic 2024</div>
+  <div class="section-label"><span class="t-en">IRL Project · Dec 2024</span><span class="t-es">Proyecto IRL · Dic 2024</span></div>
   <h2>Mural "Amar y ya" — 60m²</h2>
 
   <div class="mural-intro">
     <div>
-      <p style="font-size:0.92rem;color:var(--fg-muted);line-height:1.8;margin-bottom:1rem;">
-        Un mural colaborativo de 15m × 4m en Cali, creado junto a 3 artistas locales entre el 11
-        y el 21 de diciembre de 2024. El tema: personas en situación de calle y sus vínculos
-        profundos con animales compañeros.
+      <p style="font-size:0.92rem;color:var(--fg-muted);line-height:1.8;margin-bottom:1rem;" class="t-en">
+        A collaborative 15m × 4m mural in Cali, created with 3 local artists.
+        Project started in November 2024 after returning from Devconnect Argentina.
+        Painting: Dec 11–16. Inauguration event: Dec 21.
+        Theme: people experiencing homelessness and their deep bonds with animal companions.
       </p>
-      <p style="font-size:0.88rem;color:var(--fg-muted);line-height:1.8;margin-bottom:1rem;">
-        La frase <em style="color:var(--fg);">"Amar y ya"</em> (To love, and that's it) suena
-        como <em style="color:var(--fg);">"Amarilla"</em> (Yellow) — amor incondicional, sin condiciones.
+      <p style="font-size:0.92rem;color:var(--fg-muted);line-height:1.8;margin-bottom:1rem;" class="t-es">
+        Un mural colaborativo de 15m × 4m en Cali, creado junto a 3 artistas locales.
+        El proyecto arrancó en noviembre de 2024 al volver de Devconnect Argentina.
+        Pintada: 11–16 de diciembre. Inauguración: 21 de diciembre.
+        Tema: personas en situación de calle y sus vínculos profundos con animales compañeros.
       </p>
-      <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;">
+      <p style="font-size:0.88rem;color:var(--fg-muted);line-height:1.8;margin-bottom:1rem;" class="t-en">
+        The phrase <em>"Amar y ya"</em> (To love, and that's it) sounds like
+        <em>"Amarilla"</em> (Yellow) — unconditional love.
+      </p>
+      <p style="font-size:0.88rem;color:var(--fg-muted);line-height:1.8;margin-bottom:1rem;" class="t-es">
+        La frase <em>"Amar y ya"</em> suena como <em>"Amarilla"</em> (Yellow) — amor incondicional, sin condiciones.
+      </p>
+      <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;" class="t-en">
+        Residency funds secured a 15m² wall; collaboration with
+        <strong>Yellow Collective (Prop #18 Executed)</strong> expanded it to 60m².
+        Dec 21 inauguration: empanadas &amp; lulada, collected
+        <strong>28kg pet food + 5 bags of snacks</strong> for Fundación Familia Cuatro Huellas.
+      </p>
+      <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.75;" class="t-es">
         Los fondos de la residencia aseguraron una pared de 15m²; la colaboración con
-        <strong style="color:var(--fg);">Yellow Collective (Prop #18 Executed)</strong>
-        la expandió a 60m² totales. La inauguración del 21 de diciembre reunió a la comunidad:
-        empanadas, lulada, y una colecta de
-        <strong style="color:var(--fg);">28kg de alimento + 5 bolsas</strong>
+        <strong>Yellow Collective (Prop #18 Executed)</strong>
+        la expandió a 60m² totales. Inauguración el 21 de dic: empanadas, lulada, y colecta de
+        <strong>28kg de comida para animales + 5 bolsas de snacks</strong>
         para la Fundación Familia Cuatro Huellas.
       </p>
     </div>
@@ -1692,12 +754,16 @@
   </div>
 
   <div class="mural-collab">
-    <span class="ch-tag ch-tag--milestone" style="display:inline-block;margin-bottom:0.5rem;">Colaboración</span>
-    <p style="font-size:0.82rem;color:var(--fg-muted);line-height:1.7;">
-      <strong style="color:var(--fg);">Yellow Collective</strong> · Prop #18 Executed ·
+    <span class="ch-tag ch-tag--milestone" style="display:inline-block;margin-bottom:0.5rem;"><span class="t-en">Collaboration</span><span class="t-es">Colaboración</span></span>
+    <p style="font-size:0.82rem;color:var(--fg-muted);line-height:1.7;" class="t-en">
+      <strong>Yellow Collective</strong> · Prop #18 Executed ·
+      Cross-funding that scaled the project ×4.
+      An example of how Nouns DAO infrastructure lets local projects amplify each other.
+    </p>
+    <p style="font-size:0.82rem;color:var(--fg-muted);line-height:1.7;" class="t-es">
+      <strong>Yellow Collective</strong> · Prop #18 Executed ·
       Financiamiento cruzado que multiplicó la escala del proyecto ×4.
-      Un ejemplo de cómo la infraestructura de Nouns DAO permite que proyectos locales
-      se potencien entre sí.
+      Un ejemplo de cómo la infraestructura de Nouns DAO permite que proyectos locales se potencien entre sí.
     </p>
   </div>
 </div>
@@ -1708,8 +774,8 @@
      CHRONICLE
 ════════════════════════════════ -->
 <div class="section" id="chronicle">
-  <div class="section-label">Residency Log</div>
-  <h2>Chronicle ⌐◨-◨</h2>
+  <div class="section-label"><span class="t-en">Residency Log</span><span class="t-es">Registro</span></div>
+  <h2><span class="t-en">Chronicle ⌐◨-◨</span><span class="t-es">Crónica ⌐◨-◨</span></h2>
 
   <div class="chronicle">
 
@@ -1722,7 +788,8 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Global Pizza Party — First Nouns Amigos Collab · Cali</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">Organized the Global Pizza Party at Terraza Albahaca, San Nicolás — the historic downtown neighborhood of Cali — in collaboration with Nouns Amigos (the Latin American SubDAO). That first direct collaboration sparked everything — started attending Nouns Amigos calls, diving deeper into the ecosystem, and discovering Farcaster.</p>
+          <p class="ch-desc t-en">Organized the Global Pizza Party at Terraza Albahaca, San Nicolás — the historic downtown neighborhood of Cali — in collaboration with Nouns Amigos (the Latin American SubDAO). That first direct collaboration sparked everything — started attending Nouns Amigos calls, diving deeper into the ecosystem, and discovering Farcaster.</p>
+          <p class="ch-desc t-es">Organicé la Global Pizza Party en Terraza Albahaca, San Nicolás — el barrio histórico del centro de Cali — en colaboración con Nouns Amigos (el SubDAO latinoamericano). Esa primera colaboración directa lo encendió todo — empecé a asistir a las calls de Nouns Amigos, a profundizar en el ecosistema y a descubrir Farcaster.</p>
           <div class="ch-photos">
             <div class="ch-photo">
               <img src="assets/events/pizza-party-2024.jpg" alt="Global Pizza Party 2024" loading="lazy"
@@ -1744,20 +811,8 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Farcaster, Pixel Art &amp; the NOC Channel</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">Discovered Farcaster and the dynamics of Nouns channels. Pixel art clicked immediately — Nouns was the perfect place to apply it and have it valued. Started contributing daily to the NOC (Noun O'Clock) channel: 100+ animations, self-titled <em>"almost daily, barely animated pieces."</em> Also participated in Nouns Rounds, Flows (sunseted 2025), and IRL Nouns Town meetups.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="ch-entry">
-      <div class="ch-meta">
-        <span class="ch-date">Sep 16, 2024</span>
-        <span class="ch-tag ch-tag--milestone">Milestone</span>
-      </div>
-      <div class="ch-card">
-        <div class="ch-card-head"><h3>Abacus v1 — First On-Chain Proposal (Prop #641, Defeated)</h3></div>
-        <div class="ch-card-body">
-          <p class="ch-desc">Submitted the first Nouns head to DAO governance — Abacus v1 (Prop #641). It didn't pass, but the experience set the path for 14 more proposals to follow and a relentless belief in the process.</p>
+          <p class="ch-desc t-en">Discovered Farcaster and the dynamics of Nouns channels. Pixel art clicked immediately — Nouns was the perfect place to apply it and have it valued. Started contributing to the NOC (Noun O'Clock) channel: 100+ animations, self-titled <em>"almost daily, barely animated pieces."</em> Also participated in Nouns Rounds, Flows (sunsetted 2025), and IRL Nouns Town meetups.</p>
+          <p class="ch-desc t-es">Descubrí Farcaster y la dinámica de los canales de Nouns. El pixel art encajó de inmediato — Nouns era el lugar perfecto para aplicarlo y que fuera valorado. Empecé a aportar al canal NOC (Noun O'Clock): 100+ animaciones, autodenominadas <em>"piezas casi diarias, apenas animadas."</em> También participé en Nouns Rounds, Flows (extinto en 2025) y meetups IRL de Nouns Town.</p>
         </div>
       </div>
     </div>
@@ -1771,7 +826,22 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Prop #840 Approved — Residency Begins ⌐◨-◨</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">Nouns DAO votes YES. Scope: open experimentation, content creation, pixel art, IRL events, and collaboration with local artists in Cali. Period: Aug 2024 → Mar 2025.</p>
+          <p class="ch-desc t-en">Nouns DAO votes YES. Scope: open experimentation, content creation, pixel art, IRL events, and collaboration with local artists in Cali. Period: Aug 2024 → Mar 2025.</p>
+          <p class="ch-desc t-es">Nouns DAO vota SÍ. Alcance: experimentación abierta, creación de contenido, pixel art, eventos IRL y colaboración con artistas locales en Cali. Período: Ago 2024 → Mar 2025.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ch-entry">
+      <div class="ch-meta">
+        <span class="ch-date">Sep 16, 2024</span>
+        <span class="ch-tag ch-tag--milestone">Milestone</span>
+      </div>
+      <div class="ch-card">
+        <div class="ch-card-head"><h3>Abacus v1 — First On-Chain Proposal (Prop #641, Defeated)</h3></div>
+        <div class="ch-card-body">
+          <p class="ch-desc t-en">Submitted the first Nouns head to DAO governance — Abacus v1 (Prop #641). It didn't pass, but the experience set the path for 14 more proposals to follow and a relentless belief in the process.</p>
+          <p class="ch-desc t-es">Envié la primera cabeza de Nouns a gobernanza — Abacus v1 (Prop #641). No pasó, pero la experiencia trazó el camino para 14 propuestas más y una fe inquebrantable en el proceso.</p>
         </div>
       </div>
     </div>
@@ -1784,9 +854,42 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Devconnect Argentina — Nouns Booth, Buenos Aires</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">Participated as resident artist at the Nouns booth for 5 days. Created live pixel art pieces printed on a risograph machine on the spot. First time meeting the global Nouns community in person — many people known only online, finally face to face.</p>
+          <p class="ch-desc t-en">Participated as resident artist at the Nouns booth for 5 days. Created one pixel art piece live during one of the sessions, printed on a risograph machine on the spot. First time meeting the global Nouns community in person — many people known only online, finally face to face.</p>
+          <p class="ch-desc t-es">Participé como artista residente en el stand de Nouns durante 5 días. Creé una pieza de pixel art en vivo durante una de las sesiones, impresa en risógrafo al momento. Primera vez encontrándome en persona con la comunidad global de Nouns — muchas personas conocidas solo en internet, por fin cara a cara.</p>
           <div class="ch-photos">
             <!-- <img src="assets/events/devconnect-1.jpg" alt="Devconnect Argentina" loading="lazy"> -->
+            <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
+            <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
+            <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ch-entry">
+      <div class="ch-meta">
+        <span class="ch-date">Nov–Dec 11–16, 2024</span>
+        <span class="ch-tag ch-tag--event">Project</span>
+      </div>
+      <div class="ch-card">
+        <div class="ch-card-head"><h3>Mural Amarillo "Amar y ya" — Cali · 60m²</h3></div>
+        <div class="ch-card-body">
+          <p class="ch-desc t-en">
+            Project started in November, right after returning from Devconnect Argentina. Painting: Dec 11–16. Inauguration: Dec 21.
+            15m wide × 4m high = 60m² total surface. Created with 3 local Cali artists. Theme: people experiencing homelessness and their bonds with animal companions. <em>"Amar y ya"</em> (To love, and that's it) sounds like <em>"Amarilla"</em> (Yellow) — unconditional love.
+            <br><br>
+            Collaboration with <strong>Yellow Collective (Prop #18 Executed)</strong> — residency funds got a 15m² wall; their partnership made it 60m².
+            Dec 21 inauguration: empanadas &amp; lulada, collected <strong>28kg pet food + 5 bags of snacks</strong> for Fundación Familia Cuatro Huellas.
+          </p>
+          <p class="ch-desc t-es">
+            Proyecto iniciado en noviembre, al regresar de Devconnect Argentina. Pintada: 11–16 dic. Inauguración: 21 dic.
+            15m de ancho × 4m de alto = 60m² de superficie total. Creado con 3 artistas locales de Cali. Tema: personas en situación de calle y sus vínculos con animales compañeros. <em>"Amar y ya"</em> suena como <em>"Amarilla"</em> — amor incondicional.
+            <br><br>
+            Colaboración con <strong>Yellow Collective (Prop #18 Executed)</strong> — los fondos de la residencia consiguieron 15m²; su aporte lo llevó a 60m².
+            Inauguración 21 dic: empanadas &amp; lulada, colecta de <strong>28kg de comida para animales + 5 bolsas de snacks</strong> para Fundación Familia Cuatro Huellas.
+          </p>
+          <div class="ch-photos">
+            <!-- <img src="assets/events/mural-1.jpg" alt="Mural Amarillo" loading="lazy"> -->
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
@@ -1803,52 +906,11 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Feria Gráfica Nounish — Primera Edición · Cali</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">First edition of the Nounish Graphic Fair, funded by Nouns Amigos. Local artists with their own stands, each designing a nounish-inspired sticker. The foundation of what became a recurring community gathering. Full archive at <a href="https://ferianounish.xyz" target="_blank" rel="noopener">ferianounish.xyz ↗</a></p>
+          <p class="ch-desc t-en">First edition of the Nounish Graphic Fair, funded by Nouns Amigos. Local artists with their own stands, each designing a nounish-inspired sticker. Happened in the middle of the mural painting week — a concentrated burst of community energy. Full archive at <a href="https://ferianounish.xyz" target="_blank" rel="noopener">ferianounish.xyz ↗</a></p>
+          <p class="ch-desc t-es">Primera edición de la Feria Gráfica Nounish, financiada por Nouns Amigos. Artistas locales con sus propios stands, cada uno diseñando un sticker con inspiración nounish. Ocurrió en mitad de la semana de pintura del mural — una explosión concentrada de energía comunitaria. Archivo completo en <a href="https://ferianounish.xyz" target="_blank" rel="noopener">ferianounish.xyz ↗</a></p>
           <div class="ch-photos">
             <!-- <img src="assets/events/feria2024-1.jpg" alt="Feria 2024" loading="lazy"> -->
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
-            <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
-            <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ch-entry">
-      <div class="ch-meta">
-        <span class="ch-date">Dec 11–21, 2024</span>
-        <span class="ch-tag ch-tag--event">Proyecto</span>
-      </div>
-      <div class="ch-card">
-        <div class="ch-card-head"><h3>Mural Amarillo "Amar y ya" — Cali · 60m²</h3></div>
-        <div class="ch-card-body">
-          <p class="ch-desc">
-            Collaborative mural started Dec 11, inaugurated Dec 21. 15m wide × 4m high = 60m² total surface. Created with 3 local Cali artists. The theme: people experiencing homelessness and their deep bonds with animal companions. The phrase <em>"Amar y ya"</em> (To love, and that's it) sounds like <em>"Amarilla"</em> (Yellow) in Spanish — unconditional love.
-            <br><br>
-            Collaboration with <strong>Yellow Collective (Prop #18 Executed)</strong>. Residency funds secured a 15m² wall; Yellow Collective partnership made it 60m².
-            Dec 21 inauguration: shared empanadas &amp; lulada, collected <strong>28kg pet food + 5 bags</strong> for Fundación Familia Cuatro Huellas.
-          </p>
-          <div class="ch-photos">
-            <!-- <img src="assets/events/mural-1.jpg" alt="Mural Amarillo" loading="lazy"> -->
-            <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
-            <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
-            <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ch-entry">
-      <div class="ch-meta">
-        <span class="ch-date">Feb 2025</span>
-        <span class="ch-tag ch-tag--artwork">Artwork</span>
-      </div>
-      <div class="ch-card">
-        <div class="ch-card-head"><h3>ETH Denver &amp; ETH Boulder — OnchainCreators</h3></div>
-        <div class="ch-card-body">
-          <p class="ch-desc">Created original artworks for OnchainCreators at ETH Denver and ETH Boulder. Also produced art for the NounsBus (Props #917 &amp; #921 — defeated, but the work was done and lives on).</p>
-          <div class="ch-photos">
-            <!-- <img src="assets/work/eth-denver.png" alt="ETH Denver artwork" loading="lazy"> -->
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
           </div>
@@ -1864,7 +926,8 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>NOC Decentralized Content Creation — Selected Artist</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">Selected as one of the artists for the NOC Decentralized Content Creation program — a model to sustain daily creative output around Noun O'Clock by supporting contributors directly. Participating as one of the chosen creators for this initiative.</p>
+          <p class="ch-desc t-en">Selected as one of the artists for the NOC Decentralized Content Creation program — a model that sustains creative output around Noun O'Clock by supporting contributors directly. The idea: creating art inspired by each day's Noun, keeping the channel alive with fresh work.</p>
+          <p class="ch-desc t-es">Seleccionada como una de las artistas del programa NOC Decentralized Content Creation — un modelo que sostiene la producción creativa en torno al Noun O'Clock apoyando a los contribuidores directamente. La idea: crear arte inspirado en el Noun del día, manteniendo el canal vivo con obra fresca.</p>
         </div>
       </div>
     </div>
@@ -1877,7 +940,8 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Abacus Head Executed — Prop #922 ✓ · In the Collection Forever</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">After multiple proposals and iterations, the Abacus Head (v2) is voted in and executed on July 5, 2025. Now part of the official Nouns collection — part of the infinite artwork forever on Ethereum. Every Noun generated with this head carries Nadiecito's pixel art in the protocol. ⌐◨-◨</p>
+          <p class="ch-desc t-en">After multiple proposals and iterations, the Abacus Head (v2) is voted in and executed on July 5, 2025. Now part of the official Nouns collection — part of the infinite artwork forever on Ethereum. Every Noun generated with this head carries Nadiecito's pixel art in the protocol. ⌐◨-◨</p>
+          <p class="ch-desc t-es">Después de múltiples propuestas e iteraciones, la Abacus Head (v2) es votada y ejecutada el 5 de julio de 2025. Ahora forma parte de la colección oficial de Nouns — parte de la obra infinita para siempre en Ethereum. Cada Noun generado con esta cabeza lleva el pixel art de Nadiecito en el protocolo. ⌐◨-◨</p>
         </div>
       </div>
     </div>
@@ -1890,7 +954,8 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Noundry Studio Live Contest — Winner ⌐◨-◨</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">Won a live head creation contest hosted by Noundry Studio on Discord — competing in real time against other pixel artists to design a Noun head from scratch. A direct test of craft, speed, and nounish sensibility.</p>
+          <p class="ch-desc t-en">Won a live head creation contest hosted by Noundry Studio on Discord — competing in real time against other pixel artists to design a Noun head from scratch. A direct test of craft, speed, and nounish sensibility.</p>
+          <p class="ch-desc t-es">Gané un concurso en vivo de creación de cabezas organizado por Noundry Studio en Discord — compitiendo en tiempo real contra otros pixel artistas para diseñar una cabeza de Noun desde cero. Una prueba directa de oficio, velocidad y sensibilidad nounish.</p>
         </div>
       </div>
     </div>
@@ -1903,7 +968,8 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Drawing Jam: WTF is ¿Nounish? — Cervezas Kalima, Cali</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">20+ local artists gathered to learn about Nouns, explore what "Nounish" means, and participate in the open call for the upcoming Feria Nounish 2.0. Artists drew in pairs with competitive prompts — winners chose between a beer or a pizza slice 🍕🍻.</p>
+          <p class="ch-desc t-en">20+ local artists gathered to learn about Nouns, explore what "Nounish" means, and participate in the open call for the upcoming Feria Nounish 2.0. Artists drew in pairs with competitive prompts — winners chose between a beer or a pizza slice 🍕🍻.</p>
+          <p class="ch-desc t-es">20+ artistas locales se reunieron para conocer Nouns, explorar qué significa "Nounish" y participar en la convocatoria para la próxima Feria Nounish 2.0. Los artistas dibujaron en parejas con prompts competitivos — los ganadores eligieron entre una cerveza o una porción de pizza 🍕🍻.</p>
           <div class="ch-photos">
             <div class="ch-photo">
               <img src="assets/events/drawing-jam-wtf-flyer.jpg" alt="Drawing Jam WTF is Nounish flyer" loading="lazy"
@@ -1943,7 +1009,8 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>"No es un culto pero parece" — Terraza San Nicolás, Cali</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">Pre-party for Feria Nounish 2.0. Gathered artists at Terraza San Nicolás to onboard them to Base, open wallets, share food, and present the Nouns miniapp. Continuing the work of connecting local creatives with the Nounish ecosystem.</p>
+          <p class="ch-desc t-en">Pre-party for Feria Nounish 2.0. Gathered artists at Terraza San Nicolás to onboard them to Base, open wallets, share food, and present the Nouns miniapp. Continuing the work of connecting local creatives with the Nounish ecosystem.</p>
+          <p class="ch-desc t-es">Pre-fiesta de la Feria Nounish 2.0. Reuní a artistas en Terraza San Nicolás para incorporarlos a Base, abrir wallets, compartir comida y presentar la miniapp de Nouns. Continuando el trabajo de conectar creativos locales con el ecosistema Nounish.</p>
           <div style="margin-top:0.75rem;">
             <a href="https://www.instagram.com/reel/DQIIXm1jZt5/" target="_blank" rel="noopener"
                style="display:inline-block;font-family:var(--font-accent);font-size:0.4rem;padding:0.4rem 0.75rem;border:2px solid var(--fg-muted);color:var(--fg-muted);text-decoration:none;letter-spacing:1px;transition:border-color 0.2s,color 0.2s;"
@@ -1973,10 +1040,29 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Feria Gráfica Nounish 2.0 — Segunda Edición · Cali</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">Second edition funded through the Nouns DAO residency proposal. Bigger scale, more artists, more products, wider reach. Full archive at <a href="https://ferianounish.xyz" target="_blank" rel="noopener">ferianounish.xyz ↗</a></p>
+          <p class="ch-desc t-en">Second edition funded through the Nouns DAO residency proposal. Bigger scale, more artists, more products, wider reach. Full archive at <a href="https://ferianounish.xyz" target="_blank" rel="noopener">ferianounish.xyz ↗</a></p>
+          <p class="ch-desc t-es">Segunda edición financiada por la propuesta de residencia en Nouns DAO. Mayor escala, más artistas, más productos, más alcance. Archivo completo en <a href="https://ferianounish.xyz" target="_blank" rel="noopener">ferianounish.xyz ↗</a></p>
           <div class="ch-photos">
             <!-- <img src="assets/events/feria2025-1.jpg" alt="Feria 2025" loading="lazy"> -->
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
+            <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
+            <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ch-entry">
+      <div class="ch-meta">
+        <span class="ch-date">Feb 2026</span>
+        <span class="ch-tag ch-tag--artwork">Artwork</span>
+      </div>
+      <div class="ch-card">
+        <div class="ch-card-head"><h3>ETH Denver &amp; ETH Boulder — OnchainCreators</h3></div>
+        <div class="ch-card-body">
+          <p class="ch-desc t-en">Created artwork for two Nouns props tied to ETH Denver and ETH Boulder events — both were defeated, but the art was produced and had a presence at the events. Also created pieces for OnchainCreators during the same period.</p>
+          <p class="ch-desc t-es">Creé arte para dos props de Nouns vinculadas a ETH Denver y ETH Boulder — ambas fueron derrotadas, pero el arte se produjo y tuvo presencia en los eventos. También creé piezas para OnchainCreators durante el mismo período.</p>
+          <div class="ch-photos">
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
             <div class="ch-photo"><span class="ch-photo-ph">📸</span></div>
           </div>
@@ -1992,7 +1078,8 @@
       <div class="ch-card">
         <div class="ch-card-head"><h3>Residency Extension Proposal — Keep Building</h3></div>
         <div class="ch-card-body">
-          <p class="ch-desc">Proposing 6 more months at 0.8 ETH/month. Focus: graphic support, content for key moments, social media for Nouns Colombia, artist networking in Cali, and groundwork for Feria Nounish 3. The work continues. ⌐◨-◨</p>
+          <p class="ch-desc t-en">Proposing 6 more months at 0.8 ETH/month. Focus: graphic support, content for key moments, social media for Nouns Colombia, artist networking in Cali, and groundwork for Feria Nounish 3. The work continues. ⌐◨-◨</p>
+          <p class="ch-desc t-es">Proponiendo 6 meses más a 0.8 ETH/mes. Enfoque: apoyo gráfico, contenido para momentos clave, redes sociales para Nouns Colombia, networking de artistas en Cali, y preparación para la Feria Nounish 3. El trabajo continúa. ⌐◨-◨</p>
         </div>
       </div>
     </div>
@@ -2006,27 +1093,32 @@
      PROPOSAL
 ════════════════════════════════ -->
 <div id="proposal">
-  <h2>Hire Me Boss — Extend the Residency</h2>
+  <h2><span class="t-en">Hire Me Boss — Extend the Residency</span><span class="t-es">Apóyame — Extendamos la Residencia</span></h2>
   <p>
-    The past months have been a blessing. Nouns gave me the space to refine my craft
-    while building something real for my local community. I want to keep going.
+    <span class="t-en">The past months have been a blessing. Nouns gave me the space to refine my craft while building something real for my local community. I want to keep going.</span>
+    <span class="t-es">Los últimos meses fueron una bendición. Nouns me dio el espacio para refinar mi oficio mientras construía algo real para mi comunidad local. Quiero seguir adelante.</span>
   </p>
   <div class="prop-pills">
-    <div class="prop-pill">⌐◨ 6 months</div>
-    <div class="prop-pill">⌐◨ 0.8 ETH / month</div>
+    <div class="prop-pill">⌐◨ <span class="t-en">6 months</span><span class="t-es">6 meses</span></div>
+    <div class="prop-pill">⌐◨ 0.8 ETH / <span class="t-en">month</span><span class="t-es">mes</span></div>
     <div class="prop-pill">⌐◨ 4.8 ETH total</div>
     <div class="prop-pill">⌐◨ Cali, Colombia</div>
   </div>
-  <p style="margin-bottom:1.5rem;color:#aaa;">
-    <strong>What I'll do:</strong><br>
+  <p style="margin-bottom:1.5rem;color:var(--fg-muted);">
+    <span class="t-en"><strong>What I'll do:</strong><br>
     Graphic support for community projects · Content for key dates &amp; moments ·
     Social media strategy for Nouns Colombia · Artist networking in Cali ·
-    Groundwork for Feria Nounish 3 · Prop for the fair by mid-year.
+    Groundwork for Feria Nounish 3 · Prop for the fair by mid-year.</span>
+    <span class="t-es"><strong>Qué haré:</strong><br>
+    Apoyo gráfico para proyectos comunitarios · Contenido para fechas y momentos clave ·
+    Estrategia en redes para Nouns Colombia · Networking de artistas en Cali ·
+    Preparación para la Feria Nounish 3 · Prop para la feria a mitad de año.</span>
   </p>
-  <a href="#" class="btn">View Proposal on Nouns →</a>
+  <a href="#" class="btn"><span class="t-en">View Proposal on Nouns →</span><span class="t-es">Ver Propuesta en Nouns →</span></a>
   <br><br>
-  <p style="font-size:0.8rem;color:#555;">
-    Questions? Find me on Warpcast or Discord as <strong>@nadiecito</strong>
+  <p style="font-size:0.8rem;color:var(--fg-muted);">
+    <span class="t-en">Questions? Find me on Warpcast or Discord as <strong>@nadiecito</strong></span>
+    <span class="t-es">¿Preguntas? Encuéntrame en Warpcast o Discord como <strong>@nadiecito</strong></span>
   </p>
 </div>
 
@@ -2034,33 +1126,13 @@
      FOOTER
 ════════════════════════════════ -->
 <footer>
-  <p>Built with ⌐◨-◨ for the Nouns DAO community · <span>Nouns Colombia</span> · Cali 🇨🇴</p>
+  <p>
+    <span class="t-en">Built with ⌐◨-◨ for the Nouns DAO community · <span>Nouns Colombia</span> · Cali 🇨🇴</span>
+    <span class="t-es">Hecho con ⌐◨-◨ para la comunidad Nouns DAO · <span>Nouns Colombia</span> · Cali 🇨🇴</span>
+  </p>
 </footer>
 
-<script>
-  // ── Theme toggle ──
-  const root = document.documentElement;
-  const btn  = document.getElementById('theme-btn');
-  const saved = localStorage.getItem('nc-theme') || 'dark';
-  root.setAttribute('data-theme', saved);
-  btn.textContent = saved === 'dark' ? '☀ Light' : '☾ Dark';
-
-  function toggleTheme() {
-    const cur  = root.getAttribute('data-theme');
-    const next = cur === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('nc-theme', next);
-    btn.textContent = next === 'dark' ? '☀ Light' : '☾ Dark';
-  }
-
-  // ── Feria tabs ──
-  function switchTab(id) {
-    document.querySelectorAll('.feria-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.feria-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    event.target.classList.add('active');
-  }
-</script>
+<script src="main.js" defer></script>
 
 </body>
 </html>
