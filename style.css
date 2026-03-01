@@ -42,7 +42,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -153,7 +152,6 @@ nav ul a:hover { color: var(--yellow); }
 ═══════════════════════════════════════ */
 #hero {
   min-height: 100vh;
-  scroll-snap-align: start;
   background: #0a0a0a;
   color: #f0f0f0;
   display: flex;
@@ -369,8 +367,6 @@ h3 {
 /* ═══════════════════════════════════════
    WHO — HEADER BAR
 ═══════════════════════════════════════ */
-#who { scroll-snap-align: start; }
-
 #who-header {
   background: var(--yellow);
   border-top: 6px solid #111;

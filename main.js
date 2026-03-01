@@ -39,6 +39,23 @@ langBtn.addEventListener('click', () => {
   checkHero();
 })();
 
+// ── Hero → WHO auto-scroll (only this transition) ──
+(function() {
+  const hero = document.getElementById('hero');
+  const who  = document.getElementById('who');
+  let triggered = false;
+
+  const obs = new IntersectionObserver(([entry]) => {
+    if (!triggered && !entry.isIntersecting && entry.boundingClientRect.top < 0) {
+      triggered = true;
+      who.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => { triggered = false; }, 1200);
+    }
+  }, { threshold: 0.15 });
+
+  obs.observe(hero);
+})();
+
 // ── Feria tabs ──
 function switchTab(id) {
   document.querySelectorAll('.feria-panel').forEach(p => p.classList.remove('active'));
