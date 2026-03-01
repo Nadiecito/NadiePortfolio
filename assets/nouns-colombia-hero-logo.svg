@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<svg version="1.1" width="2100" height="2000" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-  <rect x="0" y="0" width="2100" height="700" fill="#FFCD00" />
-  <rect x="0" y="700" width="500" height="200" fill="#FFCD00" />
+<svg version="1.1" viewBox="150 650 1800 700" width="1800" height="700" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
   <rect x="500" y="700" width="600" height="100" fill="#E70B20" />
-  <rect x="1100" y="700" width="100" height="200" fill="#FFCD00" />
   <rect x="1200" y="700" width="600" height="100" fill="#E70B20" />
-  <rect x="1800" y="700" width="300" height="300" fill="#FFCD00" />
   <rect x="500" y="800" width="100" height="500" fill="#E70B20" />
   <rect x="600" y="800" width="200" height="400" fill="#FFCD00" />
   <rect x="800" y="800" width="200" height="400" fill="#003087" />
@@ -14,18 +10,9 @@
   <rect x="1300" y="800" width="200" height="400" fill="#FFCD00" />
   <rect x="1500" y="800" width="200" height="400" fill="#003087" />
   <rect x="1700" y="800" width="100" height="500" fill="#E70B20" />
-  <rect x="0" y="900" width="200" height="100" fill="#FFCD00" />
   <rect x="200" y="900" width="300" height="100" fill="#E70B20" />
   <rect x="1100" y="900" width="100" height="100" fill="#E70B20" />
-  <rect x="0" y="1000" width="200" height="500" fill="#003087" />
   <rect x="200" y="1000" width="100" height="200" fill="#E70B20" />
-  <rect x="300" y="1000" width="200" height="500" fill="#003087" />
-  <rect x="1100" y="1000" width="100" height="500" fill="#003087" />
-  <rect x="1800" y="1000" width="300" height="500" fill="#003087" />
-  <rect x="200" y="1200" width="100" height="300" fill="#003087" />
   <rect x="600" y="1200" width="400" height="100" fill="#E70B20" />
   <rect x="1300" y="1200" width="400" height="100" fill="#E70B20" />
-  <rect x="500" y="1300" width="600" height="200" fill="#003087" />
-  <rect x="1200" y="1300" width="600" height="200" fill="#003087" />
-  <rect x="0" y="1500" width="2100" height="500" fill="#E70B20" />
 </svg>
