@@ -40,6 +40,11 @@
 ═══════════════════════════════════════ */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
@@ -58,8 +63,7 @@ img { display: block; }
 ═══════════════════════════════════════ */
 nav {
   position: fixed;
-  bottom: 0;
-  top: auto;
+  top: calc(100vh - 60px);
   left: 0;
   right: 0;
   z-index: 100;
@@ -70,16 +74,17 @@ nav {
   padding: 0 1.5rem;
   height: 60px;
   border-top: 3px solid var(--yellow);
-  border-bottom: none;
+  border-bottom: 3px solid transparent;
   gap: 1rem;
-  transition: top 0.25s ease, bottom 0.25s ease, border 0.25s ease;
+  transition: top 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              border-top-color 0.35s ease,
+              border-bottom-color 0.35s ease;
 }
 
 body.past-hero nav {
-  bottom: auto;
   top: 0;
-  border-top: none;
-  border-bottom: 3px solid var(--yellow);
+  border-top-color: transparent;
+  border-bottom-color: var(--yellow);
 }
 
 .nav-logo {
@@ -148,6 +153,7 @@ nav ul a:hover { color: var(--yellow); }
 ═══════════════════════════════════════ */
 #hero {
   min-height: 100vh;
+  scroll-snap-align: start;
   background: #0a0a0a;
   color: #f0f0f0;
   display: flex;
@@ -219,6 +225,16 @@ nav ul a:hover { color: var(--yellow); }
 }
 
 .hero-title span:first-child { color: var(--yellow); }
+
+.hero-sub {
+  font-family: var(--font-accent);
+  font-size: 0.88rem;
+  color: var(--fg-muted);
+  max-width: 500px;
+  margin: 0.5rem auto 1.75rem;
+  line-height: 1.7;
+  text-align: center;
+}
 
 .hero-ctas {
   display: flex;
@@ -353,6 +369,8 @@ h3 {
 /* ═══════════════════════════════════════
    WHO — HEADER BAR
 ═══════════════════════════════════════ */
+#who { scroll-snap-align: start; }
+
 #who-header {
   background: var(--yellow);
   border-top: 6px solid #111;
