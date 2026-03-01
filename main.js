@@ -28,6 +28,17 @@ langBtn.addEventListener('click', () => {
   langBtn.textContent = next === 'en' ? '🌐 ES' : '🌐 EN';
 });
 
+// ── Hero nav: bottom when hero visible, top when scrolled past ──
+(function() {
+  const heroEl = document.getElementById('hero');
+  function checkHero() {
+    const bottom = heroEl.getBoundingClientRect().bottom;
+    document.body.classList.toggle('past-hero', bottom < 80);
+  }
+  window.addEventListener('scroll', checkHero, { passive: true });
+  checkHero();
+})();
+
 // ── Feria tabs ──
 function switchTab(id) {
   document.querySelectorAll('.feria-panel').forEach(p => p.classList.remove('active'));

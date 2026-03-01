@@ -33,33 +33,50 @@
 <!-- ════════════════════════════════
      NAV
 ════════════════════════════════ -->
-<nav>
-  <a href="#" class="nav-logo">
-    <img src="assets/nouns-colombia-logo.svg" alt="Nouns Colombia">
-    <span class="nav-logo-text">Nouns Colombia</span>
-  </a>
-  <ul>
-    <li><a href="#who"><span class="t-en">Community</span><span class="t-es">Comunidad</span></a></li>
-    <li><a href="#work"><span class="t-en">Gallery</span><span class="t-es">Galería</span></a></li>
-    <li><a href="#chronicle"><span class="t-en">Chronicle</span><span class="t-es">Crónica</span></a></li>
-    <li><a href="#feria">Feria</a></li>
-    <li><a href="#mural">Mural</a></li>
-    <li><a href="#proposal"><span class="t-en">Proposal</span><span class="t-es">Propuesta</span></a></li>
-  </ul>
-  <button class="theme-btn" id="lang-btn" aria-label="Toggle language">🌐 ES</button>
-  <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">☀ Light</button>
-</nav>
-
 <!-- ════════════════════════════════
-     HERO
+     HERO (100vh landing)
 ════════════════════════════════ -->
 <div id="hero">
-  <div class="hero-tag">Nouns Colombia ⌐◨-◨</div>
-  <h1>Building <span>Nounish</span><br>Culture in Colombia</h1>
-  <p class="hero-sub">
-    <span class="t-en">A community building web3 culture from Colombia,<br>with the support of Nouns DAO.</span>
-    <span class="t-es">Una comunidad construyendo cultura en web3 desde Colombia,<br>con el apoyo de Nouns DAO.</span>
-  </p>
+  <div class="hero-inner">
+    <p class="hero-bynounish">Be Nounish ⌐◨-◨</p>
+
+    <div class="hero-logo-wrap">
+      <div class="hero-logo-float">
+        <img src="assets/nouns-colombia-hero-logo.svg" alt="Nouns Colombia" class="hero-logo-img">
+      </div>
+      <div class="hero-logo-reflection" aria-hidden="true">
+        <img src="assets/nouns-colombia-hero-logo.svg" alt="" class="hero-logo-img">
+      </div>
+    </div>
+
+    <div class="hero-title">
+      <span>NOUNS</span>
+      <span>COLOMBIA</span>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="https://nouns.world" target="_blank" rel="noopener" class="hero-btn">wtf is nounish</a>
+      <a href="https://nouns.game" target="_blank" rel="noopener" class="hero-btn">Juega nouns</a>
+      <a href="https://studio.noundry.wtf/" target="_blank" rel="noopener" class="hero-btn">Explora y crea traits</a>
+    </div>
+  </div>
+
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="assets/nouns-colombia-logo.svg" alt="Nouns Colombia">
+      <span class="nav-logo-text">Nouns Colombia</span>
+    </a>
+    <ul>
+      <li><a href="#who"><span class="t-en">Community</span><span class="t-es">Comunidad</span></a></li>
+      <li><a href="#work"><span class="t-en">Gallery</span><span class="t-es">Galería</span></a></li>
+      <li><a href="#chronicle"><span class="t-en">Chronicle</span><span class="t-es">Crónica</span></a></li>
+      <li><a href="#feria">Feria</a></li>
+      <li><a href="#mural">Mural</a></li>
+      <li><a href="#proposal"><span class="t-en">Proposal</span><span class="t-es">Propuesta</span></a></li>
+    </ul>
+    <button class="theme-btn" id="lang-btn" aria-label="Toggle language">🌐 ES</button>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">☀ Light</button>
+  </nav>
 </div>
 
 <div class="divider"></div>
@@ -1042,9 +1059,12 @@
       <span class="t-en">Started in 2024, funded by Nouns Amigos. In 2025 we brought it back — funded by Nouns DAO — bigger and with more artists.</span>
       <span class="t-es">Comenzó en 2024, financiada por Nouns Amigos. En 2025 volvió — financiada por Nouns DAO — más grande y con más artistas.</span>
     </p>
-    <p style="margin-bottom:1.5rem;font-size:0.85rem;">
+    <p style="margin-bottom:1rem;font-size:0.85rem;">
       <span class="t-en">Full archive at</span><span class="t-es">Archivo completo en</span> <a href="https://ferianounish.xyz" target="_blank" style="font-weight:bold;">ferianounish.xyz ↗</a>
     </p>
+    <a href="https://www.instagram.com/p/DSnZRIwDqVv/" target="_blank" rel="noopener" class="feria-ig-btn">
+      <span class="t-en">📹 Video on Instagram</span><span class="t-es">📹 Video en Instagram</span>
+    </a>
 
     <div class="feria-tabs">
       <button class="feria-tab active" onclick="switchTab('feria2024')">Feria 2024</button>
