@@ -51,7 +51,7 @@ langBtn.addEventListener('click', () => {
       who.scrollIntoView({ behavior: 'smooth' });
       setTimeout(() => { triggered = false; }, 1200);
     }
-  }, { threshold: 0.15 });
+  }, { threshold: 0.10 });
 
   obs.observe(hero);
 })();
