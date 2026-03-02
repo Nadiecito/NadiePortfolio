@@ -103,7 +103,7 @@ body.past-hero nav {
 
 .nav-logo-text {
   font-family: var(--font-pixel);
-  font-size: 1.5rem;
+  font-size: 0.85rem;
   color: var(--yellow);
   line-height: 1;
   letter-spacing: 1px;
@@ -403,7 +403,7 @@ h3 {
 
 .who-header-text h2 {
   color: #111;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
   margin-bottom: 0.2rem;
 }
 
