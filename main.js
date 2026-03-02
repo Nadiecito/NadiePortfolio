@@ -28,12 +28,13 @@ langBtn.addEventListener('click', () => {
   langBtn.textContent = next === 'en' ? '🌐 ES' : '🌐 EN';
 });
 
-// ── Hero nav: bottom when hero visible, top when scrolled past ──
+// ── Hero nav: transitions to top as soon as the CTA buttons leave the viewport ──
 (function() {
+  const ctasEl = document.querySelector('.hero-ctas');
   const heroEl = document.getElementById('hero');
   function checkHero() {
-    const bottom = heroEl.getBoundingClientRect().bottom;
-    document.body.classList.toggle('past-hero', bottom < 80);
+    const trigger = ctasEl || heroEl;
+    document.body.classList.toggle('past-hero', trigger.getBoundingClientRect().bottom < 0);
   }
   window.addEventListener('scroll', checkHero, { passive: true });
   checkHero();
@@ -45,12 +46,12 @@ langBtn.addEventListener('click', () => {
   const who  = document.getElementById('who-header');
   let done   = false;
 
-  // Pre-calculate once at load (scrollY = 0, so getBCR().top = document-top)
-  const targetY = Math.max(0, who.getBoundingClientRect().top - nav.offsetHeight);
-
   function snap() {
     if (done) return;
     done = true;
+    // Calculate HERE (at snap time, after images load and layout is final)
+    // At wheel time scrollY is still 0, so getBCR().top = document-absolute position
+    const targetY = Math.max(0, who.getBoundingClientRect().top + window.scrollY - nav.offsetHeight);
     window.scrollTo({ top: targetY, behavior: 'smooth' });
   }
 
