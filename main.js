@@ -39,22 +39,26 @@ langBtn.addEventListener('click', () => {
   checkHero();
 })();
 
-// ── Hero → WHO auto-scroll (only this transition) ──
+// ── Hero → first downward scroll snaps to yellow stripe (#who-header) ──
 (function() {
-  const hero = document.getElementById('hero');
-  const who  = document.getElementById('who');
+  const nav    = document.querySelector('nav');
+  const target = document.getElementById('who-header');
   let triggered = false;
 
-  const obs = new IntersectionObserver(([entry]) => {
-    if (!triggered && !entry.isIntersecting && entry.boundingClientRect.top < 0) {
-      triggered = true;
-      who.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => { triggered = false; }, 1200);
-    }
-  }, { threshold: 0.10 });
+  function snapToWho() {
+    if (triggered) return;
+    triggered = true;
+    window.removeEventListener('scroll', onScroll);
+    const top = target.getBoundingClientRect().top + window.scrollY - nav.offsetHeight;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
 
-  obs.observe(hero);
-})();
+  function onScroll() {
+    if (window.scrollY > 0) snapToWho();
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+})()
 
 // ── Feria tabs ──
 function switchTab(id) {
