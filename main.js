@@ -28,36 +28,46 @@ langBtn.addEventListener('click', () => {
   langBtn.textContent = next === 'en' ? '🌐 ES' : '🌐 EN';
 });
 
-// ── Hero nav: bottom when hero visible, top when scrolled past ──
+// ── Hero nav: transitions to top as soon as the CTA buttons leave the viewport ──
 (function() {
+  const ctasEl = document.querySelector('.hero-ctas');
   const heroEl = document.getElementById('hero');
   function checkHero() {
-    const bottom = heroEl.getBoundingClientRect().bottom;
-    document.body.classList.toggle('past-hero', bottom < 80);
+    const trigger = ctasEl || heroEl;
+    document.body.classList.toggle('past-hero', trigger.getBoundingClientRect().bottom < 0);
   }
   window.addEventListener('scroll', checkHero, { passive: true });
   checkHero();
 })();
 
-// ── Hero → first downward scroll snaps to yellow stripe (#who-header) ──
-(function() {
-  const nav    = document.querySelector('nav');
-  const target = document.getElementById('who-header');
-  let triggered = false;
+// ── Hero: first downward input snaps to #who-header, nav sits above it ──
+(function () {
+  const nav  = document.querySelector('nav');
+  const who  = document.getElementById('who-header');
+  let done   = false;
 
-  function snapToWho() {
-    if (triggered) return;
-    triggered = true;
-    window.removeEventListener('scroll', onScroll);
-    const top = target.getBoundingClientRect().top + window.scrollY - nav.offsetHeight;
-    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  function snap() {
+    if (done) return;
+    done = true;
+    // Calculate HERE (at snap time, after images load and layout is final)
+    // At wheel time scrollY is still 0, so getBCR().top = document-absolute position
+    const targetY = Math.max(0, who.getBoundingClientRect().top + window.scrollY - nav.offsetHeight);
+    window.scrollTo({ top: targetY, behavior: 'smooth' });
   }
 
-  function onScroll() {
-    if (window.scrollY > 0) snapToWho();
-  }
+  // Mouse / trackpad wheel — fires before browser moves the page
+  window.addEventListener('wheel', function (e) {
+    if (e.deltaY > 0 && window.scrollY < 50) snap();
+  }, { passive: true });
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  // Touch (mobile)
+  let startY = 0;
+  window.addEventListener('touchstart', function (e) {
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+  window.addEventListener('touchend', function (e) {
+    if (startY - e.changedTouches[0].clientY > 20 && window.scrollY < 50) snap();
+  }, { passive: true });
 })()
 
 // ── Feria tabs ──
