@@ -1005,7 +1005,7 @@ h3 {
   gap: 0.75rem;
 }
 
-.ch-card-head h3 { margin: 0; flex: 1; }
+.ch-card-head h3 { margin: 0; flex: 1; font-size: 1rem; }
 
 .ch-card-head::after {
   content: '⌐◨-◨';
