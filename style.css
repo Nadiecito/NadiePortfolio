@@ -7,7 +7,7 @@
   --red:    #e83b3b;
   --blue:   #4965ff;
   --green:  #2a9d2a;
-  --font-pixel:  'Press Start 2P', 'Courier New', monospace;
+  --font-pixel:  'Tiny5', 'Courier New', monospace;
   --font-accent: 'Courier New', monospace;
   --font-body:   'Courier New', monospace;
   --t: 0.2s;
@@ -103,7 +103,7 @@ body.past-hero nav {
 
 .nav-logo-text {
   font-family: var(--font-pixel);
-  font-size: 1.5rem;
+  font-size: 0.85rem;
   color: var(--yellow);
   line-height: 1;
   letter-spacing: 1px;
@@ -225,7 +225,7 @@ nav ul a:hover { color: var(--yellow); }
   flex-direction: column;
   align-items: center;
   font-family: var(--font-pixel);
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-size: clamp(1.2rem, 3.5vw, 2.2rem);
   line-height: 0.95;
   margin-bottom: 1.75rem;
   color: #fff;
@@ -299,7 +299,7 @@ nav ul a:hover { color: var(--yellow); }
 
 h2 {
   font-family: var(--font-pixel);
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1rem, 2.5vw, 1.8rem);
   font-weight: normal;
   line-height: 1.1;
   margin-bottom: 1.5rem;
@@ -308,7 +308,7 @@ h2 {
 
 h3 {
   font-family: var(--font-pixel);
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   font-weight: normal;
   margin-bottom: 0.4rem;
 }
@@ -355,7 +355,7 @@ h3 {
 
 .stat-num {
   font-family: var(--font-pixel);
-  font-size: 2.8rem;
+  font-size: 1.5rem;
   color: var(--yellow);
   line-height: 1;
   display: block;
@@ -528,7 +528,7 @@ h3 {
 
 .bio-stat-n {
   font-family: var(--font-pixel);
-  font-size: 1.5rem;
+  font-size: 0.85rem;
   color: var(--yellow);
   line-height: 1;
 }
@@ -623,7 +623,7 @@ h3 {
 /* ── Noundry big num ── */
 .noundry-num {
   font-family: var(--font-pixel);
-  font-size: 3rem;
+  font-size: 1.6rem;
   color: var(--yellow);
   line-height: 1;
 }
@@ -695,7 +695,7 @@ h3 {
 
 .ph-icon {
   font-family: var(--font-pixel);
-  font-size: 2rem;
+  font-size: 1.1rem;
   color: var(--border-hi);
 }
 
@@ -745,7 +745,7 @@ h3 {
 
 .contrib-name {
   font-family: var(--font-pixel);
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   color: var(--fg);
   display: block;
   margin-bottom: 0.25rem;
@@ -839,7 +839,7 @@ h3 {
 }
 
 .sticker-img img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
-.sticker-ph { font-family: var(--font-pixel); font-size: 1.8rem; color: #ccc; }
+.sticker-ph { font-family: var(--font-pixel); font-size: 1rem; color: #ccc; }
 
 .sticker-artist {
   padding: 0.4rem 0.5rem;
@@ -894,7 +894,7 @@ h3 {
 .mural-stat-n {
   display: block;
   font-family: var(--font-pixel);
-  font-size: 1.8rem;
+  font-size: 1rem;
   color: var(--yellow);
   line-height: 1;
   margin-bottom: 0.25rem;
@@ -1010,7 +1010,7 @@ h3 {
 .ch-card-head::after {
   content: '⌐◨-◨';
   font-family: var(--font-pixel);
-  font-size: 1rem;
+  font-size: 0.7rem;
   color: var(--fg-muted);
   opacity: 0.35;
   flex-shrink: 0;
