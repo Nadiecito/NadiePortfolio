@@ -4,14 +4,14 @@ const root = document.documentElement;
 const themeBtn = document.getElementById('theme-btn');
 const savedTheme = localStorage.getItem('nc-theme') || 'dark';
 root.setAttribute('data-theme', savedTheme);
-themeBtn.textContent = savedTheme === 'dark' ? '☀ Light' : '☾ Dark';
+themeBtn.textContent = savedTheme === 'dark' ? '🌙' : '☀';
 
 function toggleTheme() {
   const cur  = root.getAttribute('data-theme');
   const next = cur === 'dark' ? 'light' : 'dark';
   root.setAttribute('data-theme', next);
   localStorage.setItem('nc-theme', next);
-  themeBtn.textContent = next === 'dark' ? '☀ Light' : '☾ Dark';
+  themeBtn.textContent = next === 'dark' ? '🌙' : '☀';
 }
 
 // ── Language toggle ──
