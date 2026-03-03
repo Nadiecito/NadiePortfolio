@@ -289,7 +289,8 @@ nav ul a:hover { color: var(--yellow); }
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: var(--yellow);
+  color: var(--fg-muted);
+  font-weight: bold;
   white-space: nowrap;
 }
 
