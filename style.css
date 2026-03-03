@@ -22,6 +22,7 @@
   --fg-muted: #888888;
   --border:   #2e2e2e;
   --border-hi:#555555;
+  --accent-text: var(--yellow);
 }
 
 /* LIGHT */
@@ -33,6 +34,7 @@
   --fg-muted: #666666;
   --border:   #111111;
   --border-hi:#111111;
+  --accent-text: var(--fg);
 }
 
 /* ═══════════════════════════════════════
@@ -104,7 +106,7 @@ body.past-hero nav {
 .nav-logo-text {
   font-family: var(--font-pixel);
   font-size: 0.85rem;
-  color: var(--yellow);
+  color: var(--accent-text);
   line-height: 1;
   letter-spacing: 1px;
 }
@@ -308,7 +310,8 @@ nav ul a:hover { color: var(--yellow); }
   font-size: 0.85rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--fg-muted);
+  font-weight: bold;
   margin-bottom: 0.75rem;
 }
 
@@ -371,7 +374,7 @@ h3 {
 .stat-num {
   font-family: var(--font-pixel);
   font-size: 1.5rem;
-  color: var(--yellow);
+  color: var(--accent-text);
   line-height: 1;
   display: block;
 }
@@ -545,7 +548,7 @@ h3 {
 .bio-stat-n {
   font-family: var(--font-pixel);
   font-size: 0.85rem;
-  color: var(--yellow);
+  color: var(--accent-text);
   line-height: 1;
 }
 
@@ -640,7 +643,7 @@ h3 {
 .noundry-num {
   font-family: var(--font-pixel);
   font-size: 4rem;
-  color: var(--yellow);
+  color: var(--accent-text);
   line-height: 1;
 }
 
