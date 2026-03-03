@@ -472,7 +472,8 @@ h3 {
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: var(--yellow);
+  color: var(--fg-muted);
+  font-weight: bold;
   white-space: nowrap;
 }
 
@@ -638,7 +639,7 @@ h3 {
 /* ── Noundry big num ── */
 .noundry-num {
   font-family: var(--font-pixel);
-  font-size: 1.6rem;
+  font-size: 4rem;
   color: var(--yellow);
   line-height: 1;
 }
