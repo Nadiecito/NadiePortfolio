@@ -1,0 +1,51 @@
+# Nouns Colombia — Nadiecito, Resident Artist
+
+> Portfolio and documentation site for Nouns Colombia, a Latin American node of
+> the Nouns DAO ecosystem. This page focuses on the artist residency program and
+> its first resident: Nadiecito, pixel artist and cultural organizer from Cali, Colombia.
+
+## About Nouns Colombia
+
+Nouns Colombia is a community bringing nounish culture to Colombia through graphic art
+fairs, collaborative murals, IRL events, and a DAO-funded artist residency program.
+The project is backed by Nouns DAO (Ethereum-based decentralized autonomous organization
+that funds public goods and creative projects globally).
+
+The community model: direct DAO funding, full creative freedom, local cultural roots.
+Activities include pixel art, onchain trait creation, Farcaster community building,
+IRL meetups, and participation in the broader Nouns ecosystem.
+
+## Artist in Residence: Nadiecito
+
+- **Full handle:** Nadiecito (@nadiecito.eth on Farcaster, @Ningunartista on X)
+- **Location:** Cali, Colombia
+- **Disciplines:** Pixel art, illustration, animation, cultural organizing
+- **Residency period:** August 2024 – March 2025
+- **Funded by:** Nouns DAO Prop #840 (https://www.nouns.camp/proposals/840)
+
+### Key works and contributions
+- 100+ pixel animations for the NOC (Noun O'Clock) Farcaster channel, self-described as "almost daily, barely animated pieces"
+- Noundry trait submissions: onchain Nouns traits created and published
+- Feria Gráfica Nounish: IRL graphic art fair in Cali, Colombia, bringing local artists into the Nouns ecosystem
+- Mural Amarillo: collaborative community mural project
+- Active participant in Nouns subcommunities: Vrbs, Lil Nouns, Nouns Amigos, Nouncil, Yellow Collective, Based Nouns
+- Participated in Nouns Rounds and Flows (illustration/animation contests on Farcaster)
+
+## Site Sections
+
+- **Community (#who):** Who Nouns Colombia is, the residency program model, what the DAO funds
+- **Gallery (#work):** Pixel art and animation work by Nadiecito
+- **Chronicle (#chronicle):** Detailed timeline of the residency — month-by-month account of contributions, projects, and community activity
+- **Feria (#feria):** Documentation of the Feria Gráfica Nounish art fair in Cali
+- **Mural (#mural):** Documentation of the Mural Amarillo collaborative mural
+- **Proposal (#proposal):** Summary and link to the original Nouns DAO proposal (Prop #840)
+
+## Links
+
+- Farcaster profile: https://farcaster.xyz/nadiecito.eth
+- X / Twitter: https://x.com/Ningunartista
+- Instagram (Nouns Colombia): https://www.instagram.com/nounscolombia
+- Nouns DAO Proposal #840: https://www.nouns.camp/proposals/840
+- Noundry (trait explorer): https://studio.noundry.wtf/
+- Nouns game: https://nouns.game
+- Nouns world: https://nouns.world
