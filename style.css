@@ -44,6 +44,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 75px;
 }
 
 body {
@@ -371,7 +372,7 @@ h3 {
 }
 
 .card-label {
-  background: #111;
+  background: var(--bg-card);
   color: var(--yellow);
   font-family: var(--font-accent);
   font-size: 0.85rem;

@@ -28,13 +28,13 @@ langBtn.addEventListener('click', () => {
   langBtn.textContent = next === 'en' ? '🌐 ES' : '🌐 EN';
 });
 
-// ── Hero nav: transitions to top as soon as the CTA buttons leave the viewport ──
+// ── Hero nav: transitions to top once hero is ~half scrolled past ──
 (function() {
   const ctasEl = document.querySelector('.hero-ctas');
   const heroEl = document.getElementById('hero');
   function checkHero() {
     const trigger = ctasEl || heroEl;
-    document.body.classList.toggle('past-hero', trigger.getBoundingClientRect().bottom < 0);
+    document.body.classList.toggle('past-hero', trigger.getBoundingClientRect().bottom < window.innerHeight * 0.5);
   }
   window.addEventListener('scroll', checkHero, { passive: true });
   checkHero();
