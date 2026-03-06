@@ -68,10 +68,10 @@ nav {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(10,10,10,0.97);
+  background: #0a0a0a;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 1.5rem;
   height: 60px;
   border-top: 3px solid var(--yellow);
@@ -95,6 +95,8 @@ body.past-hero nav {
   text-decoration: none;
   color: var(--yellow);
   flex-shrink: 0;
+  position: absolute;
+  left: 1.5rem;
 }
 
 .nav-logo img {
@@ -104,11 +106,7 @@ body.past-hero nav {
 }
 
 .nav-logo-text {
-  font-family: var(--font-pixel);
-  font-size: 0.85rem;
-  color: var(--accent-text);
-  line-height: 1;
-  letter-spacing: 1px;
+  display: none;
 }
 
 nav ul {
