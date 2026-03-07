@@ -47,6 +47,11 @@ html {
   scroll-padding-top: 75px;
 }
 
+/* Offset for fixed nav on all anchor targets */
+#who, #work, #chronicle, #feria, #mural, #proposal {
+  scroll-margin-top: 70px;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
