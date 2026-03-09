@@ -48,7 +48,7 @@ html {
 }
 
 /* Offset for fixed nav on all anchor targets */
-#who, #work, #chronicle, #feria, #mural, #proposal {
+#who, #work, #noc, #chronicle, #feria, #mural, #proposal {
   scroll-margin-top: 70px;
 }
 
