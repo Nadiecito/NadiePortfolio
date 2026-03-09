@@ -557,9 +557,9 @@
         var gif = btn.dataset.gif;
         var inner = document.getElementById('nocPreviewInner');
         if (gif) {
-          inner.innerHTML = '<div class="noc-preview-gif"><img src="' + gif + '" alt="NOC #' + num + '"><p class="noc-preview-label">#' + num + '</p></div>';
+          inner.innerHTML = '<div class="noc-preview-gif"><img src="' + gif + '" alt="NOC #' + num + '"><p class="noc-preview-label">NOUN ' + num + '</p></div>';
         } else {
-          inner.innerHTML = '<div class="noc-preview-gif"><img src="assets/noc%20preview/' + num + '.svg" alt="NOC #' + num + '"><p class="noc-preview-label">#' + num + ' · preview only</p></div>';
+          inner.innerHTML = '<div class="noc-preview-gif"><img src="assets/noc%20preview/' + num + '.svg" alt="NOC #' + num + '"><p class="noc-preview-label">NOUN ' + num + '</p></div>';
         }
         if (window.innerWidth < 768) {
           document.getElementById('nocPreviewPanel').scrollIntoView({behavior:'smooth', block:'nearest'});

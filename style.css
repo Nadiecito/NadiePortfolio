@@ -850,7 +850,7 @@ h3 {
 
 .noc-preview-label {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 1rem;
   color: var(--fg-muted);
   margin: 0;
 }
