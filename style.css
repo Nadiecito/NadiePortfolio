@@ -803,9 +803,35 @@ h3 {
 
 .noc-thumb-col {
   flex-shrink: 0;
-  overflow-y: auto;
-  max-height: 650px;
 }
+
+.noc-scroll-shell {
+  position: relative;
+}
+
+.noc-thumb-scroll {
+  max-height: 620px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+.noc-thumb-scroll::-webkit-scrollbar { display: none; }
+
+.noc-scroll-arrow {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--yellow);
+  font-size: 0.55rem;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.noc-scroll-arrow.visible { opacity: 1; }
+.noc-scroll-arrow-up  { top: 2px; }
+.noc-scroll-arrow-down { bottom: 2px; }
 
 .noc-thumb-hint {
   font-family: var(--font-pixel);
@@ -933,6 +959,7 @@ h3 {
   .noc-viewer { gap: 1rem; }
   .noc-thumb-grid { grid-template-columns: repeat(2, 56px); }
   .noc-thumb { width: 56px; height: 56px; }
+  .noc-thumb-scroll { max-height: 590px; }
   .noc-preview-panel { position: static; flex: 1; min-width: 0; }
   .noc-preview-frame { width: 100%; height: 420px; }
 }
@@ -940,6 +967,7 @@ h3 {
 @media (max-width: 480px) {
   .noc-thumb-grid { grid-template-columns: repeat(2, 44px); }
   .noc-thumb { width: 44px; height: 44px; }
+  .noc-thumb-scroll { max-height: 500px; }
   .noc-preview-frame { height: 320px; }
 }
 

@@ -530,7 +530,10 @@
     <div class="noc-viewer">
       <div class="noc-thumb-col">
         <p class="noc-thumb-hint"><span class="t-en">← Click any preview to see the animation</span><span class="t-es">← Haz clic para ver la animación</span></p>
-      <div class="noc-thumb-grid">
+        <div class="noc-scroll-shell">
+          <div class="noc-scroll-arrow noc-scroll-arrow-up" id="nocArrowUp">▲</div>
+          <div class="noc-thumb-scroll" id="nocThumbScroll">
+            <div class="noc-thumb-grid">
   <button class="noc-thumb" data-num="544" data-gif="assets/noc/544.gif" onclick="nocSelect(this)" title="#544"><img src="assets/noc%20preview/544.svg" alt="NOC #544" loading="lazy"></button>
   <button class="noc-thumb" data-num="1289" data-gif="assets/noc/1289.gif" onclick="nocSelect(this)" title="#1289"><img src="assets/noc%20preview/1289.svg" alt="NOC #1289" loading="lazy"></button>
   <button class="noc-thumb" data-num="1291" data-gif="assets/noc/1291.gif" onclick="nocSelect(this)" title="#1291"><img src="assets/noc%20preview/1291.svg" alt="NOC #1291" loading="lazy"></button>
@@ -639,7 +642,10 @@
   <button class="noc-thumb" data-num="1499" data-gif="assets/noc/1499.gif" onclick="nocSelect(this)" title="#1499"><img src="assets/noc%20preview/1499.svg" alt="NOC #1499" loading="lazy"></button>
   <button class="noc-thumb" data-num="1513" data-gif="assets/noc/1513.gif" onclick="nocSelect(this)" title="#1513"><img src="assets/noc%20preview/1513.svg" alt="NOC #1513" loading="lazy"></button>
   <button class="noc-thumb" data-num="1582" data-gif="assets/noc/1582.gif" onclick="nocSelect(this)" title="#1582"><img src="assets/noc%20preview/1582.svg" alt="NOC #1582" loading="lazy"></button>
-      </div>
+            </div><!-- end noc-thumb-grid -->
+          </div><!-- end noc-thumb-scroll -->
+          <div class="noc-scroll-arrow noc-scroll-arrow-down" id="nocArrowDown">▼</div>
+        </div><!-- end noc-scroll-shell -->
       </div><!-- end noc-thumb-col -->
       <div class="noc-preview-panel" id="nocPreviewPanel">
         <div class="noc-preview-frame">
@@ -668,10 +674,19 @@
       idle.classList.add('hidden');
       label.textContent = 'NOUN ' + num;
     }, 80);
-    if (window.innerWidth < 820) {
-      document.getElementById('nocPreviewPanel').scrollIntoView({behavior:'smooth', block:'nearest'});
-    }
   }
+
+  (function() {
+    var scroll = document.getElementById('nocThumbScroll');
+    var arrowUp = document.getElementById('nocArrowUp');
+    var arrowDown = document.getElementById('nocArrowDown');
+    function updateArrows() {
+      arrowUp.classList.toggle('visible', scroll.scrollTop > 4);
+      arrowDown.classList.toggle('visible', scroll.scrollTop < scroll.scrollHeight - scroll.clientHeight - 4);
+    }
+    scroll.addEventListener('scroll', updateArrows, { passive: true });
+    updateArrows();
+  })();
   </script>
   </div>
 
