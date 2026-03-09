@@ -762,6 +762,47 @@ h3 {
 }
 
 /* ═══════════════════════════════════════
+   NOC GRID
+═══════════════════════════════════════ */
+.noc-grid {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.6rem;
+}
+
+.noc-card {
+  position: relative;
+}
+
+.noc-card .artwork-img {
+  aspect-ratio: 1;
+}
+
+.noc-card .artwork-img img {
+  object-fit: contain;
+}
+
+.noc-card::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.78);
+  color: #fff;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  text-align: center;
+  padding: 0.25rem 0.4rem;
+  opacity: 0;
+  transition: opacity var(--t);
+  pointer-events: none;
+}
+
+.noc-card:hover::after {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════
    CONTRIBUTIONS
 ═══════════════════════════════════════ */
 .contrib-grid {
