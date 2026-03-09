@@ -798,10 +798,13 @@ h3 {
   display: flex;
   gap: 2rem;
   align-items: start;
+  max-height: 650px;
 }
 
 .noc-thumb-col {
   flex-shrink: 0;
+  overflow-y: auto;
+  max-height: 650px;
 }
 
 .noc-thumb-hint {
