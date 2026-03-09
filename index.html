@@ -80,8 +80,7 @@
     </a>
     <ul>
       <li><a href="#who"><span class="t-en">Community</span><span class="t-es">Comunidad</span></a></li>
-      <li><a href="#work"><span class="t-en">Gallery</span><span class="t-es">Galería</span></a></li>
-      <li><a href="#noc"><span class="t-en">NOC</span><span class="t-es">NOC</span></a></li>
+      <li><a href="#work"><span class="t-en">Galleries</span><span class="t-es">Galerías</span></a></li>
       <li><a href="#chronicle"><span class="t-en">Chronicle</span><span class="t-es">Crónica</span></a></li>
       <li><a href="#feria">Feria</a></li>
       <li><a href="#mural">Mural</a></li>
@@ -842,6 +841,10 @@
     </div>
 
   </div>
+
+  <!-- Dynamic galleries — populated from assets/gallery-config.js -->
+  <div id="gallery-sections"></div>
+
 </div>
 
 <div class="divider"><span class="t-en">Residency Log</span><span class="t-es">Registro</span></div>
@@ -1503,6 +1506,71 @@
   <button class="float-btn" id="lang-btn" aria-label="Toggle language">🌐 ES</button>
 </div>
 
+<script src="assets/gallery-config.js"></script>
+<script>
+(function () {
+  var config = window.GALLERY_CONFIG || [];
+  var container = document.getElementById('gallery-sections');
+  if (!container || !config.length) return;
+
+  config.forEach(function (gallery) {
+    if (!gallery.files || !gallery.files.length) return;
+
+    // Section wrapper
+    var section = document.createElement('div');
+    section.className = 'gallery-subsection';
+
+    // Header — reuse noc-section-header style
+    var header = document.createElement('div');
+    header.className = 'noc-section-header';
+    header.style.marginTop = '2.5rem';
+    header.innerHTML =
+      '<h3>' +
+        '<span class="t-en">' + escHtml(gallery.title.en) + '</span>' +
+        '<span class="t-es">' + escHtml(gallery.title.es) + '</span>' +
+      '</h3>';
+    section.appendChild(header);
+
+    // Grid
+    var grid = document.createElement('div');
+    grid.className = 'dyn-gallery-grid';
+
+    gallery.files.forEach(function (file) {
+      var title = file.replace(/\.[^.]+$/, ''); // filename without extension
+      var src = 'assets/' + gallery.folder + '/' + file;
+      var isVideo = /\.mp4$/i.test(file);
+
+      var item = document.createElement('div');
+      item.className = 'dyn-gallery-item';
+      item.title = title;
+
+      if (isVideo) {
+        item.innerHTML =
+          '<video autoplay loop muted playsinline loading="lazy">' +
+            '<source src="' + escHtml(src) + '">' +
+          '</video>' +
+          '<span class="dyn-gallery-label">' + escHtml(title) + '</span>';
+      } else {
+        item.innerHTML =
+          '<img src="' + escHtml(src) + '" alt="' + escHtml(title) + '" loading="lazy">' +
+          '<span class="dyn-gallery-label">' + escHtml(title) + '</span>';
+      }
+      grid.appendChild(item);
+    });
+
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
+
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+})();
+</script>
 <script src="main.js" defer></script>
 
 </body>
