@@ -1,51 +1,117 @@
 /**
  * GALLERY CONFIG — Nadiecito Portfolio
  * ─────────────────────────────────────────────────────────────
- * Cómo agregar una galería:
+ * Cómo agregar una galería / How to add a gallery:
  *
  *  1. Crea una carpeta dentro de assets/ con el nombre de la sección.
- *     Ese nombre se usará como subtítulo de la galería.
- *     Ejemplo: assets/Noundry Traits/
+ *     Create a folder inside assets/ named after the section.
  *
- *  2. Sube las imágenes/GIFs a esa carpeta.
- *     El nombre del archivo (sin extensión) será el título que aparece
- *     al hacer hover sobre cada pieza.
- *     Ejemplo: assets/Noundry Traits/Cool Mushroom Head.png
+ *  2. Sube los archivos. El nombre del archivo (sin extensión)
+ *     será el label de hover (si showLabels: true).
+ *     Upload files. Filename without extension = hover label (if showLabels: true).
  *
- *  3. Agrega una entrada al array de abajo con la carpeta y los archivos.
+ *  3. Agrega una entrada aquí.
+ *     Add an entry below.
  *
- *  Formatos soportados: .png  .jpg  .jpeg  .gif  .webp  .svg  .mp4
+ *  Opciones / Options:
+ *    layout:     'grid' (default) | 'masonry'
+ *    showLabels: true (default) | false
+ *    lightbox:   false (default) | true  — click opens full size
  *
- *  Traducciones: puedes poner el título en inglés y español,
- *  o poner el mismo si el nombre no cambia.
- *
- * ─────────────────────────────────────────────────────────────
- * How to add a gallery:
- *
- *  1. Create a folder inside assets/ named after the section.
- *     That name will be used as the gallery subtitle.
- *     Example: assets/Noundry Traits/
- *
- *  2. Upload images/GIFs into that folder.
- *     The filename (without extension) becomes the hover title.
- *     Example: assets/Noundry Traits/Cool Mushroom Head.png
- *
- *  3. Add an entry to the array below with the folder and files.
- *
+ *  Formatos / Formats: .png .jpg .jpeg .gif .webp .svg .mp4
  * ─────────────────────────────────────────────────────────────
  */
 
 window.GALLERY_CONFIG = [
 
-  // ── Example (delete or replace with real galleries) ────────
-  // {
-  //   folder: "Noundry Traits",
-  //   title: { en: "Noundry Traits", es: "Traits de Noundry" },
-  //   files: [
-  //     "Cool Mushroom Head.png",
-  //     "Rainbow Cape.gif",
-  //     "Star Glasses.svg"
-  //   ]
-  // },
+  {
+    folder: "Rounds & Contests",
+    title: {
+      en: "Rounds, Contests & Direct Commissions",
+      es: "Rondas, Concursos y Encargos Directos"
+    },
+    layout: "masonry",
+    showLabels: false,
+    lightbox: true,
+    files: [
+      "1617.png",
+      "Agatha.png",
+      "Aliens huh.gif",
+      "Amigo 82.gif",
+      "Amigos Christmas Carols.gif",
+      "BAGELS.png",
+      "BETTER.png",
+      "BURRITO FINE.png",
+      "Benjamin going to Nouns Town LA.gif",
+      "Burriversario.png",
+      "Casei.png",
+      "Chuches.gif",
+      "EMPANADAS.png",
+      "FIGHT.gif",
+      "FInn.png",
+      "Flyer.png",
+      "Franklin & Oliver.png",
+      "HYRAX.png",
+      "Happy Halloween.gif",
+      "Happy New Year Amigos.gif",
+      "Hgiher.png",
+      "Higher X Nouns.gif",
+      "JUMBOTRON.gif",
+      "Lead The Way.gif",
+      "Magic Trick.gif",
+      "Maribel.png",
+      "Merry Christmas.gif",
+      "Nouns vs Reptiliamus.gif",
+      "NounsGG Dota.gif",
+      "PIZZAS.png",
+      "Penuthed.png",
+      "Pets.gif",
+      "Pirate Party Quest.png",
+      "Pirates Bay.png",
+      "Poppy.png",
+      "RAVEN 1626.png",
+      "Sir Mouselot.png",
+      "Spooky Scary Skelenouns.gif",
+      "Sports.gif",
+      "Spy.gif",
+      "SteamNoun CC0.gif",
+      "Sticker 1.png",
+      "Sunny.png",
+      "Tommy.png",
+      "Tug o War.gif",
+      "Untitled_Artwork.png",
+      "VRBS en Cali.gif",
+      "WEIRD.png",
+      "Walk the Coco.png",
+      "YARN'T.png",
+      "Yarr.png",
+      "Yellow Valentine.png",
+      "Yellowversary.png",
+      "an.png",
+      "as.png",
+      "awawaw.png",
+      "burr.png",
+      "burr3.png",
+      "burre1.png",
+      "burre2.png",
+      "burrece.png",
+      "burrete.png",
+      "dream.png",
+      "hothot.png",
+      "hottest.png",
+      "mantis promo.png",
+      "mantis repetaed.png",
+      "noun 1556.png",
+      "noun1553.png",
+      "noun95.gif",
+      "sticker 2.png",
+      "superchevere.png",
+      "ujjjjjjjj.png",
+      "well fed.gif",
+      "wizard_1.mp4"
+    ]
+  }
+
+  // Add more galleries here following the same structure.
 
 ];
