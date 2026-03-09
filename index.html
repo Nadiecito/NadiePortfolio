@@ -476,6 +476,17 @@
     Las obras creadas para <strong style="color:var(--fg);">Bingo Revival</strong> o <strong style="color:var(--fg);">Noun City (Tucumcari, NM)</strong> pueden tener sus propios términos de licencia.</span>
   </p>
 
+  <div class="gallery-context-note">
+    <p>
+      <span class="t-en">Much of what's shown here came out of community-driven rewarding dynamics — creation rounds, tips, flows, contests, and direct commissions across channels like <em>nouns-draws, nouns-animators, NOC, Yellow, Pirates Bay, Higher, Noundry, Nouns Amigos</em>, and many others. These are the spaces where my creative participation in the ecosystem began, and they're documented in more detail in the <a href="#chronicle" style="color:var(--yellow);">Chronicle</a> below.</span>
+      <span class="t-es">Gran parte de lo que se muestra aquí surgió de dinámicas de recompensa impulsadas por la comunidad — rondas de creación, tips, flows, concursos y encargos directos en canales como <em>nouns-draws, nouns-animators, NOC, Yellow, Pirates Bay, Higher, Noundry, Nouns Amigos</em>, entre muchos otros. Esos fueron los espacios donde comenzó mi participación creativa en el ecosistema, documentada con más detalle en la <a href="#chronicle" style="color:var(--yellow);">Crónica</a>.</span>
+    </p>
+    <p>
+      <span class="t-en">Worth saying clearly: what I do today is more complex — collaborative work, events, proposals, and real accountability to others. The NOC animations were an early commitment that kept me present, but also one that became unsustainable as the rewarding dynamics that gave them meaning gradually disappeared from the Farcaster ecosystem.</span>
+      <span class="t-es">Vale decirlo con claridad: lo que hago hoy es más complejo — trabajo colaborativo, eventos, propuestas, y compromisos reales con otras personas. Las animaciones de NOC fueron un compromiso temprano que mantuvo mi presencia, pero también uno que se volvió insostenible cuando las dinámicas de recompensa que les daban sentido fueron desapareciendo del ecosistema de Farcaster.</span>
+    </p>
+  </div>
+
   <!--
   ╔═══════════════════════════════════════════════════════════════╗
   ║  CÓMO AGREGAR IMÁGENES, GIFs Y VIDEOS                        ║
@@ -1524,52 +1535,86 @@
 <script src="assets/gallery-config.js"></script>
 <script>
 (function () {
+
+  /* ── Lightbox ─────────────────────────────── */
+  var lb = document.createElement('div');
+  lb.id = 'lb-overlay';
+  lb.innerHTML = '<div id="lb-inner"><button id="lb-close" aria-label="Close">✕</button><div id="lb-media"></div></div>';
+  document.body.appendChild(lb);
+
+  function lbOpen(src, isVideo) {
+    var media = document.getElementById('lb-media');
+    media.innerHTML = isVideo
+      ? '<video src="' + src + '" autoplay loop muted playsinline controls></video>'
+      : '<img src="' + src + '" alt="">';
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('lb-media').innerHTML = '';
+  }
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.id === 'lb-close') lbClose(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lbClose(); });
+
+  /* ── Gallery renderer ─────────────────────── */
   var config = window.GALLERY_CONFIG || [];
   var container = document.getElementById('gallery-sections');
   if (!container || !config.length) return;
 
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
   config.forEach(function (gallery) {
     if (!gallery.files || !gallery.files.length) return;
+
+    var useMasonry  = gallery.layout === 'masonry';
+    var showLabels  = gallery.showLabels !== false;
+    var useLightbox = !!gallery.lightbox;
 
     // Section wrapper
     var section = document.createElement('div');
     section.className = 'gallery-subsection';
 
-    // Header — reuse noc-section-header style
+    // Header
     var header = document.createElement('div');
     header.className = 'noc-section-header';
     header.style.marginTop = '2.5rem';
     header.innerHTML =
-      '<h3>' +
-        '<span class="t-en">' + escHtml(gallery.title.en) + '</span>' +
-        '<span class="t-es">' + escHtml(gallery.title.es) + '</span>' +
-      '</h3>';
+      '<h3><span class="t-en">' + esc(gallery.title.en) +
+      '</span><span class="t-es">' + esc(gallery.title.es) + '</span></h3>';
     section.appendChild(header);
 
-    // Grid
+    // Grid / Masonry
     var grid = document.createElement('div');
-    grid.className = 'dyn-gallery-grid';
+    grid.className = useMasonry ? 'masonry-gallery' : 'dyn-gallery-grid';
 
     gallery.files.forEach(function (file) {
-      var title = file.replace(/\.[^.]+$/, ''); // filename without extension
-      var src = 'assets/' + gallery.folder + '/' + file;
+      var label   = file.replace(/\.[^.]+$/, '');
+      var src     = 'assets/' + gallery.folder + '/' + encodeURIComponent(file).replace(/%2F/g, '/');
       var isVideo = /\.mp4$/i.test(file);
 
       var item = document.createElement('div');
-      item.className = 'dyn-gallery-item';
-      item.title = title;
+      item.className = useMasonry ? 'masonry-item' : 'dyn-gallery-item';
+      if (showLabels) item.title = label;
 
-      if (isVideo) {
-        item.innerHTML =
-          '<video autoplay loop muted playsinline loading="lazy">' +
-            '<source src="' + escHtml(src) + '">' +
-          '</video>' +
-          '<span class="dyn-gallery-label">' + escHtml(title) + '</span>';
-      } else {
-        item.innerHTML =
-          '<img src="' + escHtml(src) + '" alt="' + escHtml(title) + '" loading="lazy">' +
-          '<span class="dyn-gallery-label">' + escHtml(title) + '</span>';
+      var mediaHtml = isVideo
+        ? '<video src="' + esc(src) + '" autoplay loop muted playsinline loading="lazy"></video>'
+        : '<img src="' + esc(src) + '" alt="' + (showLabels ? esc(label) : '') + '" loading="lazy">';
+
+      var labelHtml = showLabels
+        ? '<span class="' + (useMasonry ? 'masonry-label' : 'dyn-gallery-label') + '">' + esc(label) + '</span>'
+        : '';
+
+      item.innerHTML = mediaHtml + labelHtml;
+
+      if (useLightbox) {
+        item.style.cursor = 'zoom-in';
+        item.addEventListener('click', function () { lbOpen(src, isVideo); });
       }
+
       grid.appendChild(item);
     });
 
@@ -1577,13 +1622,6 @@
     container.appendChild(section);
   });
 
-  function escHtml(s) {
-    return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
 })();
 </script>
 <script src="main.js" defer></script>

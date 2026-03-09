@@ -1489,3 +1489,119 @@ footer span { color: var(--yellow); }
   }
 }
 
+/* ── Gallery context note ─────────────────────────────────── */
+.gallery-context-note {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.gallery-context-note p {
+  font-size: 0.83rem;
+  color: var(--fg-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Masonry gallery ──────────────────────────────────────── */
+.masonry-gallery {
+  columns: 4;
+  column-gap: 5px;
+  margin-top: 1rem;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.masonry-item img,
+.masonry-item video {
+  width: 100%;
+  height: auto;
+  display: block;
+  image-rendering: auto;
+  transition: opacity 0.15s;
+}
+
+.masonry-item:hover img,
+.masonry-item:hover video {
+  opacity: 0.88;
+}
+
+.masonry-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.75);
+  color: var(--yellow);
+  font-family: var(--font-accent);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 6px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.masonry-item:hover .masonry-label { opacity: 1; }
+
+@media (max-width: 900px) { .masonry-gallery { columns: 3; } }
+@media (max-width: 600px) { .masonry-gallery { columns: 2; } }
+@media (max-width: 360px) { .masonry-gallery { columns: 2; } }
+
+/* ── Lightbox ─────────────────────────────────────────────── */
+#lb-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+#lb-overlay.active { display: flex; }
+
+#lb-inner {
+  position: relative;
+  max-width: 92vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#lb-close {
+  position: fixed;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+#lb-close:hover { opacity: 1; }
+
+#lb-media img,
+#lb-media video {
+  max-width: 92vw;
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  display: block;
+  image-rendering: auto;
+}
+
