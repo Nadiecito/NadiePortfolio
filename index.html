@@ -170,33 +170,12 @@
       <!-- ── BIO CARD ── -->
       <div class="who-bio">
         <div class="who-portrait">
-          <!--
-            ┌──────────────────────────────────────────────┐
-            │  RETRATO: sube tu foto a assets/ y cambia:   │
-            │  <img src="assets/nadiecito.png"             │
-            │       alt="Nadiecito" loading="lazy">        │
-            │  Recomendado: PNG cuadrado 400×400 mínimo    │
-            └──────────────────────────────────────────────┘
-          -->
-          <div class="portrait-ph">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 80" shape-rendering="crispEdges" width="100" height="133">
-              <rect x="10" y="2"  width="40" height="16" fill="#4A7FD9"/>
-              <rect x="6"  y="6"  width="8"  height="12" fill="#4A7FD9"/>
-              <rect x="46" y="6"  width="8"  height="12" fill="#4A7FD9"/>
-              <rect x="14" y="16" width="32" height="30" fill="#8B5E3A"/>
-              <rect x="14" y="24" width="12" height="9"  fill="#e83b3b"/>
-              <rect x="34" y="24" width="12" height="9"  fill="#e83b3b"/>
-              <rect x="26" y="26" width="8"  height="5"  fill="#e83b3b"/>
-              <rect x="16" y="26" width="8"  height="5"  fill="#fff"/>
-              <rect x="36" y="26" width="8"  height="5"  fill="#fff"/>
-              <rect x="18" y="27" width="4"  height="3"  fill="#111"/>
-              <rect x="38" y="27" width="4"  height="3"  fill="#111"/>
-              <rect x="28" y="36" width="4"  height="4"  fill="#6A3F1A"/>
-              <rect x="20" y="42" width="20" height="3"  fill="#3A1005"/>
-              <rect x="24" y="46" width="12" height="8"  fill="#8B5E3A"/>
-              <rect x="8"  y="54" width="44" height="26" fill="#2D9E6B"/>
-            </svg>
-            <span style="font-size:0.65rem;color:#555;display:block;margin-top:0.5rem;">Nadiecito</span>
+          <div class="portrait-widget" id="portraitWidget">
+            <img id="portraitImg"
+                 src="assets/Resident%20Artist%20Portrait/Resident%20Artist.svg"
+                 alt="Nadiecito"
+                 draggable="false"
+                 loading="eager">
           </div>
         </div>
         <div class="who-bio-right">
@@ -1531,6 +1510,103 @@
   <button class="float-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
   <button class="float-btn" id="lang-btn" aria-label="Toggle language">🌐 ES</button>
 </div>
+
+<script>
+/* ── Resident Artist Portrait — interactive ─────────────────── */
+(function () {
+  var P = 'assets/Resident%20Artist%20Portrait/Resident%20Artist';
+  var F = {
+    center:       P + '.svg',
+    up:           P + '%20Looking%20Up.svg',
+    down:         P + '%20Looking%20Down.svg',
+    left:         P + '%20Looking%20Left.svg',
+    right:        P + '%20Looking%20Right.svg',
+    leftUp:       P + '%20Looking%20Left%20Up.svg',
+    leftDown:     P + '%20Looking%20Left%20Down.svg',
+    rightUp:      P + '%20Looking%20Right%20up.svg',
+    rightDown:    P + '%20Looking%20Right%20Down.svg',
+    almostClosed: P + '%20Almost%20Closed%20Eyes.svg',
+    closed:       P + '%20Looking%20Closed%20Eyes.svg'
+  };
+
+  var img    = document.getElementById('portraitImg');
+  var widget = document.getElementById('portraitWidget');
+  if (!img || !widget) return;
+
+  var blinking = false;
+  var curDir   = 'center';
+  var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function dir(dx, dy) {
+    var T = 0.28;
+    var u = dy < -T, d = dy > T, l = dx < -T, r = dx > T;
+    if (u && l) return 'leftUp';
+    if (u && r) return 'rightUp';
+    if (d && l) return 'leftDown';
+    if (d && r) return 'rightDown';
+    if (u) return 'up';
+    if (d) return 'down';
+    if (l) return 'left';
+    if (r) return 'right';
+    return 'center';
+  }
+
+  function setDir(d) {
+    if (blinking || d === curDir) return;
+    curDir = d; img.src = F[d];
+  }
+
+  function track(mx, my) {
+    if (noMotion) return;
+    var r  = widget.getBoundingClientRect();
+    var cx = r.left + r.width  / 2;
+    var cy = r.top  + r.height / 2;
+    var dx = Math.max(-1, Math.min(1, (mx - cx) / (window.innerWidth  * 0.5)));
+    var dy = Math.max(-1, Math.min(1, (my - cy) / (window.innerHeight * 0.5)));
+    setDir(dir(dx, dy));
+    if (!blinking)
+      widget.style.transform =
+        'translate(' + (dx * 4).toFixed(1) + 'px,' + (dy * 3).toFixed(1) + 'px)' +
+        ' rotate('   + (dx * 1.5).toFixed(2) + 'deg)';
+  }
+
+  document.addEventListener('mousemove', function (e) { track(e.clientX, e.clientY); });
+  document.addEventListener('touchmove', function (e) {
+    var t = e.touches[0]; track(t.clientX, t.clientY);
+  }, { passive: true });
+  document.addEventListener('mouseleave', function () {
+    setDir('center'); widget.style.transform = '';
+  });
+
+  /* Blink */
+  function blink() {
+    if (blinking) return;
+    blinking = true;
+    var saved = curDir;
+    img.src = F.almostClosed;
+    setTimeout(function () {
+      img.src = F.closed;
+      setTimeout(function () {
+        img.src = F.almostClosed;
+        setTimeout(function () { img.src = F[saved]; blinking = false; }, 90);
+      }, 110);
+    }, 90);
+  }
+  function scheduleBlink() {
+    setTimeout(function () { blink(); scheduleBlink(); }, 2500 + Math.random() * 4500);
+  }
+  scheduleBlink();
+
+  /* Mobile idle drift (touch-only devices have no hover) */
+  if (!window.matchMedia('(hover: hover)').matches && !noMotion) {
+    var idle = ['center','left','center','right','center','up','center','down','leftUp','center','rightDown','center'];
+    var ii = 0;
+    setInterval(function () {
+      if (!blinking) { curDir = idle[ii % idle.length]; img.src = F[curDir]; ii++; }
+    }, 1600);
+  }
+})();
+</script>
 
 <script src="assets/gallery-config.js"></script>
 <script>
