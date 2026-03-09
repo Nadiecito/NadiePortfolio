@@ -772,15 +772,15 @@ h3 {
 
 .noc-thumb-grid {
   display: grid;
-  grid-template-columns: repeat(10, 8px);
+  grid-template-columns: repeat(10, 16px);
   gap: 1px;
   flex-shrink: 0;
   padding: 4px; /* room for scale effects at edges */
 }
 
 .noc-thumb {
-  width: 8px;
-  height: 9px; /* 50:54 ratio */
+  width: 16px;
+  height: 17px; /* 50:54 ratio */
   padding: 0;
   background: none;
   border: none;
@@ -868,7 +868,7 @@ h3 {
 
 @media (max-width: 720px) {
   .noc-viewer { flex-direction: column; }
-  .noc-thumb-grid { grid-template-columns: repeat(auto-fill, 8px); width: 100%; }
+  .noc-thumb-grid { grid-template-columns: repeat(auto-fill, 16px); width: 100%; }
   .noc-preview-panel { position: static; }
   .noc-preview-gif img { max-height: 50vh; }
 }
