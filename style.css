@@ -123,7 +123,7 @@ nav ul {
 }
 
 nav ul a {
-  color: var(--fg-muted);
+  color: var(--fg);
   text-decoration: none;
   font-family: var(--font-accent);
   font-size: 0.85rem;
@@ -875,8 +875,8 @@ h3 {
   width: 500px;
   height: 540px;
   position: relative;
-  outline: 1px solid var(--border);
-  background: var(--bg);
+  outline: none;
+  background: transparent;
   overflow: hidden;
 }
 
@@ -930,10 +930,17 @@ h3 {
 }
 
 @media (max-width: 1100px) {
-  .noc-viewer { flex-direction: column; }
-  .noc-thumb-grid { grid-template-columns: repeat(auto-fill, 64px); }
-  .noc-preview-panel { position: static; }
-  .noc-preview-frame { width: 100%; max-width: 500px; height: 400px; }
+  .noc-viewer { gap: 1rem; }
+  .noc-thumb-grid { grid-template-columns: repeat(2, 56px); }
+  .noc-thumb { width: 56px; height: 56px; }
+  .noc-preview-panel { position: static; flex: 1; min-width: 0; }
+  .noc-preview-frame { width: 100%; height: 420px; }
+}
+
+@media (max-width: 480px) {
+  .noc-thumb-grid { grid-template-columns: repeat(2, 44px); }
+  .noc-thumb { width: 44px; height: 44px; }
+  .noc-preview-frame { height: 320px; }
 }
 
 /* ═══════════════════════════════════════
@@ -1393,5 +1400,64 @@ footer span { color: var(--yellow); }
   .hero-logo-img { width: clamp(140px, 70vw, 240px); }
   .card-split-img { width: 100px; height: 100px; }
   .noundry-num { font-size: 2.5rem; }
+}
+
+/* ═══════════════════════════════════════
+   DYNAMIC GALLERIES
+═══════════════════════════════════════ */
+.dyn-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 6px;
+  margin-top: 1rem;
+}
+
+.dyn-gallery-item {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-alt);
+  cursor: default;
+}
+
+.dyn-gallery-item img,
+.dyn-gallery-item video {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.dyn-gallery-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.78);
+  color: var(--yellow);
+  font-family: var(--font-accent);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 6px;
+  opacity: 0;
+  transition: opacity 0.18s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dyn-gallery-item:hover .dyn-gallery-label {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .dyn-gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  .dyn-gallery-item img,
+  .dyn-gallery-item video {
+    height: 120px;
+  }
 }
 
