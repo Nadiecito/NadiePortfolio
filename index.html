@@ -1416,10 +1416,13 @@
   var widget = document.getElementById('portraitWidget');
   if (!img || !widget) return;
 
-  var blinking = false;
-  var curDir   = 'center';
-  var lastMx   = null, lastMy = null;
-  var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var blinking       = false;
+  var squinting      = false;  /* almostClosed "tired" look while facing right */
+  var squintCooldown = false;  /* blocks squint right after a blink */
+  var squintTimer    = null;
+  var curDir         = 'center';
+  var lastMx         = null, lastMy = null;
+  var noMotion       = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Fixed sensitivity radius (px). Using half-width caused "left" to almost
      never trigger because the portrait sits near the left edge of the page. */
@@ -1439,14 +1442,39 @@
     return 'center';
   }
 
+  /* ── Squint (almostClosed while looking right a long time) ── */
+  function clearSquintTimer() {
+    if (squintTimer) { clearTimeout(squintTimer); squintTimer = null; }
+  }
+
+  function doSquint() {
+    if (blinking || squinting || squintCooldown || curDir !== 'right') return;
+    squinting = true;
+    img.src = F.almostClosed;
+    setTimeout(function () {
+      squinting = false;
+      if (!blinking && curDir === 'right') img.src = F.right;
+      /* Schedule another squint if still looking right */
+      if (curDir === 'right') scheduleSquint();
+    }, 450);
+  }
+
+  function scheduleSquint() {
+    clearSquintTimer();
+    if (curDir !== 'right') return;
+    squintTimer = setTimeout(doSquint, 3500 + Math.random() * 2500);
+  }
+
   function setDir(d) {
-    if (blinking) return;
+    if (blinking || squinting) return;
     if (d === curDir) return;
+    clearSquintTimer();
     curDir = d; img.src = F[d];
+    if (d === 'right') scheduleSquint();
   }
 
   function applyTransform(dx, dy) {
-    if (blinking) return;
+    if (blinking || squinting) return;
     widget.style.transform =
       'translate(' + (dx * 4).toFixed(1) + 'px,' + (dy * 3).toFixed(1) + 'px)' +
       ' rotate('   + (dx * 1.5).toFixed(2) + 'deg)';
@@ -1469,28 +1497,29 @@
     var t = e.touches[0]; track(t.clientX, t.clientY);
   }, { passive: true });
   document.addEventListener('mouseleave', function () {
-    if (blinking) return;
+    if (blinking || squinting) return;
+    clearSquintTimer();
     curDir = 'center'; img.src = F.center; widget.style.transform = '';
   });
 
-  /* Blink */
+  /* ── Blink — just closed, no almostClosed ── */
   function blink() {
     if (blinking) return;
     blinking = true;
-    img.src = F.almostClosed;
+    clearSquintTimer();
+    squinting = false;      /* cancel any in-progress squint */
+    squintCooldown = true;
+    img.src = F.closed;
     setTimeout(function () {
-      img.src = F.closed;
+      blinking = false;
+      img.src = F[curDir];
+      if (lastMx !== null) track(lastMx, lastMy);
+      /* Block squint for 1.5s after blink ends */
       setTimeout(function () {
-        img.src = F.almostClosed;
-        setTimeout(function () {
-          blinking = false;
-          /* Restore correct direction — re-track if we have a last position,
-             otherwise fall back to whichever direction was active. */
-          img.src = F[curDir];
-          if (lastMx !== null) track(lastMx, lastMy);
-        }, 90);
-      }, 110);
-    }, 90);
+        squintCooldown = false;
+        if (curDir === 'right') scheduleSquint();
+      }, 1500);
+    }, 130);
   }
   function scheduleBlink() {
     setTimeout(function () { blink(); scheduleBlink(); }, 2800 + Math.random() * 4200);
