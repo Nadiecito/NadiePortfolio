@@ -1794,6 +1794,12 @@
     header.innerHTML =
       '<h3><span class="t-en">' + esc(gallery.title.en) +
       '</span><span class="t-es">' + esc(gallery.title.es) + '</span></h3>';
+    if (gallery.description) {
+      var desc = document.createElement('p');
+      desc.style.cssText = 'font-size:0.88rem;color:var(--fg-muted);margin:0.4rem 0 0;line-height:1.6;max-width:680px;';
+      desc.innerHTML = '<span class="t-en">' + gallery.description.en + '</span><span class="t-es">' + gallery.description.es + '</span>';
+      header.appendChild(desc);
+    }
     section.appendChild(header);
 
     // Grid / Masonry

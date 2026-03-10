@@ -134,26 +134,14 @@ window.GALLERY_CONFIG = [
   },
 
   {
-    folder: "ETH BOULDER ETH DENVER",
-    title: {
-      en: "ETH Denver · ETH Boulder · Nouns Bus",
-      es: "ETH Denver · ETH Boulder · Nouns Bus"
-    },
-    layout: "masonry",
-    showLabels: false,
-    lightbox: true,
-    files: [
-      "ETHDENVER.png",
-      "ETHBOULDER.png",
-      "NOUNSBUS.png"
-    ]
-  },
-
-  {
     folder: "Residency",
     title: {
       en: "Residency — Illustrations & Commissions",
       es: "Residencia — Ilustraciones y Encargos"
+    },
+    description: {
+      en: "Thanks to the support of Nouns DAO, the last year gave me something I didn't expect: room to breathe. I got to go deeper into my practice, connect with artist communities in Cali, travel to events I'd been watching from afar, and meet in person people I'd only ever known through a screen. It sounds simple but it meant a lot. This work came out of that.",
+      es: "Gracias al apoyo de Nouns DAO, el último año me dio algo que no esperaba: espacio. Pude profundizar en mi práctica, conectar con comunidades de artistas en Cali, viajar a eventos a los que antes solo miraba de lejos y conocer en persona a gente con la que llevaba años hablando por internet. Suena sencillo pero significó mucho. Este trabajo salió de ahí."
     },
     layout: "masonry",
     showLabels: false,
@@ -212,7 +200,10 @@ window.GALLERY_CONFIG = [
       "potatoes.png",
       "science.png",
       "stake it meth.png",
-      "vivalanoc.png"
+      "vivalanoc.png",
+      "ETHDENVER.png",
+      "ETHBOULDER.png",
+      "NOUNSBUS.png"
     ]
   }
 
