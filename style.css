@@ -1431,8 +1431,10 @@ footer span { color: var(--yellow); }
 @media (max-width: 480px) {
   nav { padding: 0 0.5rem; gap: 0; justify-content: center; }
   .nav-logo { display: none; }
-  nav ul { flex-wrap: wrap; gap: 0; justify-content: center; width: 100%; }
-  nav ul a { font-size: 0.6rem; padding: 0.3rem 0.45rem; }
+  nav ul { flex-wrap: nowrap; gap: 0; justify-content: center; width: 100%; }
+  nav ul a { font-size: 0.68rem; padding: 0.35rem 0.6rem; }
+  nav ul li:has(a[href="#feria"]),
+  nav ul li:has(a[href="#mural"]) { display: none; }
   .who-grid { grid-template-columns: 1fr; }
   .hero-logo-img { width: clamp(140px, 70vw, 240px); }
   .card-split-img { width: 100px; height: 100px; }
