@@ -134,6 +134,22 @@ window.GALLERY_CONFIG = [
   },
 
   {
+    folder: "ETH BOULDER ETH DENVER",
+    title: {
+      en: "ETH Denver · ETH Boulder · Nouns Bus",
+      es: "ETH Denver · ETH Boulder · Nouns Bus"
+    },
+    layout: "masonry",
+    showLabels: false,
+    lightbox: true,
+    files: [
+      "ETHDENVER.png",
+      "ETHBOULDER.png",
+      "NOUNSBUS.png"
+    ]
+  },
+
+  {
     folder: "Residency",
     title: {
       en: "Residency — Illustrations & Commissions",
