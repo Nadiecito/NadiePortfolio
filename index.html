@@ -1371,10 +1371,15 @@
 
   var blinking = false;
   var curDir   = 'center';
+  var lastMx   = null, lastMy = null;
   var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Fixed sensitivity radius (px). Using half-width caused "left" to almost
+     never trigger because the portrait sits near the left edge of the page. */
+  var SENS_X = 380, SENS_Y = 320;
+
   function dir(dx, dy) {
-    var T = 0.28;
+    var T = 0.30;
     var u = dy < -T, d = dy > T, l = dx < -T, r = dx > T;
     if (u && l) return 'leftUp';
     if (u && r) return 'rightUp';
@@ -1388,22 +1393,28 @@
   }
 
   function setDir(d) {
-    if (blinking || d === curDir) return;
+    if (blinking) return;
+    if (d === curDir) return;
     curDir = d; img.src = F[d];
+  }
+
+  function applyTransform(dx, dy) {
+    if (blinking) return;
+    widget.style.transform =
+      'translate(' + (dx * 4).toFixed(1) + 'px,' + (dy * 3).toFixed(1) + 'px)' +
+      ' rotate('   + (dx * 1.5).toFixed(2) + 'deg)';
   }
 
   function track(mx, my) {
     if (noMotion) return;
+    lastMx = mx; lastMy = my;
     var r  = widget.getBoundingClientRect();
     var cx = r.left + r.width  / 2;
     var cy = r.top  + r.height / 2;
-    var dx = Math.max(-1, Math.min(1, (mx - cx) / (window.innerWidth  * 0.5)));
-    var dy = Math.max(-1, Math.min(1, (my - cy) / (window.innerHeight * 0.5)));
+    var dx = Math.max(-1, Math.min(1, (mx - cx) / SENS_X));
+    var dy = Math.max(-1, Math.min(1, (my - cy) / SENS_Y));
     setDir(dir(dx, dy));
-    if (!blinking)
-      widget.style.transform =
-        'translate(' + (dx * 4).toFixed(1) + 'px,' + (dy * 3).toFixed(1) + 'px)' +
-        ' rotate('   + (dx * 1.5).toFixed(2) + 'deg)';
+    applyTransform(dx, dy);
   }
 
   document.addEventListener('mousemove', function (e) { track(e.clientX, e.clientY); });
@@ -1411,25 +1422,31 @@
     var t = e.touches[0]; track(t.clientX, t.clientY);
   }, { passive: true });
   document.addEventListener('mouseleave', function () {
-    setDir('center'); widget.style.transform = '';
+    if (blinking) return;
+    curDir = 'center'; img.src = F.center; widget.style.transform = '';
   });
 
   /* Blink */
   function blink() {
     if (blinking) return;
     blinking = true;
-    var saved = curDir;
     img.src = F.almostClosed;
     setTimeout(function () {
       img.src = F.closed;
       setTimeout(function () {
         img.src = F.almostClosed;
-        setTimeout(function () { img.src = F[saved]; blinking = false; }, 90);
+        setTimeout(function () {
+          blinking = false;
+          /* Restore correct direction — re-track if we have a last position,
+             otherwise fall back to whichever direction was active. */
+          img.src = F[curDir];
+          if (lastMx !== null) track(lastMx, lastMy);
+        }, 90);
       }, 110);
     }, 90);
   }
   function scheduleBlink() {
-    setTimeout(function () { blink(); scheduleBlink(); }, 2500 + Math.random() * 4500);
+    setTimeout(function () { blink(); scheduleBlink(); }, 2800 + Math.random() * 4200);
   }
   scheduleBlink();
 
