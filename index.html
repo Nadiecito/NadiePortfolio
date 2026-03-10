@@ -170,33 +170,12 @@
       <!-- ── BIO CARD ── -->
       <div class="who-bio">
         <div class="who-portrait">
-          <!--
-            ┌──────────────────────────────────────────────┐
-            │  RETRATO: sube tu foto a assets/ y cambia:   │
-            │  <img src="assets/nadiecito.png"             │
-            │       alt="Nadiecito" loading="lazy">        │
-            │  Recomendado: PNG cuadrado 400×400 mínimo    │
-            └──────────────────────────────────────────────┘
-          -->
-          <div class="portrait-ph">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 80" shape-rendering="crispEdges" width="100" height="133">
-              <rect x="10" y="2"  width="40" height="16" fill="#4A7FD9"/>
-              <rect x="6"  y="6"  width="8"  height="12" fill="#4A7FD9"/>
-              <rect x="46" y="6"  width="8"  height="12" fill="#4A7FD9"/>
-              <rect x="14" y="16" width="32" height="30" fill="#8B5E3A"/>
-              <rect x="14" y="24" width="12" height="9"  fill="#e83b3b"/>
-              <rect x="34" y="24" width="12" height="9"  fill="#e83b3b"/>
-              <rect x="26" y="26" width="8"  height="5"  fill="#e83b3b"/>
-              <rect x="16" y="26" width="8"  height="5"  fill="#fff"/>
-              <rect x="36" y="26" width="8"  height="5"  fill="#fff"/>
-              <rect x="18" y="27" width="4"  height="3"  fill="#111"/>
-              <rect x="38" y="27" width="4"  height="3"  fill="#111"/>
-              <rect x="28" y="36" width="4"  height="4"  fill="#6A3F1A"/>
-              <rect x="20" y="42" width="20" height="3"  fill="#3A1005"/>
-              <rect x="24" y="46" width="12" height="8"  fill="#8B5E3A"/>
-              <rect x="8"  y="54" width="44" height="26" fill="#2D9E6B"/>
-            </svg>
-            <span style="font-size:0.65rem;color:#555;display:block;margin-top:0.5rem;">Nadiecito</span>
+          <div class="portrait-widget" id="portraitWidget">
+            <img id="portraitImg"
+                 src="assets/Resident%20Artist%20Portrait/Resident%20Artist.svg"
+                 alt="Nadiecito"
+                 draggable="false"
+                 loading="eager">
           </div>
         </div>
         <div class="who-bio-right">
@@ -702,176 +681,12 @@
   </div>
 
 
-  <div class="artwork-grid">
-    <!-- PROJECTS:START -->
-    <a href="https://www.nouns.camp/proposals/822" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="artwork-card">
-        <div class="artwork-img">
-          <img src="assets/work/abacus-head-v2.png" alt="Abacus Head — Prop #822" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <span class="ph-icon" style="display:none;">⌐◨-◨</span>
-        </div>
-        <div class="artwork-caption">
-          <span class="t-en">Abacus Head · Prop #822 · ✓ In the collection forever</span><span class="t-es">Cabeza Ábaco · Prop #822 · ✓ En la colección para siempre</span>
-        </div>
-      </div>
-    </a>
-    <a href="https://farcaster.xyz/nadiecito.eth" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="artwork-card">
-        <div class="artwork-img">
-          <img src="assets/work/noc-sample.gif" alt="NOC Animation — Daily Pixel" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <span class="ph-icon" style="display:none;">⌐◨-◨</span>
-        </div>
-        <div class="artwork-caption">
-          <span class="t-en">NOC · Almost daily, barely animated</span><span class="t-es">NOC · Casi diaria, apenas animada</span>
-        </div>
-      </div>
-    </a>
-    <a href="https://www.nouns.camp/proposals/925" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="artwork-card">
-        <div class="artwork-img">
-          <img src="assets/head-direwolf.svg" alt="Direwolf Head — Prop #925" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <span class="ph-icon" style="display:none;">⌐◨-◨</span>
-        </div>
-        <div class="artwork-caption">
-          <span class="t-en">Direwolf Head · Prop #925 · Defeated</span><span class="t-es">Cabeza Lobo · Prop #925 · Derrotada</span>
-        </div>
-      </div>
-    </a>
-    <a href="https://www.nouns.camp/proposals/935" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
-      <div class="artwork-card">
-        <div class="artwork-img">
-          <img src="assets/head-bananasplit.svg" alt="Banana Split Head — Prop #935" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <span class="ph-icon" style="display:none;">⌐◨-◨</span>
-        </div>
-        <div class="artwork-caption">
-          <span class="t-en">Banana Split Head · Prop #935 · Defeated</span><span class="t-es">Cabeza Banana Split · Prop #935 · Derrotada</span>
-        </div>
-      </div>
-    </a>
-    <div class="artwork-card">
-      <div class="artwork-img">
-        <img src="assets/work/devconnect-live.png" alt="Devconnect Live Piece" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <span class="ph-icon" style="display:none;">⌐◨-◨</span>
-      </div>
-      <div class="artwork-caption">
-        <span class="t-en">Created live at Devconnect Argentina · Nov 2025 · Risograph printed</span><span class="t-es">Creada en vivo en Devconnect Argentina · Nov 2025 · Impresa en risógrafo</span>
-      </div>
-    </div>
-    <div class="artwork-card">
-      <div class="artwork-img">
-        <img src="assets/work/mural-sketch.png" alt="Mural Amarillo — Boceto" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <span class="ph-icon" style="display:none;">⌐◨-◨</span>
-      </div>
-      <div class="artwork-caption">
-        <span class="t-en">Mural concept sketch · \"Amar y ya\" · Cali, Dec 2025</span><span class="t-es">Boceto del mural · \"Amar y ya\" · Cali, dic 2025</span>
-      </div>
-    </div>
-    <div class="artwork-card">
-      <div class="artwork-img">
-        <img src="assets/work/eth-denver-art.png" alt="ETH Denver · OnchainCreators Art" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <span class="ph-icon" style="display:none;">⌐◨-◨</span>
-      </div>
-      <div class="artwork-caption">
-        <span class="t-en">ETH Denver artwork · Feb 2026 · Made for Nouns props that didn't pass</span><span class="t-es">Arte para ETH Denver · Feb 2026 · Creado para props que no pasaron</span>
-      </div>
-    </div>
-    <div class="artwork-card">
-      <div class="artwork-img">
-        <img src="assets/work/noundry-winner.png" alt="Noundry Contest Winner" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <span class="ph-icon" style="display:none;">⌐◨-◨</span>
-      </div>
-      <div class="artwork-caption">
-        <span class="t-en">Noundry Studio Live Contest · Winner · Aug 8, 2025</span><span class="t-es">Concurso en vivo Noundry Studio · Ganadora · 8 ago 2025</span>
-      </div>
-    </div>
-    <!-- PROJECTS:END -->
-  </div>
-
-  <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--fg-muted);">
-    <span class="t-en">Contributed visuals to:</span><span class="t-es">Apoyo visual para:</span>
-    <strong style="color:var(--fg);">Nouncil · NOC · Nounspace · Bingo Revival · Noun City (Tucumcari, NM) ·
-    Onchain Creators Rally (Buenos Aires) · ETH Boulder · ETH Denver</strong>
-  </p>
-</div>
-
-<!-- ════════════════════════════════
-     CONTRIBUTIONS
-════════════════════════════════ -->
-<div class="section" id="contributions" style="padding-top:0;">
-  <div class="section-label"><span class="t-en">Visual Support</span><span class="t-es">Apoyo Visual</span></div>
-  <h2><span class="t-en">Projects I Helped</span><span class="t-es">Proyectos que apoyé</span></h2>
-  <div class="contrib-grid">
-
-    <div class="contrib-card">
-      <div class="contrib-img"><span class="ph-icon">⌐◨</span></div>
-      <div class="contrib-body">
-        <span class="contrib-name">Nouncil</span>
-        <span class="contrib-desc"><span class="t-en">Graphic support for governance communications</span><span class="t-es">Apoyo gráfico para comunicaciones de gobernanza</span></span>
-      </div>
-    </div>
-
-    <div class="contrib-card">
-      <div class="contrib-img"><span class="ph-icon">⌐◨</span></div>
-      <div class="contrib-body">
-        <span class="contrib-name">NOC</span>
-        <span class="contrib-desc"><span class="t-en">Visual assets for Noun O'Clock — active contributor</span><span class="t-es">Assets visuales para Noun O'Clock — contribuidora activa</span></span>
-      </div>
-    </div>
-
-    <div class="contrib-card">
-      <div class="contrib-img"><span class="ph-icon">⌐◨</span></div>
-      <div class="contrib-body">
-        <span class="contrib-name">Nounspace</span>
-        <span class="contrib-desc"><span class="t-en">Design support for the platform</span><span class="t-es">Apoyo de diseño para la plataforma</span></span>
-      </div>
-    </div>
-
-    <div class="contrib-card">
-      <div class="contrib-img"><span class="ph-icon">⌐◨</span></div>
-      <div class="contrib-body">
-        <span class="contrib-name">Bingo Revival</span>
-        <span class="contrib-desc"><span class="t-en">Graphic pieces for this funded project</span><span class="t-es">Piezas gráficas para este proyecto fondeado</span></span>
-      </div>
-    </div>
-
-    <div class="contrib-card">
-      <div class="contrib-img"><span class="ph-icon">⌐◨</span></div>
-      <div class="contrib-body">
-        <span class="contrib-name">Noun City</span>
-        <span class="contrib-desc"><span class="t-en">Visual contributions for Tucumcari, NM activation</span><span class="t-es">Contribuciones visuales para la activación en Tucumcari, NM</span></span>
-      </div>
-    </div>
-
-    <div class="contrib-card">
-      <div class="contrib-img"><span class="ph-icon">⌐◨</span></div>
-      <div class="contrib-body">
-        <span class="contrib-name">ETH Denver + ETH Boulder</span>
-        <span class="contrib-desc"><span class="t-en">Artwork created for these events</span><span class="t-es">Arte creado para estos eventos</span></span>
-      </div>
-    </div>
-
-    <div class="contrib-card">
-      <div class="contrib-img"><span class="ph-icon">⌐◨</span></div>
-      <div class="contrib-body">
-        <span class="contrib-name">Onchain Creators Rally</span>
-        <span class="contrib-desc"><span class="t-en">Visuals for Buenos Aires event</span><span class="t-es">Visuales para el evento en Buenos Aires</span></span>
-      </div>
-    </div>
-
-    <div class="contrib-card">
-      <div class="contrib-img"><span class="ph-icon">⌐◨</span></div>
-      <div class="contrib-body">
-        <span class="contrib-name">Devconnect Argentina</span>
-        <span class="contrib-desc"><span class="t-en">Resident artist at the Nouns booth — first IRL meeting</span><span class="t-es">Artista residente en el stand de Nouns — primer encuentro IRL</span></span>
-      </div>
-    </div>
-
-  </div>
-
   <!-- Dynamic galleries — populated from assets/gallery-config.js -->
   <div id="gallery-sections"></div>
 
 </div>
+
+<!-- placeholder to preserve id references -->
 
 <div class="divider"><span class="t-en">Residency Log</span><span class="t-es">Registro</span></div>
 
@@ -1532,6 +1347,120 @@
   <button class="float-btn" id="lang-btn" aria-label="Toggle language">🌐 ES</button>
 </div>
 
+<script>
+/* ── Resident Artist Portrait — interactive ─────────────────── */
+(function () {
+  var P = 'assets/Resident%20Artist%20Portrait/Resident%20Artist';
+  var F = {
+    center:       P + '.svg',
+    up:           P + '%20Looking%20Up.svg',
+    down:         P + '%20Looking%20Down.svg',
+    left:         P + '%20Looking%20Left.svg',
+    right:        P + '%20Looking%20Right.svg',
+    leftUp:       P + '%20Looking%20Left%20Up.svg',
+    leftDown:     P + '%20Looking%20Left%20Down.svg',
+    rightUp:      P + '%20Looking%20Right%20up.svg',
+    rightDown:    P + '%20Looking%20Right%20Down.svg',
+    almostClosed: P + '%20Almost%20Closed%20Eyes.svg',
+    closed:       P + '%20Looking%20Closed%20Eyes.svg'
+  };
+
+  var img    = document.getElementById('portraitImg');
+  var widget = document.getElementById('portraitWidget');
+  if (!img || !widget) return;
+
+  var blinking = false;
+  var curDir   = 'center';
+  var lastMx   = null, lastMy = null;
+  var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Fixed sensitivity radius (px). Using half-width caused "left" to almost
+     never trigger because the portrait sits near the left edge of the page. */
+  var SENS_X = 380, SENS_Y = 320;
+
+  function dir(dx, dy) {
+    var T = 0.30;
+    var u = dy < -T, d = dy > T, l = dx < -T, r = dx > T;
+    if (u && l) return 'leftUp';
+    if (u && r) return 'rightUp';
+    if (d && l) return 'leftDown';
+    if (d && r) return 'rightDown';
+    if (u) return 'up';
+    if (d) return 'down';
+    if (l) return 'left';
+    if (r) return 'right';
+    return 'center';
+  }
+
+  function setDir(d) {
+    if (blinking) return;
+    if (d === curDir) return;
+    curDir = d; img.src = F[d];
+  }
+
+  function applyTransform(dx, dy) {
+    if (blinking) return;
+    widget.style.transform =
+      'translate(' + (dx * 4).toFixed(1) + 'px,' + (dy * 3).toFixed(1) + 'px)' +
+      ' rotate('   + (dx * 1.5).toFixed(2) + 'deg)';
+  }
+
+  function track(mx, my) {
+    if (noMotion) return;
+    lastMx = mx; lastMy = my;
+    var r  = widget.getBoundingClientRect();
+    var cx = r.left + r.width  / 2;
+    var cy = r.top  + r.height / 2;
+    var dx = Math.max(-1, Math.min(1, (mx - cx) / SENS_X));
+    var dy = Math.max(-1, Math.min(1, (my - cy) / SENS_Y));
+    setDir(dir(dx, dy));
+    applyTransform(dx, dy);
+  }
+
+  document.addEventListener('mousemove', function (e) { track(e.clientX, e.clientY); });
+  document.addEventListener('touchmove', function (e) {
+    var t = e.touches[0]; track(t.clientX, t.clientY);
+  }, { passive: true });
+  document.addEventListener('mouseleave', function () {
+    if (blinking) return;
+    curDir = 'center'; img.src = F.center; widget.style.transform = '';
+  });
+
+  /* Blink */
+  function blink() {
+    if (blinking) return;
+    blinking = true;
+    img.src = F.almostClosed;
+    setTimeout(function () {
+      img.src = F.closed;
+      setTimeout(function () {
+        img.src = F.almostClosed;
+        setTimeout(function () {
+          blinking = false;
+          /* Restore correct direction — re-track if we have a last position,
+             otherwise fall back to whichever direction was active. */
+          img.src = F[curDir];
+          if (lastMx !== null) track(lastMx, lastMy);
+        }, 90);
+      }, 110);
+    }, 90);
+  }
+  function scheduleBlink() {
+    setTimeout(function () { blink(); scheduleBlink(); }, 2800 + Math.random() * 4200);
+  }
+  scheduleBlink();
+
+  /* Mobile idle drift (touch-only devices have no hover) */
+  if (!window.matchMedia('(hover: hover)').matches && !noMotion) {
+    var idle = ['center','left','center','right','center','up','center','down','leftUp','center','rightDown','center'];
+    var ii = 0;
+    setInterval(function () {
+      if (!blinking) { curDir = idle[ii % idle.length]; img.src = F[curDir]; ii++; }
+    }, 1600);
+  }
+})();
+</script>
+
 <script src="assets/gallery-config.js"></script>
 <script>
 (function () {
@@ -1588,8 +1517,11 @@
     section.appendChild(header);
 
     // Grid / Masonry
+    var gridContainer = useMasonry ? document.createElement('div') : null;
+    if (gridContainer) gridContainer.className = 'masonry-wrap';
     var grid = document.createElement('div');
     grid.className = useMasonry ? 'masonry-gallery' : 'dyn-gallery-grid';
+    if (gridContainer) gridContainer.appendChild(grid);
 
     gallery.files.forEach(function (file) {
       var label   = file.replace(/\.[^.]+$/, '');
@@ -1618,7 +1550,7 @@
       grid.appendChild(item);
     });
 
-    section.appendChild(grid);
+    section.appendChild(gridContainer || grid);
     container.appendChild(section);
   });
 
