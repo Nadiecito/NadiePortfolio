@@ -139,6 +139,10 @@ window.GALLERY_CONFIG = [
       en: "Residency — Illustrations & Commissions",
       es: "Residencia — Ilustraciones y Encargos"
     },
+    description: {
+      en: "The residency changed everything. With the support of Nouns DAO, I was able to go deeper — not just in craft, but in what it means to be part of something. I connected with local artist communities in Cali, traveled to international events, and finally met face-to-face people I'd only known through a screen for years. The artwork here reflects that shift: more intentional, more collaborative, more alive. This is what happens when you give an artist the space to actually build.",
+      es: "La residencia lo cambió todo. Con el apoyo de Nouns DAO pude ir más lejos — no solo en lo técnico, sino en lo que significa ser parte de algo. Conecté con comunidades de artistas en Cali, viajé a eventos internacionales y por fin conocí en persona a gente con la que llevaba años interactuando solo a través de una pantalla. El trabajo que ves aquí refleja ese cambio: más intencional, más colaborativo, más vivo. Esto es lo que pasa cuando le das a un artista el espacio para realmente construir."
+    },
     layout: "masonry",
     showLabels: false,
     lightbox: true,
