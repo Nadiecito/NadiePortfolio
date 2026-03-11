@@ -24,7 +24,7 @@ IRL meetups, and participation in the broader Nouns ecosystem.
 - **Funded by:** Nouns DAO Prop #840 (https://www.nouns.camp/proposals/840)
 
 ### Key works and contributions
-- 100+ pixel animations for the NOC (Noun O'Clock) Farcaster channel, self-described as "almost daily, barely animated pieces"
+- Hundreds of pieces across illustration, pixel art, and animation — including 100+ pixel animations for the NOC (Noun O'Clock) Farcaster channel, self-described as "almost daily, barely animated pieces"
 - Noundry trait submissions: onchain Nouns traits created and published
 - Feria Gráfica Nounish: IRL graphic art fair in Cali, Colombia, bringing local artists into the Nouns ecosystem
 - Mural Amarillo: collaborative community mural project
