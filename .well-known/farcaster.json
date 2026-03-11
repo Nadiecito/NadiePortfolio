@@ -1,0 +1,15 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "version": "1",
+    "name": "Nouns Colombia",
+    "iconUrl": "https://nounscolombia.vercel.app/assets/icon.png",
+    "homeUrl": "https://nounscolombia.vercel.app",
+    "splashImageUrl": "https://nounscolombia.vercel.app/assets/splash.png",
+    "splashBackgroundColor": "#000000"
+  }
+}
