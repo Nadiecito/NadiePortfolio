@@ -1862,5 +1862,13 @@
 </script>
 <script src="main.js" defer></script>
 
+<!-- Farcaster Mini App SDK: hide splash screen once page is ready -->
+<script type="module">
+  import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
+  window.addEventListener('load', async () => {
+    await sdk.actions.ready();
+  });
+</script>
+
 </body>
 </html>
