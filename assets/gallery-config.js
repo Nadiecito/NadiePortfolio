@@ -203,7 +203,9 @@ window.GALLERY_CONFIG = [
       "vivalanoc.png",
       "ETHDENVER.png",
       "ETHBOULDER.png",
-      "NOUNSBUS.png"
+      "NOUNSBUS.png",
+      "1840.png",
+      "zebra fashion week.png"
     ]
   }
 
