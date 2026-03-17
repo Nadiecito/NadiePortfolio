@@ -206,7 +206,10 @@ window.GALLERY_CONFIG = [
       "NOUNSBUS.png",
       "1840.png",
       "Zebra Fashion Week.png",
-      "1843.png"
+      "1843.png",
+      "1844.png",
+      "1845.png",
+      "1846.png"
     ]
   }
 
