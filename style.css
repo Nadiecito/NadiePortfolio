@@ -1021,13 +1021,21 @@ h3 {
 
 @media (max-width: 480px) {
   .noc-viewer { flex-direction: column; max-height: none; }
-  .noc-preview-panel { order: 1; width: 100%; }
+  /* Thumbnails first (above the GIF), preview panel second */
+  .noc-thumb-col { order: 1; width: 100%; }
+  .noc-preview-panel { order: 2; width: 100%; }
   .noc-preview-frame { width: 100%; height: min(80vw, 340px); }
-  .noc-thumb-col { order: 2; width: 100%; }
   .noc-scroll-shell { width: 100%; }
+  /* 2-row horizontal grid: fills row 1 then row 2, then adds columns */
   .noc-thumb-scroll { max-height: none; overflow-x: auto; overflow-y: hidden; cursor: grab; }
   .noc-thumb-scroll:active { cursor: grabbing; }
-  .noc-thumb-grid { grid-template-columns: repeat(10, 44px); grid-auto-columns: 44px; grid-auto-flow: column; }
+  .noc-thumb-grid {
+    grid-template-rows: repeat(2, 44px);
+    grid-auto-flow: column;
+    grid-auto-columns: 44px;
+    grid-template-columns: unset;
+    gap: 3px;
+  }
   .noc-thumb { width: 44px; height: 44px; }
   .noc-scroll-arrow { display: none; }
 }
@@ -1244,23 +1252,145 @@ h3 {
 [data-lang="es"] .t-es { display: revert; }
 
 /* ═══════════════════════════════════════
-   CHRONICLE / TIMELINE
+   CHRONICLE / HORIZONTAL TIMELINE
 ═══════════════════════════════════════ */
+
+/* Intro text */
+.ch-intro {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+/* Horizontal timeline UI */
+.ch-timeline-ui {
+  margin-top: 2rem;
+}
+
+.ch-rail-scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--yellow) transparent;
+}
+.ch-rail-scroll::-webkit-scrollbar { height: 4px; }
+.ch-rail-scroll::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 2px; }
+
+.ch-rail {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding: 0.5rem 0 1.25rem;
+  min-width: max-content;
+  gap: 0;
+}
+
+/* Horizontal yellow connecting line */
+.ch-rail::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  top: 13px;
+  height: 4px;
+  background: var(--yellow);
+}
+
+/* Each dot + label */
+.ch-dot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  min-width: 80px;
+  padding: 0 0.35rem;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.15s;
+}
+.ch-dot-wrap:hover { opacity: 0.85; }
+
+.ch-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--bg);
+  border: 3px solid var(--yellow);
+  outline: 2px solid var(--yellow);
+  flex-shrink: 0;
+  transition: background 0.15s, transform 0.12s;
+}
+.ch-dot-wrap:hover .ch-dot,
+.ch-dot-wrap.is-open .ch-dot {
+  background: var(--yellow);
+  transform: scale(1.25);
+}
+
+.ch-dot-date {
+  font-family: var(--font-accent);
+  font-size: 0.56rem;
+  color: var(--fg-muted);
+  letter-spacing: 0.5px;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+.ch-dot-wrap.is-open .ch-dot-date {
+  color: var(--yellow);
+}
+
+.ch-dot-tag {
+  font-family: var(--font-accent);
+  font-size: 0.5rem;
+  padding: 2px 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Open cards area — stacked below rail */
+.ch-open-area {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ch-open-card {
+  position: relative;
+  animation: ch-slide-in 0.18s ease;
+}
+
+.ch-card-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 0.15rem 0.4rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: border-color 0.12s, color 0.12s;
+  z-index: 2;
+}
+.ch-card-close:hover { border-color: var(--yellow); color: var(--yellow); }
+
+@keyframes ch-slide-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Keep the old .chronicle hidden (JS sets display:none, this is fallback) */
 .chronicle {
   position: relative;
   margin-top: 2.5rem;
   padding-left: 3rem;
-}
-
-/* Vertical yellow line */
-.chronicle::before {
-  content: '';
-  position: absolute;
-  left: 0.85rem;
-  top: 0.5rem;
-  bottom: 0;
-  width: 4px;
-  background: var(--yellow);
 }
 
 .ch-entry {
@@ -1268,7 +1398,7 @@ h3 {
   margin-bottom: 2.5rem;
 }
 
-/* Yellow square bullet */
+/* Yellow square bullet (only visible in fallback vertical view) */
 .ch-entry::before {
   content: '';
   position: absolute;
@@ -1855,137 +1985,70 @@ footer span { color: var(--yellow); }
 }
 
 /* ═══════════════════════════════════════
-   MINI WINDOWS
+   GALLERY HUB — ACTIVE STATE + BADGE
 ═══════════════════════════════════════ */
-.mini-window {
-  position: fixed;
-  width: min(92vw, 960px);
-  height: min(90vh, 860px);
-  background: var(--bg);
-  border: 2px solid var(--yellow);
-  border-radius: 6px;
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-  top: 8vh;
-  left: max(4vw, calc(50vw - 480px));
+.ghub-card.active {
+  border-color: var(--yellow);
+  background: color-mix(in srgb, var(--yellow) 8%, var(--bg-alt));
 }
-.mini-window.is-open {
-  display: flex;
+.ghub-card.active .ghub-open-hint {
+  color: var(--yellow);
+  opacity: 1;
 }
 
-.mw-bar {
+.ghub-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.45rem 0.75rem;
-  background: var(--bg-alt);
-  border-bottom: 2px solid var(--yellow);
-  cursor: move;
-  user-select: none;
-  flex-shrink: 0;
+  gap: 0.4rem;
 }
-.mw-title {
+
+.ghub-count-badge {
   font-family: var(--font-pixel);
-  font-size: 0.72rem;
-  color: var(--yellow);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.mw-close {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--fg-muted);
-  font-size: 0.9rem;
-  line-height: 1;
-  padding: 0.15rem 0.45rem;
-  cursor: pointer;
+  font-size: 0.6rem;
+  color: var(--bg);
+  background: var(--yellow);
+  padding: 0.1rem 0.4rem;
   border-radius: 3px;
+  white-space: nowrap;
   flex-shrink: 0;
-  transition: border-color 0.12s, color 0.12s;
-}
-.mw-close:hover {
-  border-color: var(--yellow);
-  color: var(--yellow);
 }
 
-.mw-body {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 1.25rem 1.5rem 2rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--yellow) transparent;
+/* ═══════════════════════════════════════
+   INLINE GALLERY PANELS
+═══════════════════════════════════════ */
+.inline-gallery {
+  margin-top: 1.5rem;
+  border-top: 2px solid var(--yellow);
+  padding-top: 1.5rem;
 }
-.mw-body::-webkit-scrollbar { width: 6px; }
-.mw-body::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 3px; }
 
-/* NOC viewer inside mini-window: remove max-height constraint */
-.mw-body .noc-viewer {
+/* NOC viewer inside inline panel: remove max-height constraint */
+.inline-gallery .noc-viewer {
   max-height: none;
   flex-wrap: wrap;
 }
-.mw-body .noc-preview-panel {
+.inline-gallery .noc-preview-panel {
   position: sticky;
   top: 0;
 }
-.mw-body .noc-preview-frame {
+.inline-gallery .noc-preview-frame {
   width: 100%;
   max-width: 460px;
   height: clamp(300px, 50vh, 500px);
 }
 
-/* open-windows taskbar at bottom of screen */
-.mw-taskbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.4rem 1rem;
-  background: rgba(0,0,0,0.85);
-  border-top: 1px solid var(--border);
-  z-index: 1999;
-  overflow-x: auto;
-}
-.mw-task-btn {
-  font-family: var(--font-pixel);
-  font-size: 0.62rem;
-  color: var(--fg-muted);
-  background: var(--bg-alt);
-  border: 1px solid var(--border);
-  padding: 0.25rem 0.7rem;
-  border-radius: 3px;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: border-color 0.12s, color 0.12s;
-}
-.mw-task-btn.active {
-  border-color: var(--yellow);
-  color: var(--yellow);
-}
-.mw-task-btn:hover {
-  border-color: var(--yellow);
-  color: var(--yellow);
-}
-
 @media (max-width: 600px) {
-  .mini-window {
-    width: 100vw;
-    height: 100vh;
-    top: 0 !important;
-    left: 0 !important;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-  }
   .gallery-hub {
     grid-template-columns: 1fr;
   }
+}
+
+/* ── Footer links (moved from hero) ── */
+.footer-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
