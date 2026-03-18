@@ -32,6 +32,10 @@ window.GALLERY_CONFIG = [
       en: "Rounds, Contests & Direct Commissions",
       es: "Rondas, Concursos y Encargos Directos"
     },
+    description: {
+      en: "Much of what's shown here came out of community-driven rewarding dynamics — creation rounds, tips, flows, contests, and direct commissions across channels like nouns-draws, nouns-animators, NOC, Yellow, Pirates Bay, Higher, Noundry, Nouns Amigos, and many others. These are the spaces where my creative participation in the ecosystem began.",
+      es: "Gran parte de lo que se muestra aquí surgió de dinámicas comunitarias de incentivos — rondas de creación, tips, flows, concursos y encargos directos en canales como nouns-draws, nouns-animators, NOC, Yellow, Pirates Bay, Higher, Noundry, Nouns Amigos, y muchos otros. Estos son los espacios donde comenzó mi participación creativa en el ecosistema."
+    },
     layout: "masonry",
     showLabels: false,
     lightbox: true,
@@ -144,8 +148,8 @@ window.GALLERY_CONFIG = [
       es: "Residencia — Ilustraciones y Encargos"
     },
     description: {
-      en: "In 2025, Nouns DAO approved Prop #840 — an artist residency for a creator in Colombia. The model: direct DAO funding, full creative freedom, and roots in the local cultural scene.",
-      es: "En 2025, Nouns DAO aprobó la Prop #840 — una residencia artística para un creador en Colombia. El modelo: financiamiento directo del DAO, libertad creativa total, y anclaje en la escena cultural local."
+      en: "Work created during the Nouns DAO residency — illustrations, event visuals, and collaborative pieces rooted in Cali's cultural scene. Every piece here is tied to a real moment, a community conversation, or a local story.",
+      es: "Trabajo creado durante la residencia con Nouns DAO — ilustraciones, visuales para eventos y piezas colaborativas con raíces en la escena cultural de Cali. Cada pieza está ligada a un momento real, una conversación comunitaria o una historia local."
     },
     layout: "masonry",
     showLabels: false,
