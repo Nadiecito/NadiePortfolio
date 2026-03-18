@@ -585,20 +585,13 @@
     btn.classList.add('noc-clicked');
     setTimeout(function() { btn.classList.remove('noc-clicked'); }, 200);
     var num = btn.dataset.num;
-    var gif = btn.dataset.gif || ('assets/noc/' + num + '.gif');
+    var gif = btn.dataset.gif;
+    document.getElementById('nocPreviewIdle').classList.add('hidden');
+    document.getElementById('nocPreviewLabel').textContent = 'NOUN ' + num;
     var img = document.getElementById('nocPreviewImg');
-    var idle = document.getElementById('nocPreviewIdle');
-    var label = document.getElementById('nocPreviewLabel');
-    img.classList.remove('visible');
-    img.onload = null;
-    idle.classList.add('hidden');
-    label.textContent = 'NOUN ' + num;
     img.alt = 'NOC #' + num;
-    function show() { img.classList.add('visible'); img.onload = null; }
-    img.onload = show;
     img.src = gif;
-    // For cached images onload may not fire — check after next paint
-    requestAnimationFrame(function() { if (img.complete) show(); });
+    img.classList.add('visible');
   }
 
   (function() {
