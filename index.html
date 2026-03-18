@@ -2151,19 +2151,20 @@
     if (!panel) return;
     panel.style.display = '';
 
-    /* Add close bar (mobile only — CSS hides it on desktop) */
-    if (!panel.querySelector('.gallery-close-bar')) {
-      var bar = document.createElement('div');
-      bar.className = 'gallery-close-bar';
-      var btn = document.createElement('button');
-      btn.className = 'gallery-close-btn';
-      btn.textContent = '⌫ back';
-      btn.addEventListener('click', function () {
-        closeAll();
-        if (hub) hub.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-      bar.appendChild(btn);
-      panel.insertBefore(bar, panel.firstChild);
+    /* Inject X close button into gallery title header (mobile only via CSS) */
+    if (!panel.querySelector('.gallery-close-x')) {
+      var header = panel.querySelector('.noc-section-header');
+      if (header) {
+        var closeX = document.createElement('button');
+        closeX.className = 'gallery-close-x';
+        closeX.textContent = '✕';
+        closeX.setAttribute('aria-label', 'Close gallery');
+        closeX.addEventListener('click', function () {
+          closeAll();
+          if (hub) hub.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        header.appendChild(closeX);
+      }
     }
 
     if (doScroll) {

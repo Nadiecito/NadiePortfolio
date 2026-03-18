@@ -2081,27 +2081,22 @@ footer span { color: var(--yellow); }
   overflow-x: hidden;
 }
 
-/* ── Gallery close bar (visible on mobile only) ── */
-.gallery-close-bar {
+/* ── Gallery ✕ close button — inline with title, mobile only ── */
+.gallery-close-x {
   display: none;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1rem;
-}
-.gallery-close-btn {
   background: none;
-  border: 1px solid var(--yellow);
+  border: none;
   color: var(--yellow);
-  font-family: var(--font-pixel);
-  font-size: 0.72rem;
-  padding: 0.25rem 0.6rem;
+  font-size: 1.1rem;
+  line-height: 1;
   cursor: pointer;
-  letter-spacing: 0.05em;
-  line-height: 1.4;
+  margin-left: auto;
+  padding: 0 0.1rem;
+  flex-shrink: 0;
 }
-.gallery-close-btn:hover { background: var(--yellow); color: var(--bg); }
+.gallery-close-x:hover { opacity: 0.7; }
 @media (max-width: 600px) {
-  .gallery-close-bar { display: flex; }
+  .gallery-close-x { display: block; }
   .inline-gallery { min-height: 60vh; }
 }
 
