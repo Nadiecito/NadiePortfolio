@@ -143,6 +143,10 @@ window.GALLERY_CONFIG = [
       en: "Thanks to the support of Nouns DAO, the last year gave me something I didn't expect: room to breathe. I got to go deeper into my practice, connect with artist communities in Cali, travel to events I'd been watching from afar, and meet in person people I'd only ever known through a screen. It sounds simple but it meant a lot. This work came out of that.",
       es: "Gracias al apoyo de Nouns DAO, el último año me dio algo que no esperaba: espacio. Pude profundizar en mi práctica, conectar con comunidades de artistas en Cali, viajar a eventos a los que antes solo miraba de lejos y conocer en persona a gente con la que llevaba años hablando por internet. Suena sencillo pero significó mucho. Este trabajo salió de ahí."
     },
+    contextNote: {
+      en: "Much of what's shown here came out of community-driven rewarding dynamics — creation rounds, tips, flows, contests, and direct commissions across channels like <em>nouns-draws, nouns-animators, NOC, Yellow, Pirates Bay, Higher, Noundry, Nouns Amigos</em>, and many others. These are the spaces where my creative participation in the ecosystem began.",
+      es: "Gran parte de lo que se muestra aquí surgió de dinámicas de recompensa impulsadas por la comunidad — rondas de creación, tips, flows, concursos y encargos directos en canales como <em>nouns-draws, nouns-animators, NOC, Yellow, Pirates Bay, Higher, Noundry, Nouns Amigos</em>, entre muchos otros. Esos fueron los espacios donde comenzó mi participación creativa en el ecosistema."
+    },
     layout: "masonry",
     showLabels: false,
     lightbox: true,

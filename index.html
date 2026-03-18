@@ -386,16 +386,6 @@
     Las obras creadas para <strong style="color:var(--fg);">Bingo Revival</strong> o <strong style="color:var(--fg);">Noun City (Tucumcari, NM)</strong> pueden tener sus propios términos de licencia.</span>
   </p>
 
-  <div class="gallery-context-note">
-    <p>
-      <span class="t-en">Much of what's shown here came out of community-driven rewarding dynamics — creation rounds, tips, flows, contests, and direct commissions across channels like <em>nouns-draws, nouns-animators, NOC, Yellow, Pirates Bay, Higher, Noundry, Nouns Amigos</em>, and many others. These are the spaces where my creative participation in the ecosystem began, and they're documented in more detail in the <a href="#chronicle" style="color:var(--yellow);">Chronicle</a> below.</span>
-      <span class="t-es">Gran parte de lo que se muestra aquí surgió de dinámicas de recompensa impulsadas por la comunidad — rondas de creación, tips, flows, concursos y encargos directos en canales como <em>nouns-draws, nouns-animators, NOC, Yellow, Pirates Bay, Higher, Noundry, Nouns Amigos</em>, entre muchos otros. Esos fueron los espacios donde comenzó mi participación creativa en el ecosistema, documentada con más detalle en la <a href="#chronicle" style="color:var(--yellow);">Crónica</a>.</span>
-    </p>
-    <p>
-      <span class="t-en">Worth saying clearly: what I do today is more complex — collaborative work, events, proposals, and real accountability to others. The NOC animations were an early commitment that kept me present, but also one that became unsustainable as the rewarding dynamics that gave them meaning gradually disappeared from the Farcaster ecosystem.</span>
-      <span class="t-es">Vale decirlo con claridad: lo que hago hoy es más complejo — trabajo colaborativo, eventos, propuestas, y compromisos reales con otras personas. Las animaciones de NOC fueron un compromiso temprano que mantuvo mi presencia, pero también uno que se volvió insostenible cuando las dinámicas de recompensa que les daban sentido fueron desapareciendo del ecosistema de Farcaster.</span>
-    </p>
-  </div>
 
   <!--
   ╔═══════════════════════════════════════════════════════════════╗
@@ -446,6 +436,14 @@
     <p class="noc-section-desc">
       <span class="t-en"><em>Almost daily, barely animated.</em> Pixel art contributed to the NOC channel on Farcaster — each piece marks the moment a new Noun is born. Minted on <a href="https://cork.wtf" target="_blank" rel="noopener" style="color:var(--yellow);">cork.wtf ↗</a></span>
       <span class="t-es"><em>Casi diaria, apenas animada.</em> Pixel art para el canal NOC en Farcaster — cada pieza marca el momento en que nace un nuevo Noun. Minteada en <a href="https://cork.wtf" target="_blank" rel="noopener" style="color:var(--yellow);">cork.wtf ↗</a></span>
+    </p>
+    <p style="font-size:0.78rem;color:var(--fg-muted);line-height:1.7;margin:0.5rem 0 0.25rem;">
+      <span class="t-en">Much of what's shown here came out of community-driven rewarding dynamics — creation rounds, tips, flows, contests, and direct commissions across channels like <em>nouns-draws, nouns-animators, NOC, Yellow, Pirates Bay, Higher, Noundry, Nouns Amigos</em>, and many others. These are the spaces where my creative participation in the ecosystem began.</span>
+      <span class="t-es">Gran parte de lo que se muestra aquí surgió de dinámicas de recompensa impulsadas por la comunidad — rondas de creación, tips, flows, concursos y encargos directos en canales como <em>nouns-draws, nouns-animators, NOC, Yellow, Pirates Bay, Higher, Noundry, Nouns Amigos</em>, entre muchos otros. Esos fueron los espacios donde comenzó mi participación creativa en el ecosistema.</span>
+    </p>
+    <p style="font-size:0.78rem;color:var(--fg-muted);line-height:1.7;margin:0.25rem 0 0.75rem;">
+      <span class="t-en">Worth saying clearly: what I do today is more complex — collaborative work, events, proposals, and real accountability to others. The NOC animations were an early commitment that kept me present, but also one that became unsustainable as the rewarding dynamics that gave them meaning gradually disappeared from the Farcaster ecosystem.</span>
+      <span class="t-es">Vale decirlo con claridad: lo que hago hoy es más complejo — trabajo colaborativo, eventos, propuestas, y compromisos reales con otras personas. Las animaciones de NOC fueron un compromiso temprano que mantuvo mi presencia, pero también uno que se volvió insostenible cuando las dinámicas de recompensa que les daban sentido fueron desapareciendo del ecosistema de Farcaster.</span>
     </p>
   <div>
     <div class="noc-viewer">
@@ -1510,9 +1508,6 @@
   </div>
 </div>
 
-<div class="divider"><span class="t-en">Proposal</span><span class="t-es">Propuesta</span></div>
-
-
 <!-- ════════════════════════════════
      FOOTER
 ════════════════════════════════ -->
@@ -1796,6 +1791,12 @@
       desc.style.cssText = 'font-size:0.88rem;color:var(--fg-muted);margin:0.4rem 0 0;line-height:1.6;max-width:680px;';
       desc.innerHTML = '<span class="t-en">' + gallery.description.en + '</span><span class="t-es">' + gallery.description.es + '</span>';
       header.appendChild(desc);
+    }
+    if (gallery.contextNote) {
+      var note = document.createElement('p');
+      note.style.cssText = 'font-size:0.78rem;color:var(--fg-muted);margin:0.5rem 0 0;line-height:1.7;max-width:680px;';
+      note.innerHTML = '<span class="t-en">' + gallery.contextNote.en + '</span><span class="t-es">' + gallery.contextNote.es + '</span>';
+      header.appendChild(note);
     }
     section.appendChild(header);
 
