@@ -64,6 +64,7 @@ body {
 a { color: var(--yellow); text-decoration: none; }
 a:hover { text-decoration: underline; }
 img { display: block; }
+html, body { overflow-x: hidden; max-width: 100%; } /* prevent horizontal scroll bleed on mobile */
 
 /* ═══════════════════════════════════════
    NAV
@@ -306,7 +307,7 @@ nav ul a:hover { color: var(--yellow); }
   white-space: nowrap;
 }
 
-.hero-btn:hover { background: var(--yellow); color: #111; text-decoration: none; }
+.hero-btn:hover { background: var(--yellow); color: #000 !important; text-decoration: none; }
 
 /* ═══════════════════════════════════════
    DIVIDER
@@ -343,6 +344,7 @@ nav ul a:hover { color: var(--yellow); }
   max-width: 1100px;
   margin: 0 auto;
   padding: 4rem 2rem;
+  overflow-x: hidden;
 }
 
 .section-label {
@@ -1322,10 +1324,9 @@ h3 {
   flex-shrink: 0;
   transition: background 0.15s, transform 0.12s;
 }
-.ch-dot-wrap:hover .ch-dot,
-.ch-dot-wrap.is-open .ch-dot {
-  background: var(--yellow);
-  transform: scale(1.25);
+.ch-dot-wrap:hover .ch-dot {
+  background: color-mix(in srgb, var(--yellow) 60%, transparent);
+  transform: scale(1.18);
 }
 
 .ch-dot-date {
@@ -1336,53 +1337,108 @@ h3 {
   text-align: center;
   white-space: nowrap;
   line-height: 1.3;
-}
-.ch-dot-wrap.is-open .ch-dot-date {
-  color: var(--yellow);
+  transition: opacity 0.2s, height 0.2s;
 }
 
-.ch-dot-tag {
-  font-family: var(--font-accent);
-  font-size: 0.5rem;
-  padding: 2px 5px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-  text-align: center;
-}
-
-/* Open cards area — stacked below rail */
-.ch-open-area {
-  margin-top: 1.25rem;
+/* ── Card stack area ── */
+.ch-card-area {
+  margin-top: 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 4px;
+}
+
+/* Prev/next slots: only show card-head (mini, no border, faded) */
+.ch-slot--empty { display: none; }
+
+.ch-slot--prev,
+.ch-slot--next {
+  opacity: 0.38;
+  transform: scale(0.94);
+  transform-origin: bottom center;
+  filter: blur(0.4px);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  pointer-events: auto;
+}
+.ch-slot--next { transform-origin: top center; }
+.ch-slot--prev:hover,
+.ch-slot--next:hover { opacity: 0.65; }
+
+/* Hide body in prev/next mini cards */
+.ch-slot--prev .ch-card-body,
+.ch-slot--next .ch-card-body { display: none; }
+
+/* Current slot: full card */
+.ch-slot--current {
+  transition: none;
 }
 
 .ch-open-card {
-  position: relative;
-  animation: ch-slide-in 0.18s ease;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  overflow: hidden;
+}
+.ch-slot--current .ch-open-card {
+  border-color: var(--yellow);
+  animation: ch-slide-in 0.2s ease;
+}
+.ch-slot--prev .ch-open-card,
+.ch-slot--next .ch-open-card {
+  border-color: transparent;
+  background: transparent;
 }
 
-.ch-card-close {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--fg-muted);
+/* Date shown at top of selected card */
+.ch-open-date {
+  font-family: var(--font-accent);
   font-size: 0.75rem;
-  line-height: 1;
-  padding: 0.15rem 0.4rem;
-  cursor: pointer;
-  border-radius: 2px;
-  transition: border-color 0.12s, color 0.12s;
-  z-index: 2;
+  font-weight: bold;
+  color: var(--yellow);
+  letter-spacing: 1px;
+  padding: 0.5rem 1rem 0;
 }
-.ch-card-close:hover { border-color: var(--yellow); color: var(--yellow); }
+
+/* Mini date in prev/next */
+.ch-mini-date {
+  font-family: var(--font-accent);
+  font-size: 0.6rem;
+  color: var(--fg-muted);
+  letter-spacing: 0.5px;
+  padding: 0.3rem 0.75rem 0;
+  display: block;
+}
+
+/* Tag row in selected card */
+.ch-open-tag-row {
+  padding: 0.25rem 1rem 0;
+}
+
+/* Active dot state */
+.ch-dot-wrap.is-active .ch-dot {
+  background: var(--yellow);
+  transform: scale(1.35);
+}
+.ch-dot-wrap.is-active .ch-dot-date {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+/* Triangle indicator below active dot */
+.ch-dot-wrap.is-active::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--yellow);
+  margin: 2px auto 0;
+}
 
 @keyframes ch-slide-in {
-  from { opacity: 0; transform: translateY(-6px); }
+  from { opacity: 0; transform: translateY(-5px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -2005,10 +2061,10 @@ footer span { color: var(--yellow); }
 
 .ghub-count-badge {
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.9rem;
   color: var(--bg);
   background: var(--yellow);
-  padding: 0.1rem 0.4rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 3px;
   white-space: nowrap;
   flex-shrink: 0;
@@ -2021,12 +2077,14 @@ footer span { color: var(--yellow); }
   margin-top: 1.5rem;
   border-top: 2px solid var(--yellow);
   padding-top: 1.5rem;
+  min-height: calc(100vh - 16rem); /* fills viewport below hub once hub scrolls to top */
+  overflow-x: hidden;
 }
 
-/* NOC viewer inside inline panel: remove max-height constraint */
+/* NOC viewer inside inline panel: nowrap on desktop so preview stays right */
 .inline-gallery .noc-viewer {
   max-height: none;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .inline-gallery .noc-preview-panel {
   position: sticky;
@@ -2037,11 +2095,42 @@ footer span { color: var(--yellow); }
   max-width: 460px;
   height: clamp(300px, 50vh, 500px);
 }
+/* Gallery description text: full width inside inline panel */
+.inline-gallery .gallery-desc {
+  max-width: none;
+}
 
+/* ── Consistent action button for chronicle / card links ── */
+.link-btn {
+  display: inline-block;
+  font-family: var(--font-accent);
+  font-size: 0.78rem;
+  padding: 0.4rem 0.85rem;
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: background var(--t), color var(--t);
+}
+.link-btn:hover { background: var(--yellow); color: #000 !important; text-decoration: none; }
+
+@media (max-width: 700px) {
+  .inline-gallery {
+    max-height: none; /* mobile: let it flow naturally */
+    overflow-y: visible;
+    overflow-x: hidden;
+  }
+  .inline-gallery .noc-viewer { flex-wrap: wrap; }
+}
 @media (max-width: 600px) {
   .gallery-hub {
     grid-template-columns: 1fr;
   }
+  /* Smaller mini-previews on mobile */
+  .ghub-card { padding: 0.6rem; }
+  .ghub-preview-row { gap: 2px; }
+  .ghub-name { font-size: 0.65rem; }
+  .ghub-meta { font-size: 0.65rem; }
 }
 
 /* ── Footer links (moved from hero) ── */

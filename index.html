@@ -553,19 +553,22 @@
   </div>
   <script>
   function nocSelect(btn) {
-    document.querySelectorAll('.noc-thumb').forEach(function(t) { t.classList.remove('active', 'noc-clicked'); });
+    document.querySelectorAll('.noc-thumb').forEach(function(t) { t.classList.remove('active'); });
     btn.classList.add('active');
-    void btn.offsetWidth;
-    btn.classList.add('noc-clicked');
-    setTimeout(function() { btn.classList.remove('noc-clicked'); }, 200);
     var num = btn.dataset.num;
     var gif = btn.dataset.gif;
-    document.getElementById('nocPreviewIdle').classList.add('hidden');
-    document.getElementById('nocPreviewLabel').textContent = 'NOUN ' + num;
+    var idle = document.getElementById('nocPreviewIdle');
+    if (idle) idle.style.display = 'none';
+    var label = document.getElementById('nocPreviewLabel');
+    if (label) label.textContent = 'NOUN ' + num;
     var img = document.getElementById('nocPreviewImg');
-    img.alt = 'NOC #' + num;
-    img.src = gif;
-    img.classList.add('visible');
+    if (img) {
+      img.alt = 'NOC #' + num;
+      img.src = '';
+      img.src = gif;
+      img.style.display = 'block';
+      img.style.opacity = '1';
+    }
   }
 
   (function() {
@@ -1131,101 +1134,164 @@
 </div>
 
 <script>
-/* ── Chronicle: horizontal interactive timeline ── */
+/* ── Chronicle: single-card timeline with peek stack ── */
 (function () {
   var chronicle = document.querySelector('.chronicle');
   if (!chronicle) return;
   var entries = Array.from(chronicle.querySelectorAll(':scope > .ch-entry'));
   if (!entries.length) return;
 
-  /* Build wrapper */
+  chronicle.style.display = 'none';
+
+  /* ── Build UI ── */
   var ui = document.createElement('div');
   ui.className = 'ch-timeline-ui';
 
+  /* Rail */
   var railScroll = document.createElement('div');
   railScroll.className = 'ch-rail-scroll';
-
   var rail = document.createElement('div');
   rail.className = 'ch-rail';
   railScroll.appendChild(rail);
   ui.appendChild(railScroll);
 
-  var openArea = document.createElement('div');
-  openArea.className = 'ch-open-area';
-  ui.appendChild(openArea);
+  /* Card stack: prev (mini) + current (full) + next (mini) */
+  var cardArea = document.createElement('div');
+  cardArea.className = 'ch-card-area';
+  var prevSlot = document.createElement('div');
+  prevSlot.className = 'ch-slot ch-slot--prev';
+  var currSlot = document.createElement('div');
+  currSlot.className = 'ch-slot ch-slot--current';
+  var nextSlot = document.createElement('div');
+  nextSlot.className = 'ch-slot ch-slot--next';
+  cardArea.appendChild(prevSlot);
+  cardArea.appendChild(currSlot);
+  cardArea.appendChild(nextSlot);
+  ui.appendChild(cardArea);
 
   chronicle.parentNode.insertBefore(ui, chronicle);
-  chronicle.style.display = 'none';
 
-  var MAX_OPEN = 3;
-  var openItems = []; /* [{entry, dotWrap, openCard}] — oldest first */
+  /* ── Timeline dots ── */
+  var currentIdx = -1;
+  var dots = [];
 
-  entries.forEach(function (entry) {
+  entries.forEach(function (entry, i) {
     var dateEl = entry.querySelector('.ch-date');
-    var tagEl  = entry.querySelector('.ch-tag');
-    var card   = entry.querySelector('.ch-card');
-    if (!card) return;
-
     var dotWrap = document.createElement('div');
     dotWrap.className = 'ch-dot-wrap';
-
     var dot = document.createElement('div');
     dot.className = 'ch-dot';
     dotWrap.appendChild(dot);
-
     var dateLabel = document.createElement('div');
     dateLabel.className = 'ch-dot-date';
     dateLabel.textContent = dateEl ? dateEl.textContent : '';
     dotWrap.appendChild(dateLabel);
-
-    if (tagEl) {
-      var tagLabel = document.createElement('div');
-      tagLabel.className = 'ch-dot-tag';
-      tagEl.classList.forEach(function (c) {
-        if (c !== 'ch-tag') tagLabel.classList.add(c);
-      });
-      tagLabel.textContent = tagEl.textContent;
-      dotWrap.appendChild(tagLabel);
-    }
-
+    dotWrap.addEventListener('click', function () { selectIdx(i); });
     rail.appendChild(dotWrap);
-
-    dotWrap.addEventListener('click', function () {
-      /* Already open? Close it */
-      var existing = null;
-      for (var i = 0; i < openItems.length; i++) {
-        if (openItems[i].entry === entry) { existing = openItems[i]; break; }
-      }
-      if (existing) { closeItem(existing); return; }
-
-      /* Too many open? Close oldest */
-      if (openItems.length >= MAX_OPEN) closeItem(openItems[0]);
-
-      /* Open card */
-      dotWrap.classList.add('is-open');
-      var openCard = document.createElement('div');
-      openCard.className = 'ch-open-card';
-      openCard.appendChild(card.cloneNode(true));
-
-      /* Close button inside open card */
-      var closeBtn = document.createElement('button');
-      closeBtn.className = 'ch-card-close';
-      closeBtn.textContent = '✕';
-      var item = { entry: entry, dotWrap: dotWrap, openCard: openCard };
-      closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeItem(item); });
-      openCard.appendChild(closeBtn);
-
-      openArea.appendChild(openCard);
-      openItems.push(item);
-    });
+    dots.push(dotWrap);
   });
 
-  function closeItem(item) {
-    item.dotWrap.classList.remove('is-open');
-    if (item.openCard.parentNode) item.openCard.parentNode.removeChild(item.openCard);
-    var idx = openItems.indexOf(item);
-    if (idx !== -1) openItems.splice(idx, 1);
+  /* ── Build card element for a given entry ── */
+  function buildCard(idx, full) {
+    if (idx < 0 || idx >= entries.length) return null;
+    var entry  = entries[idx];
+    var dateEl = entry.querySelector('.ch-date');
+    var tagEl  = entry.querySelector('.ch-tag');
+    var card   = entry.querySelector('.ch-card');
+    if (!card) return null;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'ch-open-card';
+
+    if (full) {
+      /* Date at top */
+      if (dateEl) {
+        var dd = document.createElement('div');
+        dd.className = 'ch-open-date';
+        dd.textContent = dateEl.textContent;
+        wrap.appendChild(dd);
+      }
+      /* Category tag */
+      if (tagEl) {
+        var tr = document.createElement('div');
+        tr.className = 'ch-open-tag-row';
+        var ts = document.createElement('span');
+        ts.className = tagEl.className;
+        ts.textContent = tagEl.textContent;
+        tr.appendChild(ts);
+        wrap.appendChild(tr);
+      }
+      wrap.appendChild(card.cloneNode(true));
+    } else {
+      /* Mini: date + title only */
+      if (dateEl) {
+        var md = document.createElement('span');
+        md.className = 'ch-mini-date';
+        md.textContent = dateEl.textContent;
+        wrap.appendChild(md);
+      }
+      var head = card.querySelector('.ch-card-head');
+      if (head) wrap.appendChild(head.cloneNode(true));
+    }
+    return wrap;
   }
+
+  /* ── Fill a slot ── */
+  function setSlot(slot, idx, full, nav) {
+    slot.innerHTML = '';
+    if (idx < 0 || idx >= entries.length) {
+      slot.classList.add('ch-slot--empty');
+      return;
+    }
+    slot.classList.remove('ch-slot--empty');
+    var card = buildCard(idx, full);
+    if (!card) return;
+    if (nav) {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', nav);
+    }
+    slot.appendChild(card);
+  }
+
+  /* ── Select entry ── */
+  function selectIdx(idx) {
+    if (idx === currentIdx) return;
+    currentIdx = idx;
+
+    /* Update dot active state */
+    dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
+
+    /* Smooth-scroll rail so active dot is centred */
+    var dot = dots[idx];
+    if (dot) {
+      var mid    = dot.offsetLeft + dot.offsetWidth / 2;
+      var target = mid - railScroll.offsetWidth / 2;
+      railScroll.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+    }
+
+    /* Fill slots */
+    setSlot(prevSlot, idx - 1, false, function () { selectIdx(idx - 1); });
+    setSlot(currSlot, idx,     true,  null);
+    setSlot(nextSlot, idx + 1, false, function () { selectIdx(idx + 1); });
+  }
+
+  /* ── Keyboard navigation ── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' && currentIdx < entries.length - 1) selectIdx(currentIdx + 1);
+    if (e.key === 'ArrowLeft'  && currentIdx > 0)                  selectIdx(currentIdx - 1);
+  });
+
+  /* ── Touch swipe on rail ── */
+  var tX = 0;
+  railScroll.addEventListener('touchstart', function (e) { tX = e.touches[0].clientX; }, { passive: true });
+  railScroll.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - tX;
+    if (dx < -40 && currentIdx < entries.length - 1) selectIdx(currentIdx + 1);
+    else if (dx > 40 && currentIdx > 0)              selectIdx(currentIdx - 1);
+  }, { passive: true });
+
+  /* ── Auto-select first entry ── */
+  selectIdx(0);
 })();
 </script>
 
@@ -2058,38 +2124,57 @@
 /* ── Gallery hub inline toggle ── */
 (function () {
   var nocMoved = false;
+  var hub = document.querySelector('.gallery-hub');
+  var cards = Array.from(document.querySelectorAll('.ghub-card'));
 
-  document.querySelectorAll('.ghub-card').forEach(function (card) {
+  function openGallery(gallery, scrollHub) {
+    var panel = document.getElementById('inline-gallery-' + gallery);
+
+    /* Deactivate all cards + hide all panels */
+    cards.forEach(function (c) { c.classList.remove('active'); });
+    document.querySelectorAll('.inline-gallery').forEach(function (p) { p.style.display = 'none'; });
+
+    /* Activate clicked card */
+    var card = cards.find(function (c) { return c.dataset.gallery === gallery; });
+    if (card) card.classList.add('active');
+
+    /* Move NOC section into its panel on first open */
+    if (gallery === 'noc' && !nocMoved) {
+      var nocEl = document.getElementById('noc');
+      if (nocEl && panel) { panel.appendChild(nocEl); nocMoved = true; }
+    }
+    /* Make NOC section itself visible */
+    if (gallery === 'noc') {
+      var nocEl = document.getElementById('noc');
+      if (nocEl) nocEl.style.display = '';
+    }
+
+    if (panel) {
+      panel.style.display = '';
+
+      if (scrollHub && hub) {
+        /* Scroll hub to top of viewport so 3 buttons are at top, gallery fills below */
+        hub.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+
+  cards.forEach(function (card) {
     card.addEventListener('click', function () {
       var gallery  = card.dataset.gallery;
-      var panel    = document.getElementById('inline-gallery-' + gallery);
       var isActive = card.classList.contains('active');
-
-      /* Deactivate all cards + hide all panels */
-      document.querySelectorAll('.ghub-card').forEach(function (c) { c.classList.remove('active'); });
-      document.querySelectorAll('.inline-gallery').forEach(function (p) { p.style.display = 'none'; });
-
-      if (!isActive) {
-        card.classList.add('active');
-
-        /* Move NOC section into its panel on first open */
-        if (gallery === 'noc' && !nocMoved) {
-          var nocEl = document.getElementById('noc');
-          if (nocEl && panel) { panel.appendChild(nocEl); nocMoved = true; }
-        }
-        /* Make NOC section itself visible */
-        if (gallery === 'noc') {
-          var nocEl = document.getElementById('noc');
-          if (nocEl) nocEl.style.display = '';
-        }
-
-        if (panel) {
-          panel.style.display = '';
-          panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
+      if (isActive) {
+        /* Toggle off */
+        card.classList.remove('active');
+        document.querySelectorAll('.inline-gallery').forEach(function (p) { p.style.display = 'none'; });
+      } else {
+        openGallery(gallery, true);
       }
     });
   });
+
+  /* Pre-select middle gallery (rounds) on load without scrolling */
+  openGallery('rounds', false);
 })();
 </script>
 
