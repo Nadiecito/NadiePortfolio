@@ -90,7 +90,9 @@ function addDragScroll(selector) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  addDragScroll('.noc-thumb-scroll');
+  // Note: .noc-thumb-scroll is intentionally excluded — its vertical desktop
+  // scroll + horizontal mobile infinite-scroll handle themselves, and
+  // setPointerCapture here would swallow thumbnail click events on PC.
   addDragScroll('.ch-photos');
 });
 
