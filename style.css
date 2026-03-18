@@ -2113,10 +2113,13 @@ footer span { color: var(--yellow); }
 .inline-gallery .noc-preview-panel {
   position: sticky;
   top: 0;
+  flex: 1;       /* grow to fill remaining width after thumb col */
+  min-width: 0;
 }
 .inline-gallery .noc-preview-frame {
-  width: 100%;
-  max-width: 460px;
+  width: 100%;   /* now resolves correctly against the panel's explicit flex width */
+  height: 620px;
+}
   height: 620px; /* match noc-thumb-scroll max-height */
 }
 /* Gallery description text: full width, no constraint */
