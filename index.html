@@ -682,14 +682,78 @@
 
   (function() {
     var scroll = document.getElementById('nocThumbScroll');
+    var grid = scroll.querySelector('.noc-thumb-grid');
     var arrowUp = document.getElementById('nocArrowUp');
     var arrowDown = document.getElementById('nocArrowDown');
-    function updateArrows() {
-      arrowUp.classList.toggle('visible', scroll.scrollTop > 4);
-      arrowDown.classList.toggle('visible', scroll.scrollTop < scroll.scrollHeight - scroll.clientHeight - 4);
+
+    // Triple the grid for seamless infinite loop
+    var before = grid.cloneNode(true);
+    var after  = grid.cloneNode(true);
+    scroll.insertBefore(before, grid);
+    scroll.appendChild(after);
+
+    function isMob() { return window.innerWidth <= 600; }
+
+    function jumpToMiddle() {
+      if (isMob()) {
+        scroll.scrollLeft = before.offsetWidth;
+      } else {
+        scroll.scrollTop = before.offsetHeight;
+        arrowUp.classList.add('visible');
+        arrowDown.classList.add('visible');
+      }
     }
-    scroll.addEventListener('scroll', updateArrows, { passive: true });
-    updateArrows();
+    setTimeout(jumpToMiddle, 60);
+    window.addEventListener('resize', function() { setTimeout(jumpToMiddle, 60); });
+
+    // Infinite wrap on scroll
+    var jumping = false;
+    scroll.addEventListener('scroll', function() {
+      if (jumping) return;
+      if (isMob()) {
+        var segW = grid.offsetWidth;
+        if (scroll.scrollLeft < segW * 0.05) {
+          jumping = true; scroll.scrollLeft += segW; requestAnimationFrame(function(){ jumping = false; });
+        } else if (scroll.scrollLeft > segW * 1.95) {
+          jumping = true; scroll.scrollLeft -= segW; requestAnimationFrame(function(){ jumping = false; });
+        }
+      } else {
+        var segH = grid.offsetHeight;
+        if (scroll.scrollTop < segH * 0.05) {
+          jumping = true; scroll.scrollTop += segH; requestAnimationFrame(function(){ jumping = false; });
+        } else if (scroll.scrollTop > segH * 1.95) {
+          jumping = true; scroll.scrollTop -= segH; requestAnimationFrame(function(){ jumping = false; });
+        }
+        arrowUp.classList.add('visible');
+        arrowDown.classList.add('visible');
+      }
+    }, { passive: true });
+
+    // Drag-to-scroll for desktop / Farcaster miniapp
+    var isDragging = false, didDrag = false;
+    var startX = 0, startY = 0, scrollX = 0, scrollY = 0;
+    scroll.addEventListener('mousedown', function(e) {
+      isDragging = true; didDrag = false;
+      startX = e.clientX; startY = e.clientY;
+      scrollX = scroll.scrollLeft; scrollY = scroll.scrollTop;
+      scroll.style.userSelect = 'none';
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      var dx = e.clientX - startX, dy = e.clientY - startY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) didDrag = true;
+      scroll.scrollLeft = scrollX - dx;
+      scroll.scrollTop  = scrollY - dy;
+    });
+    document.addEventListener('mouseup', function() {
+      if (!isDragging) return;
+      isDragging = false;
+      scroll.style.userSelect = '';
+    });
+    scroll.addEventListener('click', function(e) {
+      if (didDrag) { e.stopPropagation(); e.preventDefault(); didDrag = false; }
+    }, true);
   })();
   </script>
   </div>
