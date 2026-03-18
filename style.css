@@ -822,9 +822,7 @@ h3 {
   overflow-y: scroll;
   overflow-x: clip;
   scrollbar-width: none;
-  cursor: grab;
 }
-.noc-thumb-scroll:active { cursor: grabbing; }
 .noc-thumb-scroll::-webkit-scrollbar { display: none; }
 
 .noc-scroll-arrow {
@@ -981,8 +979,9 @@ h3 {
   .noc-preview-frame { width: 100%; height: min(80vw, 340px); }
   .noc-thumb-col { order: 2; width: 100%; }
   .noc-scroll-shell { width: 100%; }
-  .noc-thumb-scroll { max-height: none; overflow-x: auto; overflow-y: hidden; }
-  .noc-thumb-grid { grid-template-columns: repeat(10, 44px); grid-auto-flow: column; }
+  .noc-thumb-scroll { max-height: none; overflow-x: auto; overflow-y: hidden; cursor: grab; }
+  .noc-thumb-scroll:active { cursor: grabbing; }
+  .noc-thumb-grid { grid-template-columns: repeat(10, 44px); grid-auto-columns: 44px; grid-auto-flow: column; }
   .noc-thumb { width: 44px; height: 44px; }
   .noc-scroll-arrow { display: none; }
 }
