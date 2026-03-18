@@ -820,7 +820,7 @@ h3 {
 .noc-thumb-scroll {
   max-height: 620px;
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: clip;
   scrollbar-width: none;
 }
 .noc-thumb-scroll::-webkit-scrollbar { display: none; }
@@ -853,6 +853,7 @@ h3 {
   display: grid;
   grid-template-columns: repeat(8, 64px);
   gap: 3px;
+  padding: 6px 4px;
 }
 
 .noc-thumb {
