@@ -526,6 +526,46 @@ h3 {
   gap: 1.5rem;
 }
 
+/* ── Resident tabbed card ── */
+.resident-card {
+  grid-column: 1 / -1;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.resident-card-header {
+  padding: 0.55rem 1.1rem;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-pixel);
+  font-size: 0.68rem;
+  color: var(--fg-muted);
+  letter-spacing: 0.04em;
+}
+.resident-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.resident-tab-btn {
+  flex: 1;
+  padding: 0.55rem 0.5rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--fg-muted);
+  cursor: pointer;
+  font-family: var(--font-pixel);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.15s, border-color 0.15s;
+}
+.resident-tab-btn:hover { color: var(--fg); }
+.resident-tab-btn.active { color: var(--accent-text); border-bottom-color: var(--yellow); }
+.resident-tab-panel { display: none; padding: 1.25rem; }
+.resident-tab-panel.active { display: block; }
+
 /* ── Bio card ── */
 .who-bio {
   grid-column: 1 / -1;
