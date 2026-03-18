@@ -1588,11 +1588,11 @@ footer span { color: var(--yellow); }
 @media (max-width: 900px) { .masonry-gallery { columns: 4; } }
 @media (max-width: 600px) {
   .masonry-gallery { columns: 4; }
-  .masonry-wrap { max-height: 460px; margin-left: 1.25rem; margin-right: 1.25rem; }
+  .masonry-wrap { max-height: 460px; margin-left: 2rem; margin-right: 2rem; }
 }
 @media (max-width: 400px) {
   .masonry-gallery { columns: 3; }
-  .masonry-wrap { margin-left: 1rem; margin-right: 1rem; }
+  .masonry-wrap { margin-left: 1.75rem; margin-right: 1.75rem; }
 }
 
 /* ── Lightbox ─────────────────────────────────────────────── */
@@ -1691,7 +1691,7 @@ footer span { color: var(--yellow); }
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 520px;
+  height: min(72vh, 680px);
   overflow: hidden;
 }
 
@@ -1713,7 +1713,7 @@ footer span { color: var(--yellow); }
 }
 
 @media (max-width: 600px) {
-  .tv-screen { height: 320px; }
+  .tv-screen { height: 360px; }
 }
 
 .tv-nav {
