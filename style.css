@@ -440,12 +440,13 @@ h3 {
   background: var(--yellow);
   border-top: 6px solid #111;
   border-bottom: 6px solid #111;
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 0;
 }
 
 .who-header-inner {
   max-width: 1100px;
   margin: 0 auto;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -486,7 +487,6 @@ h3 {
   font-size: 0.95rem;
   color: var(--fg-muted);
   line-height: 1.8;
-  max-width: 780px;
   margin-bottom: 2rem;
 }
 
