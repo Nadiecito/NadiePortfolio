@@ -1420,7 +1420,7 @@ footer span { color: var(--yellow); }
   .traits-grid { grid-template-columns: repeat(3, 1fr); }
   .who-header-inner { flex-direction: column; gap: 1rem; }
   .chronicle { padding-left: 2rem; }
-  .bio-stats { gap: 1rem; }
+  .bio-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem 0.5rem; justify-items: center; }
   .who-residency-body { grid-template-columns: 1fr; gap: 1rem; }
   .mural-intro { grid-template-columns: 1fr; }
   .mural-meta-box { grid-template-columns: repeat(3, 1fr); }
@@ -1449,6 +1449,8 @@ footer span { color: var(--yellow); }
   .hero-logo-img { width: clamp(140px, 70vw, 240px); }
   .card-split-img { width: 100px; height: 100px; }
   .noundry-num { font-size: 2.5rem; }
+  .ch-photos { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+  .ch-photo { width: 88px; height: 66px; flex-shrink: 0; }
 }
 
 /* ═══════════════════════════════════════
@@ -1639,5 +1641,100 @@ footer span { color: var(--yellow); }
   height: auto;
   display: block;
   image-rendering: auto;
+}
+
+#lb-prev, #lb-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.9rem 0.65rem;
+  cursor: pointer;
+  z-index: 10001;
+  opacity: 0.7;
+  transition: opacity 0.12s, color 0.12s;
+  line-height: 1;
+}
+#lb-prev:hover, #lb-next:hover { opacity: 1; color: var(--yellow); }
+#lb-prev { left: 0; }
+#lb-next { right: 0; }
+
+/* ── Gallery view toggle ── */
+.gv-toggle {
+  display: flex;
+  gap: 3px;
+  margin: 0.6rem 0 0;
+}
+.gv-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 3px 9px;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s;
+}
+.gv-btn:hover { color: var(--fg); border-color: var(--border-hi); }
+.gv-btn--active { color: var(--yellow); border-color: var(--yellow); }
+
+/* ── TV channel view ── */
+.tv-view { margin-top: 0.75rem; }
+
+.tv-screen {
+  position: relative;
+  background: var(--bg-alt);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  overflow: hidden;
+}
+
+.tv-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 3rem;
+}
+.tv-media img,
+.tv-media video {
+  max-width: 100%;
+  max-height: 65vh;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.tv-nav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.35);
+  border: none;
+  color: var(--fg-muted);
+  font-size: 1rem;
+  padding: 0 0.6rem;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  z-index: 2;
+}
+.tv-nav:hover { background: rgba(0,0,0,0.65); color: var(--yellow); }
+.tv-nav--prev { left: 0; }
+.tv-nav--next { right: 0; }
+
+.tv-counter {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  color: var(--fg-muted);
+  text-align: center;
+  padding: 0.35rem 0;
+  letter-spacing: 1px;
 }
 

@@ -1758,27 +1758,72 @@
 <script>
 (function () {
 
+  /* ── Shuffle (Fisher-Yates) ────────────────── */
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
   /* ── Lightbox ─────────────────────────────── */
   var lb = document.createElement('div');
   lb.id = 'lb-overlay';
-  lb.innerHTML = '<div id="lb-inner"><button id="lb-close" aria-label="Close">✕</button><div id="lb-media"></div></div>';
+  lb.innerHTML =
+    '<div id="lb-inner">' +
+      '<button id="lb-close" aria-label="Close">✕</button>' +
+      '<button id="lb-prev" aria-label="Previous">◀</button>' +
+      '<div id="lb-media"></div>' +
+      '<button id="lb-next" aria-label="Next">▶</button>' +
+    '</div>';
   document.body.appendChild(lb);
 
-  function lbOpen(src, isVideo) {
-    var media = document.getElementById('lb-media');
-    media.innerHTML = isVideo
+  var lbSrcs = [], lbIdx = -1;
+
+  function lbRender() {
+    var src = lbSrcs[lbIdx];
+    document.getElementById('lb-media').innerHTML = /\.mp4$/i.test(src)
       ? '<video src="' + src + '" autoplay loop muted playsinline controls></video>'
       : '<img src="' + src + '" alt="">';
+  }
+
+  function lbOpen(src, isVideo, srcs, idx) {
+    lbSrcs = srcs || [src];
+    lbIdx  = idx  !== undefined ? idx : 0;
+    lbRender();
     lb.classList.add('active');
     document.body.style.overflow = 'hidden';
+    var hasNav = lbSrcs.length > 1;
+    document.getElementById('lb-prev').style.display = hasNav ? '' : 'none';
+    document.getElementById('lb-next').style.display = hasNav ? '' : 'none';
   }
+
+  function lbNav(dir) {
+    if (lbSrcs.length < 2) return;
+    lbIdx = (lbIdx + dir + lbSrcs.length) % lbSrcs.length;
+    lbRender();
+  }
+
   function lbClose() {
     lb.classList.remove('active');
     document.body.style.overflow = '';
     document.getElementById('lb-media').innerHTML = '';
+    lbSrcs = []; lbIdx = -1;
   }
-  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.id === 'lb-close') lbClose(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lbClose(); });
+
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb || e.target.id === 'lb-close') lbClose();
+  });
+  document.getElementById('lb-prev').addEventListener('click', function (e) { e.stopPropagation(); lbNav(-1); });
+  document.getElementById('lb-next').addEventListener('click', function (e) { e.stopPropagation(); lbNav(+1); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape')      lbClose();
+    if (e.key === 'ArrowLeft')   lbNav(-1);
+    if (e.key === 'ArrowRight')  lbNav(+1);
+  });
 
   /* ── Gallery renderer ─────────────────────── */
   var config = window.GALLERY_CONFIG || [];
@@ -1795,6 +1840,14 @@
     var useMasonry  = gallery.layout === 'masonry';
     var showLabels  = gallery.showLabels !== false;
     var useLightbox = !!gallery.lightbox;
+
+    // Build ordered srcs (for gallery view + lightbox nav)
+    var srcs = gallery.files.map(function (file) {
+      return 'assets/' + gallery.folder + '/' + encodeURIComponent(file).replace(/%2F/g, '/');
+    });
+    // Shuffled srcs for TV channel mode
+    var tvSrcs = shuffle(srcs);
+    var tvIdx  = 0;
 
     // Section wrapper
     var section = document.createElement('div');
@@ -1815,16 +1868,27 @@
     }
     section.appendChild(header);
 
-    // Grid / Masonry
+    // View toggle (only for lightbox galleries)
+    var toggle = null;
+    if (useLightbox) {
+      toggle = document.createElement('div');
+      toggle.className = 'gv-toggle';
+      toggle.innerHTML =
+        '<button class="gv-btn gv-btn--active" data-view="grid" title="Gallery view">▦</button>' +
+        '<button class="gv-btn" data-view="tv" title="Channel view">▭</button>';
+      section.appendChild(toggle);
+    }
+
+    // Grid / Masonry view
     var gridContainer = useMasonry ? document.createElement('div') : null;
     if (gridContainer) gridContainer.className = 'masonry-wrap';
     var grid = document.createElement('div');
     grid.className = useMasonry ? 'masonry-gallery' : 'dyn-gallery-grid';
     if (gridContainer) gridContainer.appendChild(grid);
 
-    gallery.files.forEach(function (file) {
+    gallery.files.forEach(function (file, i) {
       var label   = file.replace(/\.[^.]+$/, '');
-      var src     = 'assets/' + gallery.folder + '/' + encodeURIComponent(file).replace(/%2F/g, '/');
+      var src     = srcs[i];
       var isVideo = /\.mp4$/i.test(file);
 
       var item = document.createElement('div');
@@ -1834,7 +1898,6 @@
       var mediaHtml = isVideo
         ? '<video src="' + esc(src) + '" autoplay loop muted playsinline loading="lazy"></video>'
         : '<img src="' + esc(src) + '" alt="' + (showLabels ? esc(label) : '') + '" loading="lazy">';
-
       var labelHtml = showLabels
         ? '<span class="' + (useMasonry ? 'masonry-label' : 'dyn-gallery-label') + '">' + esc(label) + '</span>'
         : '';
@@ -1843,13 +1906,79 @@
 
       if (useLightbox) {
         item.style.cursor = 'zoom-in';
-        item.addEventListener('click', function () { lbOpen(src, isVideo); });
+        (function (s, idx) {
+          item.addEventListener('click', function () { lbOpen(s, /\.mp4$/i.test(s), srcs, idx); });
+        })(src, i);
       }
 
       grid.appendChild(item);
     });
 
     section.appendChild(gridContainer || grid);
+
+    // TV channel view (only for lightbox galleries)
+    if (useLightbox) {
+      var tvWrap = document.createElement('div');
+      tvWrap.className = 'tv-view';
+      tvWrap.style.display = 'none';
+
+      var tvScreen  = document.createElement('div');
+      tvScreen.className = 'tv-screen';
+
+      var tvPrev = document.createElement('button');
+      tvPrev.className = 'tv-nav tv-nav--prev';
+      tvPrev.textContent = '◀';
+      tvPrev.setAttribute('aria-label', 'Previous channel');
+
+      var tvMedia = document.createElement('div');
+      tvMedia.className = 'tv-media';
+
+      var tvNext = document.createElement('button');
+      tvNext.className = 'tv-nav tv-nav--next';
+      tvNext.textContent = '▶';
+      tvNext.setAttribute('aria-label', 'Next channel');
+
+      var tvCounter = document.createElement('div');
+      tvCounter.className = 'tv-counter';
+
+      tvScreen.appendChild(tvPrev);
+      tvScreen.appendChild(tvMedia);
+      tvScreen.appendChild(tvNext);
+      tvWrap.appendChild(tvScreen);
+      tvWrap.appendChild(tvCounter);
+
+      function tvRender() {
+        var src = tvSrcs[tvIdx];
+        tvMedia.innerHTML = /\.mp4$/i.test(src)
+          ? '<video src="' + esc(src) + '" autoplay loop muted playsinline controls></video>'
+          : '<img src="' + esc(src) + '" alt="">';
+        tvCounter.textContent = (tvIdx + 1) + ' / ' + tvSrcs.length;
+      }
+
+      tvPrev.addEventListener('click', function () {
+        tvIdx = (tvIdx - 1 + tvSrcs.length) % tvSrcs.length;
+        tvRender();
+      });
+      tvNext.addEventListener('click', function () {
+        tvIdx = (tvIdx + 1) % tvSrcs.length;
+        tvRender();
+      });
+
+      section.appendChild(tvWrap);
+
+      // Wire up toggle buttons
+      toggle.querySelectorAll('.gv-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          toggle.querySelectorAll('.gv-btn').forEach(function (b) { b.classList.remove('gv-btn--active'); });
+          btn.classList.add('gv-btn--active');
+          var isTV = btn.dataset.view === 'tv';
+          (gridContainer || grid).style.display = isTV ? 'none' : '';
+          tvWrap.style.display = isTV ? '' : 'none';
+          if (isTV) tvRender();
+        });
+      });
+    }
+
     container.appendChild(section);
   });
 
