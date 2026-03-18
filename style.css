@@ -822,7 +822,9 @@ h3 {
   overflow-y: scroll;
   overflow-x: clip;
   scrollbar-width: none;
+  cursor: grab;
 }
+.noc-thumb-scroll:active { cursor: grabbing; }
 .noc-thumb-scroll::-webkit-scrollbar { display: none; }
 
 .noc-scroll-arrow {
