@@ -2147,6 +2147,15 @@
     if (gallery === 'noc') {
       var nocEl = document.getElementById('noc');
       if (nocEl) nocEl.style.display = '';
+      /* Auto-select a random thumbnail on first open */
+      if (!panel.dataset.nocAutoSelected) {
+        panel.dataset.nocAutoSelected = '1';
+        var thumbs = Array.from(document.querySelectorAll('.noc-thumb'));
+        if (thumbs.length) {
+          var pick = thumbs[Math.floor(Math.random() * thumbs.length)];
+          nocSelect(pick);
+        }
+      }
     }
 
     if (!panel) return;
