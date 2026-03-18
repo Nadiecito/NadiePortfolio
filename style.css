@@ -835,9 +835,10 @@ h3 {
   pointer-events: none;
   z-index: 10;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.2s;
 }
-.noc-scroll-arrow.visible { opacity: 1; }
+.noc-scroll-arrow.visible { opacity: 1; pointer-events: auto; }
 .noc-scroll-arrow-up  { top: 2px; }
 .noc-scroll-arrow-down { bottom: 2px; }
 
