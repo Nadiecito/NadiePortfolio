@@ -1533,6 +1533,7 @@ footer span { color: var(--yellow); }
   overflow-x: hidden;
   scrollbar-width: none;
   margin-top: 1rem;
+  overscroll-behavior: contain;
 }
 .masonry-wrap::-webkit-scrollbar { display: none; }
 
@@ -1583,8 +1584,14 @@ footer span { color: var(--yellow); }
 .masonry-item:hover .masonry-label { opacity: 1; }
 
 @media (max-width: 900px) { .masonry-gallery { columns: 4; } }
-@media (max-width: 600px) { .masonry-gallery { columns: 3; } .masonry-wrap { max-height: 500px; } }
-@media (max-width: 400px) { .masonry-gallery { columns: 2; } }
+@media (max-width: 600px) {
+  .masonry-gallery { columns: 4; }
+  .masonry-wrap { max-height: 460px; margin-left: 1.25rem; margin-right: 1.25rem; }
+}
+@media (max-width: 400px) {
+  .masonry-gallery { columns: 3; }
+  .masonry-wrap { margin-left: 1rem; margin-right: 1rem; }
+}
 
 /* ── Lightbox ─────────────────────────────────────────────── */
 #lb-overlay {
