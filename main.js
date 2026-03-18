@@ -70,6 +70,30 @@ langBtn.addEventListener('click', () => {
   }, { passive: true });
 })()
 
+// ── Drag-to-scroll for horizontal containers (works in Farcaster miniapp) ──
+function addDragScroll(selector) {
+  document.querySelectorAll(selector).forEach(el => {
+    let active = false, startX = 0, scrollLeft = 0;
+    el.addEventListener('pointerdown', e => {
+      active = true;
+      startX = e.clientX;
+      scrollLeft = el.scrollLeft;
+      el.setPointerCapture(e.pointerId);
+    });
+    el.addEventListener('pointermove', e => {
+      if (!active) return;
+      el.scrollLeft = scrollLeft - (e.clientX - startX);
+    });
+    el.addEventListener('pointerup',     () => { active = false; });
+    el.addEventListener('pointercancel', () => { active = false; });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  addDragScroll('.noc-thumb-scroll');
+  addDragScroll('.ch-photos');
+});
+
 // ── Feria tabs ──
 function switchTab(id) {
   document.querySelectorAll('.feria-panel').forEach(p => p.classList.remove('active'));
