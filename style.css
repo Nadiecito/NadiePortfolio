@@ -2093,10 +2093,10 @@ footer span { color: var(--yellow); }
 .inline-gallery .noc-preview-frame {
   width: 100%;
   max-width: 460px;
-  height: clamp(300px, 50vh, 500px);
+  height: 620px; /* match noc-thumb-scroll max-height */
 }
-/* Gallery description text: full width inside inline panel */
-.inline-gallery .gallery-desc {
+/* Gallery description text: full width, no constraint */
+.gallery-desc {
   max-width: none;
 }
 

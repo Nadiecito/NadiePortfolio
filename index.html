@@ -1951,7 +1951,7 @@
     section.appendChild(header);
     if (gallery.description) {
       var desc = document.createElement('p');
-      desc.style.cssText = 'font-size:0.88rem;color:var(--fg-muted);margin:0.5rem 0 0;line-height:1.6;max-width:680px;';
+      desc.className = 'noc-section-desc gallery-desc';
       desc.innerHTML = '<span class="t-en">' + gallery.description.en + '</span><span class="t-es">' + gallery.description.es + '</span>';
       section.appendChild(desc);
     }
