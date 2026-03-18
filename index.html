@@ -663,20 +663,25 @@
   <script>
   function nocSelect(btn) {
     document.querySelectorAll('.noc-thumb').forEach(function(t) { t.classList.remove('active', 'noc-clicked'); });
-    btn.classList.add('active', 'noc-clicked');
+    btn.classList.add('active');
+    void btn.offsetWidth; // force reflow so animation restarts
+    btn.classList.add('noc-clicked');
     setTimeout(function() { btn.classList.remove('noc-clicked'); }, 200);
     var num = btn.dataset.num;
-    var gif = btn.dataset.gif || ('assets/noc%20preview/' + num + '.svg');
+    var gif = btn.dataset.gif || ('assets/noc/' + num + '.gif');
     var img = document.getElementById('nocPreviewImg');
     var idle = document.getElementById('nocPreviewIdle');
     var label = document.getElementById('nocPreviewLabel');
     img.classList.remove('visible');
+    img.onload = null;
     setTimeout(function() {
-      img.src = gif;
-      img.alt = 'NOC #' + num;
-      img.onload = function() { img.classList.add('visible'); };
       idle.classList.add('hidden');
       label.textContent = 'NOUN ' + num;
+      img.onload = function() { img.classList.add('visible'); };
+      img.src = gif;
+      img.alt = 'NOC #' + num;
+      // If image is already cached, onload won't fire — add visible immediately
+      if (img.complete && img.naturalWidth > 0) { img.classList.add('visible'); }
     }, 80);
   }
 
@@ -705,13 +710,48 @@
       }, { passive: true });
 
     } else {
-      // Desktop: original behavior
+      // Desktop: arrows + drag-to-scroll + block page wheel over thumb panel
       function updateArrows() {
         arrowUp.classList.toggle('visible', scroll.scrollTop > 4);
         arrowDown.classList.toggle('visible', scroll.scrollTop < scroll.scrollHeight - scroll.clientHeight - 4);
       }
       scroll.addEventListener('scroll', updateArrows, { passive: true });
       updateArrows();
+
+      // Block page scroll when wheel is over the thumb panel; scroll thumbs instead
+      var shell = scroll.parentElement;
+      shell.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        scroll.scrollTop += e.deltaY;
+        updateArrows();
+      }, { passive: false });
+
+      // Drag-to-scroll without blocking clicks
+      var isDragging = false, didDrag = false;
+      var startY = 0, scrollTopStart = 0;
+      scroll.addEventListener('mousedown', function(e) {
+        if (e.button !== 0) return;
+        isDragging = true; didDrag = false;
+        startY = e.clientY; scrollTopStart = scroll.scrollTop;
+      });
+      window.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        var dy = e.clientY - startY;
+        if (!didDrag && Math.abs(dy) > 5) {
+          didDrag = true;
+          document.body.style.userSelect = 'none';
+        }
+        if (didDrag) { scroll.scrollTop = scrollTopStart - dy; }
+      });
+      window.addEventListener('mouseup', function() {
+        if (!isDragging) return;
+        isDragging = false;
+        document.body.style.userSelect = '';
+      });
+      // Cancel click only if actual drag happened (capture phase)
+      scroll.addEventListener('click', function(e) {
+        if (didDrag) { e.stopPropagation(); didDrag = false; }
+      }, true);
     }
   })();
   </script>
