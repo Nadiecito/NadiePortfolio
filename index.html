@@ -2181,7 +2181,8 @@
     card.addEventListener('click', function () {
       var gallery  = card.dataset.gallery;
       var isActive = card.classList.contains('active');
-      if (isActive) {
+      if (isActive && isMobile()) {
+        /* Mobile only: re-tapping active card closes it */
         closeAll();
       } else {
         openGallery(gallery, true);
