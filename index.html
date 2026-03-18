@@ -642,24 +642,23 @@
         updateArrows();
       }, { passive: false });
 
-      // Drag-to-scroll — Pointer Events API avoids native img drag interference
+      // Drag-to-scroll — prevent native img drag, use document-level pointer listeners
+      scroll.addEventListener('dragstart', function(e) { e.preventDefault(); });
       var isDragging = false, didDrag = false;
       var startY = 0, scrollTopStart = 0;
       scroll.addEventListener('pointerdown', function(e) {
         if (e.button !== 0) return;
         isDragging = true; didDrag = false;
         startY = e.clientY; scrollTopStart = scroll.scrollTop;
-        scroll.setPointerCapture(e.pointerId);
       });
-      scroll.addEventListener('pointermove', function(e) {
+      document.addEventListener('pointermove', function(e) {
         if (!isDragging) return;
         var dy = e.clientY - startY;
         if (!didDrag && Math.abs(dy) > 5) didDrag = true;
-        if (didDrag) { scroll.scrollTop = scrollTopStart - dy; e.preventDefault(); }
+        if (didDrag) scroll.scrollTop = scrollTopStart - dy;
       });
-      scroll.addEventListener('pointerup', function() { isDragging = false; });
-      scroll.addEventListener('lostpointercapture', function() { isDragging = false; });
-      // Cancel click only if actual drag happened (capture phase)
+      document.addEventListener('pointerup', function() { isDragging = false; });
+      // Cancel click only if actual drag happened (capture phase — fires before onclick)
       scroll.addEventListener('click', function(e) {
         if (didDrag) { e.stopPropagation(); didDrag = false; }
       }, true);
