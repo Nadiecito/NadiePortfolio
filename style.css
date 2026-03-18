@@ -610,6 +610,8 @@ h3 {
 .res-acc-item:last-child { border-bottom: none !important; }
 .res-acc-item .card-label { border-bottom: none; }
 .res-acc-item .acc-body.open { border-top: 1px solid var(--border); }
+.acc-pinned { cursor: default !important; }
+.acc-pinned:hover { color: var(--yellow) !important; }
 
 /* ── Bio card ── */
 .who-bio {
@@ -1136,7 +1138,7 @@ h3 {
    FERIA
 ═══════════════════════════════════════ */
 #feria {
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
 }
 
 #feria .inner { max-width: 1100px; margin: 0 auto; }
