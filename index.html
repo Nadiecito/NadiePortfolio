@@ -593,7 +593,7 @@
       }, { passive: true });
 
     } else {
-      // Desktop: arrows + drag-to-scroll + block page wheel over thumb panel
+      // Desktop: arrows + wheel to scroll thumbnails
       function updateArrows() {
         arrowUp.classList.toggle('visible', scroll.scrollTop > 4);
         arrowDown.classList.toggle('visible', scroll.scrollTop < scroll.scrollHeight - scroll.clientHeight - 4);
@@ -608,28 +608,6 @@
         scroll.scrollTop += e.deltaY;
         updateArrows();
       }, { passive: false });
-
-      // Drag-to-scroll — prevent native img drag, use document-level pointer listeners
-      scroll.addEventListener('dragstart', function(e) { e.preventDefault(); });
-      var isDragging = false, didDrag = false;
-      var startY = 0, scrollTopStart = 0;
-      scroll.addEventListener('pointerdown', function(e) {
-        if (e.button !== 0) return;
-        if (e.target.closest('.noc-thumb')) return; // let thumb clicks pass through unmodified
-        isDragging = true; didDrag = false;
-        startY = e.clientY; scrollTopStart = scroll.scrollTop;
-      });
-      document.addEventListener('pointermove', function(e) {
-        if (!isDragging) return;
-        var dy = e.clientY - startY;
-        if (!didDrag && Math.abs(dy) > 5) didDrag = true;
-        if (didDrag) scroll.scrollTop = scrollTopStart - dy;
-      });
-      document.addEventListener('pointerup', function() { isDragging = false; didDrag = false; });
-      // Cancel click only if actual drag happened (capture phase — fires before onclick)
-      scroll.addEventListener('click', function(e) {
-        if (didDrag) { e.stopPropagation(); didDrag = false; }
-      }, true);
     }
   })();
   </script>
@@ -1606,6 +1584,7 @@
 </div>
 
 
+<script>
 /* ── Resident Artist Portrait — interactive ─────────────────── */
 (function () {
   var P = 'assets/Resident%20Artist%20Portrait/Resident%20Artist';
