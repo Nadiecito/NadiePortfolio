@@ -26,6 +26,8 @@ window.GALLERY_CONFIG = [
 
   {
     folder: "Rounds & Contests",
+    bodyId: "mw-rounds-body",
+    previewId: "ghub-rounds-preview",
     title: {
       en: "Rounds, Contests & Direct Commissions",
       es: "Rondas, Concursos y Encargos Directos"
@@ -135,6 +137,8 @@ window.GALLERY_CONFIG = [
 
   {
     folder: "Residency",
+    bodyId: "mw-residency-body",
+    previewId: "ghub-residency-preview",
     title: {
       en: "Residency — Illustrations & Commissions",
       es: "Residencia — Ilustraciones y Encargos"

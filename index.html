@@ -87,16 +87,13 @@
   </div>
 
   <nav>
-    <a href="#" class="nav-logo">
+    <a href="#" class="nav-logo" title="Nouns Colombia — Back to top">
       <img src="assets/nouns-colombia-logo.svg" alt="Nouns Colombia">
-      <span class="nav-logo-text">Nouns Colombia</span>
     </a>
     <ul>
-      <li><a href="#who"><span class="t-en">Community</span><span class="t-es">Comunidad</span></a></li>
+      <li><a href="#who"><span class="t-en">Profile</span><span class="t-es">Perfil</span></a></li>
       <li><a href="#work"><span class="t-en">Galleries</span><span class="t-es">Galerías</span></a></li>
       <li><a href="#chronicle"><span class="t-en">Chronicle</span><span class="t-es">Crónica</span></a></li>
-      <li><a href="#feria">Feria</a></li>
-      <li><a href="#mural">Mural</a></li>
     </ul>
   </nav>
 </div>
@@ -387,6 +384,33 @@
   </p>
 
 
+  <!-- Gallery Hub — 3 cards, click to open gallery window -->
+  <div class="gallery-hub">
+    <div class="ghub-card" data-open="mw-noc">
+      <div class="ghub-preview-row">
+        <img src="assets/noc%20preview/544.svg"  alt="" loading="lazy">
+        <img src="assets/noc%20preview/1289.svg" alt="" loading="lazy">
+        <img src="assets/noc%20preview/1291.svg" alt="" loading="lazy">
+        <img src="assets/noc%20preview/1292.svg" alt="" loading="lazy">
+      </div>
+      <div class="ghub-name"><span class="t-en">NOC — Noun O'Clock</span><span class="t-es">NOC — Noun O'Clock</span></div>
+      <div class="ghub-meta"><span class="t-en">100+ pixel art animations · one per Noun birth</span><span class="t-es">100+ animaciones pixel art · una por cada Noun</span></div>
+      <div class="ghub-open-hint"><span class="t-en">▦ Open Gallery</span><span class="t-es">▦ Abrir Galería</span></div>
+    </div>
+    <div class="ghub-card" data-open="mw-rounds">
+      <div class="ghub-preview-row" id="ghub-rounds-preview"></div>
+      <div class="ghub-name"><span class="t-en">Rounds &amp; Commissions</span><span class="t-es">Rondas y Encargos</span></div>
+      <div class="ghub-meta"><span class="t-en">Community-driven artwork across Nouns channels</span><span class="t-es">Arte comunitario · canales de Nouns</span></div>
+      <div class="ghub-open-hint"><span class="t-en">▦ Open Gallery</span><span class="t-es">▦ Abrir Galería</span></div>
+    </div>
+    <div class="ghub-card" data-open="mw-residency">
+      <div class="ghub-preview-row" id="ghub-residency-preview"></div>
+      <div class="ghub-name"><span class="t-en">Residency — Illustrations</span><span class="t-es">Residencia — Ilustraciones</span></div>
+      <div class="ghub-meta"><span class="t-en">Work made during the Nouns DAO residency</span><span class="t-es">Arte de la residencia con Nouns DAO</span></div>
+      <div class="ghub-open-hint"><span class="t-en">▦ Open Gallery</span><span class="t-es">▦ Abrir Galería</span></div>
+    </div>
+  </div>
+
   <!--
   ╔═══════════════════════════════════════════════════════════════╗
   ║  CÓMO AGREGAR IMÁGENES, GIFs Y VIDEOS                        ║
@@ -423,8 +447,8 @@
   ╚═══════════════════════════════════════════════════════════════╝
   -->
 
-  <!-- NOC viewer -->
-  <div id="noc" style="margin-bottom:3rem;">
+  <!-- NOC viewer — moved to mini-window by JS -->
+  <div id="noc" style="display:none;margin-bottom:0;">
     <div class="noc-section-header">
       <svg width="28" height="28" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="image-rendering:pixelated;flex-shrink:0;" aria-hidden="true">
         <rect width="100%" height="100%" fill="none"/>
@@ -639,6 +663,7 @@
       var startY = 0, scrollTopStart = 0;
       scroll.addEventListener('pointerdown', function(e) {
         if (e.button !== 0) return;
+        if (e.target.closest('.noc-thumb')) return; // let thumb clicks pass through unmodified
         isDragging = true; didDrag = false;
         startY = e.clientY; scrollTopStart = scroll.scrollTop;
       });
@@ -1624,7 +1649,7 @@
   }
 
   function track(mx, my) {
-    if (noMotion) return;
+    if (noMotion || dragging) return;
     lastMx = mx; lastMy = my;
     var r  = widget.getBoundingClientRect();
     var cx = r.left + r.width  / 2;
@@ -1674,9 +1699,59 @@
     var idle = ['center','left','center','right','center','up','center','down','leftUp','center','rightDown','center'];
     var ii = 0;
     setInterval(function () {
-      if (!blinking) { curDir = idle[ii % idle.length]; img.src = F[curDir]; ii++; }
+      if (!blinking && !dragging) { curDir = idle[ii % idle.length]; img.src = F[curDir]; ii++; }
     }, 1600);
   }
+
+  /* ── Portrait click-drag: eased movement, eyes closed, stays in container ── */
+  var dragging = false, dragRafId = null;
+  var dragOffX = 0, dragOffY = 0;
+  var dragTargetX = 0, dragTargetY = 0;
+  var dragStartCX = 0, dragStartCY = 0;
+  var dragStartOX = 0, dragStartOY = 0;
+  var MAX_DRAG_X = 48, MAX_DRAG_Y = 38;
+
+  function dragRAF() {
+    if (!dragging) return;
+    dragOffX += (dragTargetX - dragOffX) * 0.10;
+    dragOffY += (dragTargetY - dragOffY) * 0.10;
+    widget.style.transform = 'translate(' + dragOffX.toFixed(1) + 'px,' + dragOffY.toFixed(1) + 'px)';
+    dragRafId = requestAnimationFrame(dragRAF);
+  }
+
+  widget.addEventListener('pointerdown', function (e) {
+    if (noMotion || e.button !== 0) return;
+    dragging = true;
+    dragStartCX = e.clientX; dragStartCY = e.clientY;
+    dragStartOX = dragOffX;  dragStartOY = dragOffY;
+    dragTargetX = dragOffX;  dragTargetY = dragOffY;
+    widget.style.transition = 'none';
+    widget.setPointerCapture(e.pointerId);
+    clearSquintTimer();
+    blinking = false; squinting = false;
+    img.src = F.closed;
+    dragRAF();
+    e.preventDefault();
+  });
+
+  document.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var tx = dragStartOX + (e.clientX - dragStartCX) * 0.55;
+    var ty = dragStartOY + (e.clientY - dragStartCY) * 0.55;
+    dragTargetX = Math.max(-MAX_DRAG_X, Math.min(MAX_DRAG_X, tx));
+    dragTargetY = Math.max(-MAX_DRAG_Y, Math.min(MAX_DRAG_Y, ty));
+  });
+
+  document.addEventListener('pointerup', function () {
+    if (!dragging) return;
+    dragging = false;
+    if (dragRafId) { cancelAnimationFrame(dragRafId); dragRafId = null; }
+    dragOffX = 0; dragOffY = 0; dragTargetX = 0; dragTargetY = 0;
+    widget.style.transition = '';
+    widget.style.transform = '';
+    if (lastMx !== null) track(lastMx, lastMy);
+    else { curDir = 'center'; img.src = F.center; }
+  });
 })();
 </script>
 
@@ -1753,8 +1828,7 @@
 
   /* ── Gallery renderer ─────────────────────── */
   var config = window.GALLERY_CONFIG || [];
-  var container = document.getElementById('gallery-sections');
-  if (!container || !config.length) return;
+  if (!config.length) return;
 
   function esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -1786,19 +1860,19 @@
     header.innerHTML =
       '<h3><span class="t-en">' + esc(gallery.title.en) +
       '</span><span class="t-es">' + esc(gallery.title.es) + '</span></h3>';
+    section.appendChild(header);
     if (gallery.description) {
       var desc = document.createElement('p');
-      desc.style.cssText = 'font-size:0.88rem;color:var(--fg-muted);margin:0.4rem 0 0;line-height:1.6;max-width:680px;';
+      desc.style.cssText = 'font-size:0.88rem;color:var(--fg-muted);margin:0.5rem 0 0;line-height:1.6;max-width:680px;';
       desc.innerHTML = '<span class="t-en">' + gallery.description.en + '</span><span class="t-es">' + gallery.description.es + '</span>';
-      header.appendChild(desc);
+      section.appendChild(desc);
     }
     if (gallery.contextNote) {
       var note = document.createElement('p');
-      note.style.cssText = 'font-size:0.78rem;color:var(--fg-muted);margin:0.5rem 0 0;line-height:1.7;max-width:680px;';
+      note.style.cssText = 'font-size:0.75rem;color:var(--fg-muted);margin:0.35rem 0 0.75rem;line-height:1.7;max-width:680px;';
       note.innerHTML = '<span class="t-en">' + gallery.contextNote.en + '</span><span class="t-es">' + gallery.contextNote.es + '</span>';
-      header.appendChild(note);
+      section.appendChild(note);
     }
-    section.appendChild(header);
 
     // View toggle (only for lightbox galleries)
     var toggle = null;
@@ -1888,7 +1962,7 @@
         var src = tvSrcs[tvIdx];
         tvMedia.innerHTML = /\.mp4$/i.test(src)
           ? '<video src="' + esc(src) + '" autoplay loop muted playsinline controls></video>'
-          : '<img src="' + esc(src) + '" alt="">';
+          : '<img src="' + esc(src) + '" alt="">';  /* fixed ternary */
         tvCounter.textContent = (tvIdx + 1) + ' / ' + tvSrcs.length;
       }
 
@@ -1916,7 +1990,23 @@
       });
     }
 
-    container.appendChild(section);
+    var target = (gallery.bodyId && document.getElementById(gallery.bodyId))
+      || document.getElementById('gallery-sections');
+    if (target) target.appendChild(section);
+
+    /* Populate hub mini-preview (first 4 files) */
+    if (gallery.previewId) {
+      var previewRow = document.getElementById(gallery.previewId);
+      if (previewRow) {
+        gallery.files.slice(0, 4).forEach(function (file) {
+          var pi = document.createElement('img');
+          pi.src = 'assets/' + gallery.folder + '/' + encodeURIComponent(file).replace(/%2F/g, '/');
+          pi.alt = '';
+          pi.loading = 'lazy';
+          previewRow.appendChild(pi);
+        });
+      }
+    }
   });
 
   /* ── Lightbox for chronicle ch-photo elements ── */
@@ -1940,6 +2030,144 @@
   window.addEventListener('load', async () => {
     await sdk.actions.ready();
   });
+</script>
+
+<!-- ════ Mini Windows ════ -->
+<div class="mini-window" id="mw-noc">
+  <div class="mw-bar">
+    <span class="mw-title">⌐◨-◨ NOC — Noun O'Clock</span>
+    <button class="mw-close" data-for="mw-noc">✕</button>
+  </div>
+  <div class="mw-body" id="mw-noc-body"></div>
+</div>
+
+<div class="mini-window" id="mw-rounds">
+  <div class="mw-bar">
+    <span class="mw-title"><span class="t-en">Rounds, Contests &amp; Commissions</span><span class="t-es">Rondas, Concursos y Encargos</span></span>
+    <button class="mw-close" data-for="mw-rounds">✕</button>
+  </div>
+  <div class="mw-body" id="mw-rounds-body"></div>
+</div>
+
+<div class="mini-window" id="mw-residency">
+  <div class="mw-bar">
+    <span class="mw-title"><span class="t-en">Residency — Illustrations &amp; Commissions</span><span class="t-es">Residencia — Ilustraciones y Encargos</span></span>
+    <button class="mw-close" data-for="mw-residency">✕</button>
+  </div>
+  <div class="mw-body" id="mw-residency-body"></div>
+</div>
+
+<script>
+/* ── Mini Windows: open / close / drag / z-index ── */
+(function () {
+  var Z_BASE = 1000, zTop = Z_BASE;
+
+  /* Move NOC content into its window body */
+  var nocEl = document.getElementById('noc');
+  var nocBody = document.getElementById('mw-noc-body');
+  if (nocEl && nocBody) {
+    nocEl.style.display = '';
+    nocBody.appendChild(nocEl);
+  }
+
+  /* Window positions — stagger when multiple open */
+  var offsets = [
+    { top: '7vh', left: 'max(2vw, calc(50vw - 480px))' },
+    { top: '10vh', left: 'max(5vw, calc(50vw - 460px))' },
+    { top: '13vh', left: 'max(8vw, calc(50vw - 440px))' }
+  ];
+  var openCount = 0;
+
+  function openWin(id) {
+    var win = document.getElementById(id);
+    if (!win) return;
+    if (win.classList.contains('is-open')) { bringToFront(win); return; }
+    var pos = offsets[openCount % offsets.length];
+    win.style.top  = pos.top;
+    win.style.left = pos.left;
+    win.classList.add('is-open');
+    bringToFront(win);
+    openCount++;
+    updateTaskbar();
+  }
+
+  function closeWin(id) {
+    var win = document.getElementById(id);
+    if (!win) return;
+    win.classList.remove('is-open');
+    updateTaskbar();
+  }
+
+  function bringToFront(win) {
+    zTop++;
+    win.style.zIndex = zTop;
+  }
+
+  /* Hub card clicks */
+  document.querySelectorAll('.ghub-card').forEach(function (card) {
+    card.addEventListener('click', function () { openWin(card.dataset.open); });
+  });
+
+  /* Close button clicks */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.mw-close');
+    if (btn) closeWin(btn.dataset.for);
+  });
+
+  /* Bring window to front on click */
+  document.addEventListener('pointerdown', function (e) {
+    var win = e.target.closest('.mini-window');
+    if (win) bringToFront(win);
+  }, true);
+
+  /* Drag by title bar */
+  var dragWin = null, dragDX = 0, dragDY = 0;
+  document.addEventListener('pointerdown', function (e) {
+    var bar = e.target.closest('.mw-bar');
+    if (!bar || e.target.closest('.mw-close')) return;
+    var win = bar.closest('.mini-window');
+    if (!win) return;
+    dragWin = win;
+    var r = win.getBoundingClientRect();
+    dragDX = e.clientX - r.left;
+    dragDY = e.clientY - r.top;
+    bringToFront(win);
+    e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!dragWin) return;
+    var x = Math.max(0, Math.min(window.innerWidth  - dragWin.offsetWidth,  e.clientX - dragDX));
+    var y = Math.max(0, Math.min(window.innerHeight - 48,                    e.clientY - dragDY));
+    dragWin.style.left = x + 'px';
+    dragWin.style.top  = y + 'px';
+  });
+  document.addEventListener('pointerup', function () { dragWin = null; });
+
+  /* Taskbar — shows open windows */
+  var taskbar = document.createElement('div');
+  taskbar.className = 'mw-taskbar';
+  taskbar.style.display = 'none';
+  document.body.appendChild(taskbar);
+
+  var TITLES = {
+    'mw-noc':      'NOC',
+    'mw-rounds':   'Rounds',
+    'mw-residency':'Residency'
+  };
+
+  function updateTaskbar() {
+    var open = Array.from(document.querySelectorAll('.mini-window.is-open'));
+    taskbar.style.display = open.length ? 'flex' : 'none';
+    taskbar.innerHTML = '';
+    open.forEach(function (win) {
+      var btn = document.createElement('button');
+      btn.className = 'mw-task-btn active';
+      btn.textContent = TITLES[win.id] || win.id;
+      btn.addEventListener('click', function () { bringToFront(win); });
+      taskbar.appendChild(btn);
+    });
+  }
+})();
 </script>
 
 </body>
