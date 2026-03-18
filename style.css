@@ -973,10 +973,15 @@ h3 {
 }
 
 @media (max-width: 480px) {
-  .noc-thumb-grid { grid-template-columns: repeat(2, 44px); }
+  .noc-viewer { flex-direction: column; max-height: none; }
+  .noc-preview-panel { order: 1; width: 100%; }
+  .noc-preview-frame { width: 100%; height: min(80vw, 340px); }
+  .noc-thumb-col { order: 2; width: 100%; }
+  .noc-scroll-shell { width: 100%; }
+  .noc-thumb-scroll { max-height: none; overflow-x: auto; overflow-y: hidden; }
+  .noc-thumb-grid { grid-template-columns: repeat(10, 44px); grid-auto-flow: column; }
   .noc-thumb { width: 44px; height: 44px; }
-  .noc-thumb-scroll { max-height: 500px; }
-  .noc-preview-frame { height: 320px; }
+  .noc-scroll-arrow { display: none; }
 }
 
 /* ═══════════════════════════════════════
@@ -1405,9 +1410,13 @@ footer span { color: var(--yellow); }
   .who-portrait {
     border-right: none;
     border-bottom: 3px solid var(--border);
-    min-height: 160px;
+    min-height: 0;
+    max-height: 200px;
   }
-  .traits-grid { grid-template-columns: repeat(2, 1fr); }
+  .portrait-widget {
+    max-width: 160px;
+  }
+  .traits-grid { grid-template-columns: repeat(3, 1fr); }
   .who-header-inner { flex-direction: column; gap: 1rem; }
   .chronicle { padding-left: 2rem; }
   .bio-stats { gap: 1rem; }
