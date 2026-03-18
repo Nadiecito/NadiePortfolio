@@ -568,6 +568,49 @@ h3 {
 .resident-tab-panel { display: none; padding: 1.25rem; }
 .resident-tab-panel.active { display: block; }
 
+/* ── Accordion ── */
+.acc-trigger {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.15s;
+}
+.acc-trigger:hover { color: var(--fg); }
+.acc-trigger.open { color: var(--accent-text); }
+.acc-arrow {
+  font-size: 0.55rem;
+  flex-shrink: 0;
+  margin-left: 0.75rem;
+  opacity: 0.6;
+  transition: transform 0.28s ease, opacity 0.15s;
+}
+.acc-trigger.open .acc-arrow { transform: rotate(90deg); opacity: 1; }
+.acc-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.acc-body.open { grid-template-rows: 1fr; }
+.acc-body-inner { overflow: hidden; }
+.acc-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.5;
+}
+/* Resident accordion item overrides */
+.res-acc-item {
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+}
+.res-acc-item:last-child { border-bottom: none !important; }
+.res-acc-item .card-label { border-bottom: none; }
+.res-acc-item .acc-body.open { border-top: 1px solid var(--border); }
+
 /* ── Bio card ── */
 .who-bio {
   grid-column: 1 / -1;

@@ -122,190 +122,219 @@
       Lo que sucede aquí es replicable en cualquier lugar del mundo.
     </p>
 
-    <!-- ── RESIDENT CARD (tabbed) ── -->
+    <!-- ── RESIDENT CARD (accordion) ── -->
     <div class="resident-card">
-      <div class="resident-card-header">
-        ⌐◨ &nbsp;<span class="t-en">Artist in Residence · Cali, Colombia · 2025</span><span class="t-es">Artista Residente · Cali, Colombia · 2025</span>
-      </div>
-      <!-- Panel: Artist (Nadiecito) -->
-      <div class="resident-tab-panel active" id="rtab-artist" role="tabpanel">
-        <div class="who-bio">
-          <div class="who-portrait">
-            <div class="portrait-widget" id="portraitWidget">
-              <img id="portraitImg"
-                   src="assets/Resident%20Artist%20Portrait/Resident%20Artist.svg"
-                   alt="Nadiecito"
-                   draggable="false"
-                   loading="eager">
+
+      <!-- 1. Nadiecito — Artist Profile -->
+      <div class="who-card res-acc-item">
+        <div class="card-label acc-trigger" onclick="toggleAcc(this)">
+          <span>Nadiecito <span class="acc-subtitle"><span class="t-en">· pixel artist · Cali, Colombia</span><span class="t-es">· pixel artista · Cali, Colombia</span></span></span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="who-bio" style="border:none;border-top:1px solid var(--border);">
+              <div class="who-portrait">
+                <div class="portrait-widget" id="portraitWidget">
+                  <img id="portraitImg"
+                       src="assets/Resident%20Artist%20Portrait/Resident%20Artist.svg"
+                       alt="Nadiecito"
+                       draggable="false"
+                       loading="eager">
+                </div>
+              </div>
+              <div class="who-bio-right">
+                <div class="card-body">
+                  <p class="bio-text t-en">
+                    Nadiecito is a pixel artist, illustrator, and community builder based in <strong>Cali, Colombia</strong>.
+                    Selected as a Nouns Art Resident through
+                    <a href="https://www.nouns.camp/proposals/840" target="_blank" rel="noopener">Prop #840</a>
+                    from August 2025 to February 2026.
+                  </p>
+                  <p class="bio-text t-es">
+                    Nadiecito es un pixel artista, ilustrador y gestor cultural de <strong>Cali, Colombia</strong>.
+                    Seleccionado como Artista Residente de Nouns a través de la
+                    <a href="https://www.nouns.camp/proposals/840" target="_blank" rel="noopener">Prop #840</a>
+                    de agosto 2025 a febrero 2026.
+                  </p>
+                  <p class="bio-text t-en">
+                    2+ years creating illustrations, animations and pixel art for the Nouns ecosystem —
+                    with <strong>200+ traits</strong> on Noundry Gallery, <strong>15 on-chain proposals</strong>, and 2 approved.
+                    During the residency alone: hundreds of pieces between illustrations, pixel art &amp; animations, 500+ attendees at IRL events.
+                  </p>
+                  <p class="bio-text t-es">
+                    2+ años creando ilustraciones, animaciones y pixel art para el ecosistema Nouns —
+                    con <strong>200+ traits</strong> en Noundry Gallery, <strong>15 propuestas on-chain</strong>, y 2 aprobadas.
+                    Solo durante la residencia: cientos de piezas entre ilustraciones, pixel art y animaciones, 500+ asistentes a eventos IRL.
+                  </p>
+                  <div style="display:flex;gap:0.75rem;margin-bottom:0.75rem;flex-wrap:wrap;">
+                    <a href="https://farcaster.xyz/nadiecito.eth" target="_blank" rel="noopener" style="font-size:0.75rem;color:var(--fg-muted);display:inline-flex;align-items:center;gap:4px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M18.24.24H5.76A5.76 5.76 0 0 0 0 6v12a5.76 5.76 0 0 0 5.76 5.76h12.48A5.76 5.76 0 0 0 24 18V6A5.76 5.76 0 0 0 18.24.24m.816 17.166v.504a.49.49 0 0 1 .543.48v.568h-5.143v-.569A.49.49 0 0 1 15 17.91v-.504c0-.22.153-.402.358-.458l-.01-4.364c-.158-1.737-1.64-3.098-3.443-3.098s-3.285 1.361-3.443 3.098l-.01 4.358c.228.042.532.208.54.464v.504a.49.49 0 0 1 .543.48v.568H4.392v-.569a.49.49 0 0 1 .543-.479v-.504c0-.253.201-.454.454-.472V9.039h-.49l-.61-2.031H6.93V5.042h9.95v1.966h2.822l-.61 2.03h-.49v7.896c.252.017.453.22.453.472"/></svg>
+                      Farcaster Profile
+                    </a>
+                    <a href="https://x.com/Ningunartista" target="_blank" rel="noopener" style="font-size:0.75rem;color:var(--fg-muted);display:inline-flex;align-items:center;gap:4px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M9.294 6.928 14.357 1h-1.2L8.762 6.147 5.25 1H1l5.31 7.784L1 15h1.2l4.642-5.436L10.75 15H15zM7.41 8.77l-.537-.775L2.63 1.91h1.84l3.448 4.977.537.775 4.483 6.47h-1.84z"/></svg>
+                      @Ningunartista
+                    </a>
+                  </div>
+                  <div class="bio-stats">
+                    <div class="bio-stat"><span class="bio-stat-n">2+</span><span class="bio-stat-l"><span class="t-en">Years in<br>Nouns</span><span class="t-es">Años en<br>Nouns</span></span></div>
+                    <div class="bio-stat"><span class="bio-stat-n">200+</span><span class="bio-stat-l"><span class="t-en">Traits on<br>Noundry</span><span class="t-es">Traits en<br>Noundry</span></span></div>
+                    <div class="bio-stat"><span class="bio-stat-n">15</span><span class="bio-stat-l"><span class="t-en">On-chain<br>Props</span><span class="t-es">Props<br>On-chain</span></span></div>
+                    <div class="bio-stat"><span class="bio-stat-n">1</span><span class="bio-stat-l"><span class="t-en">Head in the<br>Collection ✓</span><span class="t-es">Cabeza en la<br>Colección ✓</span></span></div>
+                    <div class="bio-stat"><span class="bio-stat-n">100s</span><span class="bio-stat-l"><span class="t-en">Illustrations,<br>Pixel Art &amp; Animations</span><span class="t-es">Ilustraciones,<br>Pixel Art y Animaciones</span></span></div>
+                    <div class="bio-stat"><span class="bio-stat-n">500+</span><span class="bio-stat-l"><span class="t-en">Total<br>Attendees</span><span class="t-es">Asistentes<br>Totales</span></span></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="who-bio-right">
-            <div class="card-label"><span class="t-en">Artist Profile</span><span class="t-es">Perfil del Artista</span></div>
+        </div>
+      </div>
+
+      <!-- 2. Head Trait Submissions -->
+      <div class="who-card res-acc-item">
+        <div class="card-label acc-trigger" onclick="toggleAcc(this)">
+          <span>⌐◨ <span class="t-en">Head Trait Submissions — Nouns Collection</span><span class="t-es">Envíos de Traits — Colección Nouns</span></span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
             <div class="card-body">
-              <p class="bio-text t-en">
-                Pixel artist, illustrator, and community builder based in <strong>Cali, Colombia</strong>.
-                Selected as a Nouns Art Resident through
-                <a href="https://www.nouns.camp/proposals/840" target="_blank" rel="noopener">Prop #840</a>
-                from August 2025 to February 2026.
-              </p>
-              <p class="bio-text t-es">
-                Pixel artista, ilustrador y gestor cultural de <strong>Cali, Colombia</strong>.
-                Seleccionado como Artista Residente de Nouns a través de la
-                <a href="https://www.nouns.camp/proposals/840" target="_blank" rel="noopener">Prop #840</a>
-                de agosto 2025 a febrero 2026.
-              </p>
-              <p class="bio-text t-en">
-                2+ years creating illustrations, animations and pixel art for the Nouns ecosystem —
-                with <strong>200+ traits</strong> on Noundry Gallery, <strong>15 on-chain proposals</strong>, and 2 approved.
-                During the residency alone: hundreds of pieces between illustrations, pixel art &amp; animations, 500+ attendees at IRL events.
-              </p>
-              <p class="bio-text t-es">
-                2+ años creando ilustraciones, animaciones y pixel art para el ecosistema Nouns —
-                con <strong>200+ traits</strong> en Noundry Gallery, <strong>15 propuestas on-chain</strong>, y 2 aprobadas.
-                Solo durante la residencia: cientos de piezas entre ilustraciones, pixel art y animaciones, 500+ asistentes a eventos IRL.
-              </p>
-              <div style="display:flex;gap:0.75rem;margin-bottom:0.75rem;flex-wrap:wrap;">
-                <a href="https://farcaster.xyz/nadiecito.eth" target="_blank" rel="noopener" style="font-size:0.75rem;color:var(--fg-muted);display:inline-flex;align-items:center;gap:4px;">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M18.24.24H5.76A5.76 5.76 0 0 0 0 6v12a5.76 5.76 0 0 0 5.76 5.76h12.48A5.76 5.76 0 0 0 24 18V6A5.76 5.76 0 0 0 18.24.24m.816 17.166v.504a.49.49 0 0 1 .543.48v.568h-5.143v-.569A.49.49 0 0 1 15 17.91v-.504c0-.22.153-.402.358-.458l-.01-4.364c-.158-1.737-1.64-3.098-3.443-3.098s-3.285 1.361-3.443 3.098l-.01 4.358c.228.042.532.208.54.464v.504a.49.49 0 0 1 .543.48v.568H4.392v-.569a.49.49 0 0 1 .543-.479v-.504c0-.253.201-.454.454-.472V9.039h-.49l-.61-2.031H6.93V5.042h9.95v1.966h2.822l-.61 2.03h-.49v7.896c.252.017.453.22.453.472"/></svg>
-                  Farcaster Profile
+              <div class="traits-grid">
+                <a href="https://www.nouns.camp/proposals/641" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #641 — Defeated">
+                  <div class="trait-img"><img src="assets/head-abacus-v1.svg" alt="Abacus v1" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Abacus v1</span><span class="trait-prop">Prop #641</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
                 </a>
-                <a href="https://x.com/Ningunartista" target="_blank" rel="noopener" style="font-size:0.75rem;color:var(--fg-muted);display:inline-flex;align-items:center;gap:4px;">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M9.294 6.928 14.357 1h-1.2L8.762 6.147 5.25 1H1l5.31 7.784L1 15h1.2l4.642-5.436L10.75 15H15zM7.41 8.77l-.537-.775L2.63 1.91h1.84l3.448 4.977.537.775 4.483 6.47h-1.84z"/></svg>
-                  @Ningunartista
+                <a href="https://www.nouns.camp/proposals/798" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #798 — Defeated">
+                  <div class="trait-img"><img src="assets/head-wolf1.svg" alt="Wolf Head" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Wolf Head</span><span class="trait-prop">Prop #798</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
                 </a>
-              </div>
-              <div class="bio-stats">
-                <div class="bio-stat"><span class="bio-stat-n">2+</span><span class="bio-stat-l"><span class="t-en">Years in<br>Nouns</span><span class="t-es">Años en<br>Nouns</span></span></div>
-                <div class="bio-stat"><span class="bio-stat-n">200+</span><span class="bio-stat-l"><span class="t-en">Traits on<br>Noundry</span><span class="t-es">Traits en<br>Noundry</span></span></div>
-                <div class="bio-stat"><span class="bio-stat-n">15</span><span class="bio-stat-l"><span class="t-en">On-chain<br>Props</span><span class="t-es">Props<br>On-chain</span></span></div>
-                <div class="bio-stat"><span class="bio-stat-n">1</span><span class="bio-stat-l"><span class="t-en">Head in the<br>Collection ✓</span><span class="t-es">Cabeza en la<br>Colección ✓</span></span></div>
-                <div class="bio-stat"><span class="bio-stat-n">100s</span><span class="bio-stat-l"><span class="t-en">Illustrations,<br>Pixel Art &amp; Animations</span><span class="t-es">Ilustraciones,<br>Pixel Art y Animaciones</span></span></div>
-                <div class="bio-stat"><span class="bio-stat-n">500+</span><span class="bio-stat-l"><span class="t-en">Total<br>Attendees</span><span class="t-es">Asistentes<br>Totales</span></span></div>
+                <a href="https://www.nouns.camp/proposals/804" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #804 — Defeated">
+                  <div class="trait-img"><img src="assets/head-wolf2.svg" alt="Wolf 2" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Wolf 2 Head</span><span class="trait-prop">Prop #804</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
+                </a>
+                <a href="https://www.nouns.camp/proposals/819" target="_blank" rel="noopener" class="trait trait--canceled" title="Prop #819 — Canceled">
+                  <div class="trait-img"><img src="assets/head-mantis.svg" alt="Mantis" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Mantis Head</span><span class="trait-prop">Prop #819</span><span class="trait-status"><span class="t-en">✕ Canceled</span><span class="t-es">✕ Cancelada</span></span></div>
+                </a>
+                <a href="https://www.nouns.camp/proposals/822" target="_blank" rel="noopener" class="trait trait--executed" title="Prop #822 — Executed ✓">
+                  <div class="trait-img"><img src="assets/head-abacus-v2.svg" alt="Abacus Head v2" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Abacus Head</span><span class="trait-prop">Prop #822</span><span class="trait-status"><span class="t-en">✓ Executed</span><span class="t-es">✓ Ejecutada</span></span></div>
+                </a>
+                <a href="https://www.nouns.camp/proposals/853" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #853 — Defeated">
+                  <div class="trait-img"><img src="assets/head-hyrax.svg" alt="Hyrax" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Hyrax Head</span><span class="trait-prop">Prop #853</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
+                </a>
+                <a href="https://www.nouns.camp/proposals/880" target="_blank" rel="noopener" class="trait trait--canceled" title="Prop #880 — Canceled">
+                  <div class="trait-img"><img src="assets/head-parkbench-880.svg" alt="Park Bench" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Park Bench</span><span class="trait-prop">Prop #880</span><span class="trait-status"><span class="t-en">✕ Canceled</span><span class="t-es">✕ Cancelada</span></span></div>
+                </a>
+                <a href="https://www.nouns.camp/proposals/881" target="_blank" rel="noopener" class="trait trait--canceled" title="Prop #881 — Canceled">
+                  <div class="trait-img"><img src="assets/head-parkbench-881.svg" alt="Park Bench v2" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Park Bench v2</span><span class="trait-prop">Prop #881</span><span class="trait-status"><span class="t-en">✕ Canceled</span><span class="t-es">✕ Cancelada</span></span></div>
+                </a>
+                <a href="https://www.nouns.camp/proposals/925" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #925 — Defeated">
+                  <div class="trait-img"><img src="assets/head-direwolf.svg" alt="Direwolf" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Direwolf Head</span><span class="trait-prop">Prop #925</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
+                </a>
+                <a href="https://www.nouns.camp/proposals/935" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #935 — Defeated">
+                  <div class="trait-img"><img src="assets/head-bananasplit.svg" alt="Banana Split" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Banana Split</span><span class="trait-prop">Prop #935</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
+                </a>
+                <a href="https://www.nouns.camp/proposals/934" target="_blank" rel="noopener" class="trait trait--canceled" title="Prop #934 — Canceled">
+                  <div class="trait-img"><img src="assets/head-cap-v1.svg" alt="Cap v1" loading="lazy"></div>
+                  <div class="trait-info"><span class="trait-name">Cap Head v1</span><span class="trait-prop">Prop #934</span><span class="trait-status"><span class="t-en">✕ Canceled</span><span class="t-es">✕ Cancelada</span></span></div>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Panel: On-Chain -->
-      <div class="resident-tab-panel active" id="rtab-onchain" role="tabpanel">
-
-        <!-- Traits -->
-        <div class="who-card who-props">
-          <div class="card-label">⌐◨ Head Trait Submissions — Nouns Collection</div>
-          <div class="card-body">
-            <div class="traits-grid">
-              <a href="https://www.nouns.camp/proposals/641" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #641 — Defeated">
-                <div class="trait-img"><img src="assets/head-abacus-v1.svg" alt="Abacus v1" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Abacus v1</span><span class="trait-prop">Prop #641</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
-              </a>
-              <a href="https://www.nouns.camp/proposals/798" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #798 — Defeated">
-                <div class="trait-img"><img src="assets/head-wolf1.svg" alt="Wolf Head" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Wolf Head</span><span class="trait-prop">Prop #798</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
-              </a>
-              <a href="https://www.nouns.camp/proposals/804" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #804 — Defeated">
-                <div class="trait-img"><img src="assets/head-wolf2.svg" alt="Wolf 2" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Wolf 2 Head</span><span class="trait-prop">Prop #804</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
-              </a>
-              <a href="https://www.nouns.camp/proposals/819" target="_blank" rel="noopener" class="trait trait--canceled" title="Prop #819 — Canceled">
-                <div class="trait-img"><img src="assets/head-mantis.svg" alt="Mantis" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Mantis Head</span><span class="trait-prop">Prop #819</span><span class="trait-status"><span class="t-en">✕ Canceled</span><span class="t-es">✕ Cancelada</span></span></div>
-              </a>
-              <a href="https://www.nouns.camp/proposals/822" target="_blank" rel="noopener" class="trait trait--executed" title="Prop #822 — Executed ✓">
-                <div class="trait-img"><img src="assets/head-abacus-v2.svg" alt="Abacus Head v2" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Abacus Head</span><span class="trait-prop">Prop #822</span><span class="trait-status"><span class="t-en">✓ Executed</span><span class="t-es">✓ Ejecutada</span></span></div>
-              </a>
-              <a href="https://www.nouns.camp/proposals/853" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #853 — Defeated">
-                <div class="trait-img"><img src="assets/head-hyrax.svg" alt="Hyrax" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Hyrax Head</span><span class="trait-prop">Prop #853</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
-              </a>
-              <a href="https://www.nouns.camp/proposals/880" target="_blank" rel="noopener" class="trait trait--canceled" title="Prop #880 — Canceled">
-                <div class="trait-img"><img src="assets/head-parkbench-880.svg" alt="Park Bench" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Park Bench</span><span class="trait-prop">Prop #880</span><span class="trait-status"><span class="t-en">✕ Canceled</span><span class="t-es">✕ Cancelada</span></span></div>
-              </a>
-              <a href="https://www.nouns.camp/proposals/881" target="_blank" rel="noopener" class="trait trait--canceled" title="Prop #881 — Canceled">
-                <div class="trait-img"><img src="assets/head-parkbench-881.svg" alt="Park Bench v2" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Park Bench v2</span><span class="trait-prop">Prop #881</span><span class="trait-status"><span class="t-en">✕ Canceled</span><span class="t-es">✕ Cancelada</span></span></div>
-              </a>
-              <a href="https://www.nouns.camp/proposals/925" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #925 — Defeated">
-                <div class="trait-img"><img src="assets/head-direwolf.svg" alt="Direwolf" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Direwolf Head</span><span class="trait-prop">Prop #925</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
-              </a>
-              <a href="https://www.nouns.camp/proposals/935" target="_blank" rel="noopener" class="trait trait--defeated" title="Prop #935 — Defeated">
-                <div class="trait-img"><img src="assets/head-bananasplit.svg" alt="Banana Split" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Banana Split</span><span class="trait-prop">Prop #935</span><span class="trait-status"><span class="t-en">✕ Defeated</span><span class="t-es">✕ Rechazada</span></span></div>
-              </a>
-              <a href="https://www.nouns.camp/proposals/934" target="_blank" rel="noopener" class="trait trait--canceled" title="Prop #934 — Canceled">
-                <div class="trait-img"><img src="assets/head-cap-v1.svg" alt="Cap v1" loading="lazy"></div>
-                <div class="trait-info"><span class="trait-name">Cap Head v1</span><span class="trait-prop">Prop #934</span><span class="trait-status"><span class="t-en">✕ Canceled</span><span class="t-es">✕ Cancelada</span></span></div>
-              </a>
-            </div>
-          </div>
+      <!-- 3. A Head in the Collection -->
+      <div class="who-card res-acc-item">
+        <div class="card-label acc-trigger" onclick="toggleAcc(this)">
+          <span>✓ <span class="t-en">A Head in the Collection</span><span class="t-es">Una Cabeza en la Colección</span></span>
+          <span class="acc-arrow">▶</span>
         </div>
-
-        <!-- Abacus -->
-        <div class="who-card" style="margin-top:1rem;">
-          <div class="card-label">✓ <span class="t-en">Part of the Infinite Artwork</span><span class="t-es">Parte de la Obra de Arte Infinita</span></div>
-          <div class="card-body">
-            <div class="card-split">
-              <div class="card-split-img" style="border:3px solid var(--green);">
-                <img src="assets/head-abacus-v2.svg" alt="Abacus Head" style="image-rendering:pixelated;" loading="lazy">
-              </div>
-              <div>
-                <h4 style="font-family:var(--font-pixel);font-size:0.9rem;margin-bottom:0.25rem;color:var(--fg);">Abacus Head</h4>
-                <a href="https://www.nouns.camp/proposals/822" target="_blank" rel="noopener" style="font-size:0.75rem;font-weight:bold;display:block;margin-bottom:0.5rem;">Prop #822 · Executed ✓ ↗</a>
-                <p style="font-size:0.8rem;color:var(--fg-muted);line-height:1.55;">
-                  <span class="t-en">Accepted into the official Nouns collection — forever on Ethereum. Every Noun generated with this head carries Nadiecito's pixel art in the protocol.</span>
-                  <span class="t-es">Aceptada en la colección oficial de Nouns — para siempre en Ethereum. Cada Noun generado con esta cabeza lleva el pixel art de Nadiecito grabado en el protocolo.</span>
-                </p>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="card-body">
+              <div class="card-split">
+                <div class="card-split-img" style="border:3px solid var(--green);">
+                  <img src="assets/head-abacus-v2.svg" alt="Abacus Head" style="image-rendering:pixelated;" loading="lazy">
+                </div>
+                <div>
+                  <h4 style="font-family:var(--font-pixel);font-size:0.9rem;margin-bottom:0.25rem;color:var(--fg);">Abacus Head</h4>
+                  <a href="https://www.nouns.camp/proposals/822" target="_blank" rel="noopener" style="font-size:0.75rem;font-weight:bold;display:block;margin-bottom:0.5rem;">Prop #822 · Executed ✓ ↗</a>
+                  <p style="font-size:0.8rem;color:var(--fg-muted);line-height:1.55;">
+                    <span class="t-en">Accepted into the official Nouns collection — forever on Ethereum. Every Noun generated with this head carries Nadiecito's pixel art in the protocol.</span>
+                    <span class="t-es">Aceptada en la colección oficial de Nouns — para siempre en Ethereum. Cada Noun generado con esta cabeza lleva el pixel art de Nadiecito grabado en el protocolo.</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Top 5 Proposer -->
-        <div class="who-card" style="margin-top:1rem;">
-          <div class="card-label">⌐◨-◨ <span class="t-en">Top 5 Most Active Nouns Proposer</span><span class="t-es">Top 5 Proponente Más Activo de Nouns</span></div>
-          <div class="card-body">
-            <div class="card-split" style="align-items:center;">
-              <div style="text-align:center;">
-                <div style="font-family:var(--font-pixel);font-size:4rem;color:var(--accent-text);line-height:1;">#5</div>
-                <div style="font-family:var(--font-accent);font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--fg-muted);margin-top:0.25rem;"><span class="t-en">Nouns Proposers</span><span class="t-es">Proponentes Nouns</span></div>
-              </div>
-              <div>
-                <h4 style="font-family:var(--font-pixel);font-size:0.9rem;margin-bottom:0.5rem;color:var(--fg);"><span class="t-en">15 On-Chain Proposals — 2 Approved</span><span class="t-es">15 Propuestas On-Chain — 2 Aprobadas</span></h4>
-                <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.6;margin-bottom:1rem;">
-                  <span class="t-en">With 15 on-chain proposals to Nouns DAO, Nadiecito ranks in the <strong>Top 5 most active proposers</strong> in the entire ecosystem — a testament to persistent community engagement, creative contribution, and belief in the process. 2 proposals executed: <strong>Prop #840</strong> (Residency) &amp; <strong>Prop #822</strong> (Abacus Head — now part of the infinite artwork).</span>
-                  <span class="t-es">Con 15 propuestas on-chain a Nouns DAO, Nadiecito figura entre los <strong>5 proponentes más activos</strong> de todo el ecosistema — reflejo de compromiso comunitario sostenido, contribución creativa y fe en el proceso. 2 propuestas ejecutadas: <strong>Prop #840</strong> (Residencia) y <strong>Prop #822</strong> (Cabeza Ábaco — ahora parte de la obra de arte infinita).</span>
-                </p>
-                <a href="https://www.nouns.game/gamers" target="_blank" rel="noopener" class="btn" style="padding:0.5rem 1.25rem;"><span class="t-en">Verify on Nouns.game ↗</span><span class="t-es">Verificar en Nouns.game ↗</span></a>
+      <!-- 4. Top 5 Proposer -->
+      <div class="who-card res-acc-item">
+        <div class="card-label acc-trigger" onclick="toggleAcc(this)">
+          <span>⌐◨-◨ <span class="t-en">Top 5 Most Active Nouns Proposer</span><span class="t-es">Top 5 Proponente Más Activo de Nouns</span></span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="card-body">
+              <div class="card-split" style="align-items:center;">
+                <div style="text-align:center;">
+                  <div style="font-family:var(--font-pixel);font-size:4rem;color:var(--accent-text);line-height:1;">#5</div>
+                  <div style="font-family:var(--font-accent);font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--fg-muted);margin-top:0.25rem;"><span class="t-en">Nouns Proposers</span><span class="t-es">Proponentes Nouns</span></div>
+                </div>
+                <div>
+                  <h4 style="font-family:var(--font-pixel);font-size:0.9rem;margin-bottom:0.5rem;color:var(--fg);"><span class="t-en">15 On-Chain Proposals — 2 Approved</span><span class="t-es">15 Propuestas On-Chain — 2 Aprobadas</span></h4>
+                  <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.6;margin-bottom:1rem;">
+                    <span class="t-en">With 15 on-chain proposals to Nouns DAO, Nadiecito ranks in the <strong>Top 5 most active proposers</strong> in the entire ecosystem — a testament to persistent community engagement, creative contribution, and belief in the process. 2 proposals executed: <strong>Prop #840</strong> (Residency) &amp; <strong>Prop #822</strong> (Abacus Head — now part of the infinite artwork).</span>
+                    <span class="t-es">Con 15 propuestas on-chain a Nouns DAO, Nadiecito figura entre los <strong>5 proponentes más activos</strong> de todo el ecosistema — reflejo de compromiso comunitario sostenido, contribución creativa y fe en el proceso. 2 propuestas ejecutadas: <strong>Prop #840</strong> (Residencia) y <strong>Prop #822</strong> (Cabeza Ábaco — ahora parte de la obra de arte infinita).</span>
+                  </p>
+                  <a href="https://www.nouns.game/gamers" target="_blank" rel="noopener" class="btn" style="padding:0.5rem 1.25rem;"><span class="t-en">Verify on Nouns.game ↗</span><span class="t-es">Verificar en Nouns.game ↗</span></a>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Noundry -->
-        <div class="who-card" style="margin-top:1rem;">
-          <div class="card-label">Noundry Gallery</div>
-          <div class="card-body">
-            <div class="card-split" style="align-items:center;">
-              <div style="text-align:center;">
-                <div class="noundry-num">200+</div>
-                <div style="font-family:var(--font-accent);font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--fg-muted);margin-top:0.25rem;"><span class="t-en">Traits Uploaded</span><span class="t-es">Traits Subidos</span></div>
-              </div>
-              <div>
-                <h4 style="font-family:var(--font-pixel);font-size:0.9rem;margin-bottom:0.5rem;color:var(--fg);"><span class="t-en">One of the most prolific trait creators in the ecosystem</span><span class="t-es">Uno de los creadores de traits más prolíficos del ecosistema</span></h4>
-                <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.6;margin-bottom:1rem;">
-                  <span class="t-en">Noundry Gallery is where pixel artists submit traits for the Nouns collection. With 200+ unique traits, Nadiecito has one of the largest individual portfolios — spanning heads, accessories, and more across 2+ years.</span>
-                  <span class="t-es">Noundry Gallery es donde los pixel artistas envían traits para la colección de Nouns. Con 200+ traits únicos, Nadiecito tiene uno de los portafolios individuales más grandes — cabezas, accesorios y más a lo largo de 2+ años.</span>
-                </p>
-                <a href="https://gallery.noundry.wtf/profile/0x215db99298af65306a4c60bd3b7612d5f60b03d7" target="_blank" rel="noopener" class="btn" style="padding:0.5rem 1.25rem;"><span class="t-en">View Profile on Noundry ↗</span><span class="t-es">Ver Perfil en Noundry ↗</span></a>
+      <!-- 5. Noundry Gallery -->
+      <div class="who-card res-acc-item">
+        <div class="card-label acc-trigger" onclick="toggleAcc(this)">
+          <span>Noundry Gallery <span class="acc-subtitle"><span class="t-en">· 200+ traits</span><span class="t-es">· 200+ traits</span></span></span>
+          <span class="acc-arrow">▶</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <div class="card-body">
+              <div class="card-split" style="align-items:center;">
+                <div style="text-align:center;">
+                  <div class="noundry-num">200+</div>
+                  <div style="font-family:var(--font-accent);font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--fg-muted);margin-top:0.25rem;"><span class="t-en">Traits Uploaded</span><span class="t-es">Traits Subidos</span></div>
+                </div>
+                <div>
+                  <h4 style="font-family:var(--font-pixel);font-size:0.9rem;margin-bottom:0.5rem;color:var(--fg);"><span class="t-en">One of the most prolific trait creators in the ecosystem</span><span class="t-es">Uno de los creadores de traits más prolíficos del ecosistema</span></h4>
+                  <p style="font-size:0.85rem;color:var(--fg-muted);line-height:1.6;margin-bottom:1rem;">
+                    <span class="t-en">Noundry Gallery is where pixel artists submit traits for the Nouns collection. With 200+ unique traits, Nadiecito has one of the largest individual portfolios — spanning heads, accessories, and more across 2+ years.</span>
+                    <span class="t-es">Noundry Gallery es donde los pixel artistas envían traits para la colección de Nouns. Con 200+ traits únicos, Nadiecito tiene uno de los portafolios individuales más grandes — cabezas, accesorios y más a lo largo de 2+ años.</span>
+                  </p>
+                  <a href="https://gallery.noundry.wtf/profile/0x215db99298af65306a4c60bd3b7612d5f60b03d7" target="_blank" rel="noopener" class="btn" style="padding:0.5rem 1.25rem;"><span class="t-en">View Profile on Noundry ↗</span><span class="t-es">Ver Perfil en Noundry ↗</span></a>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-      </div><!-- /rtab-onchain -->
     </div><!-- /resident-card -->
 
   </div>
@@ -2204,6 +2233,15 @@
   /* Pre-select middle gallery (rounds) on load, no scroll */
   openGallery('rounds', false);
 })();
+</script>
+
+<script>
+/* ── Accordion toggle ── */
+function toggleAcc(trigger) {
+  var body = trigger.nextElementSibling;
+  var open = trigger.classList.toggle('open');
+  body.classList.toggle('open', open);
+}
 </script>
 
 </body>
