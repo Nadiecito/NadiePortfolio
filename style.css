@@ -610,6 +610,8 @@ h3 {
 .res-acc-item:last-child { border-bottom: none !important; }
 .res-acc-item .card-label { border-bottom: none; }
 .res-acc-item .acc-body.open { border-top: 1px solid var(--border); }
+.acc-pinned { cursor: default !important; }
+.acc-pinned:hover { color: var(--yellow) !important; }
 
 /* ── Bio card ── */
 .who-bio {
