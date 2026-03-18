@@ -343,7 +343,7 @@ nav ul a:hover { color: var(--yellow); }
 .section {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
   overflow-x: hidden;
 }
 
@@ -2077,8 +2077,32 @@ footer span { color: var(--yellow); }
   margin-top: 1.5rem;
   border-top: 2px solid var(--yellow);
   padding-top: 1.5rem;
-  min-height: calc(100vh - 16rem); /* fills viewport below hub once hub scrolls to top */
+  min-height: calc(100vh - 16rem);
   overflow-x: hidden;
+}
+
+/* ── Gallery close bar (visible on mobile only) ── */
+.gallery-close-bar {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.gallery-close-btn {
+  background: none;
+  border: 1px solid var(--yellow);
+  color: var(--yellow);
+  font-family: var(--font-pixel);
+  font-size: 0.72rem;
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+.gallery-close-btn:hover { background: var(--yellow); color: var(--bg); }
+@media (max-width: 600px) {
+  .gallery-close-bar { display: flex; }
+  .inline-gallery { min-height: 60vh; }
 }
 
 /* NOC viewer inside inline panel: nowrap on desktop so preview stays right */
@@ -2124,13 +2148,15 @@ footer span { color: var(--yellow); }
 }
 @media (max-width: 600px) {
   .gallery-hub {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
   }
-  /* Smaller mini-previews on mobile */
-  .ghub-card { padding: 0.6rem; }
-  .ghub-preview-row { gap: 2px; }
-  .ghub-name { font-size: 0.65rem; }
-  .ghub-meta { font-size: 0.65rem; }
+  .ghub-card { padding: 0.4rem; gap: 0.3rem; }
+  .ghub-preview-row { gap: 2px; grid-template-columns: repeat(2, 1fr); }
+  .ghub-preview-row img:nth-child(n+3) { display: none; }
+  .ghub-name { font-size: 0.58rem; }
+  .ghub-meta { display: none; }
+  .ghub-open-hint { font-size: 0.52rem; }
 }
 
 /* ── Footer links (moved from hero) ── */

@@ -2122,15 +2122,19 @@
   var nocMoved = false;
   var hub = document.querySelector('.gallery-hub');
   var cards = Array.from(document.querySelectorAll('.ghub-card'));
+  var isMobile = function () { return window.innerWidth <= 600; };
 
-  function openGallery(gallery, scrollHub) {
-    var panel = document.getElementById('inline-gallery-' + gallery);
-
-    /* Deactivate all cards + hide all panels */
+  function closeAll() {
     cards.forEach(function (c) { c.classList.remove('active'); });
     document.querySelectorAll('.inline-gallery').forEach(function (p) { p.style.display = 'none'; });
+  }
 
-    /* Activate clicked card */
+  function openGallery(gallery, doScroll) {
+    var panel = document.getElementById('inline-gallery-' + gallery);
+
+    closeAll();
+
+    /* Activate card */
     var card = cards.find(function (c) { return c.dataset.gallery === gallery; });
     if (card) card.classList.add('active');
 
@@ -2139,18 +2143,36 @@
       var nocEl = document.getElementById('noc');
       if (nocEl && panel) { panel.appendChild(nocEl); nocMoved = true; }
     }
-    /* Make NOC section itself visible */
     if (gallery === 'noc') {
       var nocEl = document.getElementById('noc');
       if (nocEl) nocEl.style.display = '';
     }
 
-    if (panel) {
-      panel.style.display = '';
+    if (!panel) return;
+    panel.style.display = '';
 
-      if (scrollHub && hub) {
-        /* Scroll hub to top of viewport so 3 buttons are at top, gallery fills below */
-        hub.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    /* Add close bar (mobile only — CSS hides it on desktop) */
+    if (!panel.querySelector('.gallery-close-bar')) {
+      var bar = document.createElement('div');
+      bar.className = 'gallery-close-bar';
+      var btn = document.createElement('button');
+      btn.className = 'gallery-close-btn';
+      btn.textContent = '⌫ back';
+      btn.addEventListener('click', function () {
+        closeAll();
+        if (hub) hub.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      bar.appendChild(btn);
+      panel.insertBefore(bar, panel.firstChild);
+    }
+
+    if (doScroll) {
+      if (isMobile()) {
+        /* Mobile: scroll to gallery content, not hub */
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        /* Desktop: scroll hub to top so 3 buttons stay at top */
+        if (hub) hub.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
   }
@@ -2160,16 +2182,14 @@
       var gallery  = card.dataset.gallery;
       var isActive = card.classList.contains('active');
       if (isActive) {
-        /* Toggle off */
-        card.classList.remove('active');
-        document.querySelectorAll('.inline-gallery').forEach(function (p) { p.style.display = 'none'; });
+        closeAll();
       } else {
         openGallery(gallery, true);
       }
     });
   });
 
-  /* Pre-select middle gallery (rounds) on load without scrolling */
+  /* Pre-select middle gallery (rounds) on load, no scroll */
   openGallery('rounds', false);
 })();
 </script>
