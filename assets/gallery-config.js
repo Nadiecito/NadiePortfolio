@@ -209,7 +209,8 @@ window.GALLERY_CONFIG = [
       "1843.png",
       "1844.png",
       "1845.png",
-      "1846.png"
+      "1846.png",
+      "1847.png"
     ]
   }
 
