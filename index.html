@@ -1947,6 +1947,11 @@
       tvWrap.appendChild(tvScreen);
       tvWrap.appendChild(tvCounter);
 
+      tvMedia.style.cursor = 'zoom-in';
+      tvMedia.addEventListener('click', function () {
+        lbOpen(tvSrcs[tvIdx], /\.mp4$/i.test(tvSrcs[tvIdx]), tvSrcs, tvIdx);
+      });
+
       function tvRender() {
         var src = tvSrcs[tvIdx];
         tvMedia.innerHTML = /\.mp4$/i.test(src)
