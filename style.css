@@ -1067,11 +1067,11 @@ h3 {
 }
 
 @media (max-width: 480px) {
-  .noc-viewer { flex-direction: column; max-height: none; }
+  .noc-viewer { flex-direction: column; max-height: none; gap: 0.35rem; }
   /* Thumbnails first (above the GIF), preview panel second */
   .noc-thumb-col { order: 1; width: 100%; }
-  .noc-preview-panel { order: 2; width: 100%; }
-  .noc-preview-frame { width: 100%; height: min(80vw, 340px); }
+  .noc-preview-panel { order: 2; width: 100%; gap: 0.2rem; }
+  .noc-preview-frame { width: 100%; height: min(90vw, 320px); }
   .noc-scroll-shell { width: 100%; }
   /* 2-row horizontal grid: fills row 1 then row 2, then adds columns */
   .noc-thumb-scroll { max-height: none; overflow-x: auto; overflow-y: hidden; cursor: grab; }
@@ -1714,6 +1714,9 @@ footer span { color: var(--yellow); }
     margin: 0 auto;
   }
   .who-body { padding: 1.5rem 1rem; }
+  .section { padding: 1.25rem 1rem; }
+  #feria { padding: 1.25rem 1rem; }
+  .artist-list { justify-content: center; }
 }
 
 @media (max-width: 480px) {
@@ -2186,7 +2189,7 @@ footer span { color: var(--yellow); }
     overflow-y: visible;
     overflow-x: hidden;
   }
-  .inline-gallery .noc-viewer { flex-wrap: wrap; }
+  .inline-gallery .noc-viewer { flex-wrap: wrap; gap: 0.35rem; }
 }
 @media (max-width: 600px) {
   .gallery-hub {
