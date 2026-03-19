@@ -1595,9 +1595,45 @@ h3 {
   align-items: center;
   justify-content: center;
   transition: border-color var(--t);
+  cursor: zoom-in;
 }
 
 .ch-photo:hover { opacity: 0.85; }
+
+/* ── Lightbox ── */
+#lb-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 10100;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+#lb-overlay.open { display: flex; }
+#lb-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border: 3px solid var(--yellow);
+  cursor: default;
+  image-rendering: auto;
+}
+#lb-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.15s;
+}
+#lb-close:hover { opacity: 1; }
 
 .ch-photo img {
   width: 100%;
