@@ -96,53 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // scroll + horizontal mobile infinite-scroll handle themselves, and
   // setPointerCapture here would swallow thumbnail click events on PC.
   addDragScroll('.ch-photos');
-
-  // ── Lightbox ──
-  const overlay = document.createElement('div');
-  overlay.id = 'lb-overlay';
-  const lbImg = document.createElement('img');
-  lbImg.id = 'lb-img';
-  lbImg.alt = '';
-  const lbClose = document.createElement('button');
-  lbClose.id = 'lb-close';
-  lbClose.textContent = '✕';
-  lbClose.setAttribute('aria-label', 'Cerrar');
-  overlay.appendChild(lbClose);
-  overlay.appendChild(lbImg);
-  document.body.appendChild(overlay);
-
-  function lbOpen(src, alt) {
-    lbImg.src = src;
-    lbImg.alt = alt || '';
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function lbClose_fn() {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    lbImg.src = '';
-  }
-
-  lbClose.addEventListener('click', lbClose_fn);
-  overlay.addEventListener('click', e => { if (e.target !== lbImg) lbClose_fn(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') lbClose_fn(); });
-
-  // .ch-photo thumbnails (chronicle, feria, mural)
-  document.querySelectorAll('.ch-photo img').forEach(img => {
-    img.addEventListener('click', e => {
-      const strip = img.closest('.ch-photos');
-      if (strip && strip.dataset.dragged) return;
-      e.stopPropagation();
-      lbOpen(img.src, img.alt);
-    });
-  });
-
-  // Mural banner (full-width image)
-  const muralBanner = document.querySelector('#mural img[src*="banner"]');
-  if (muralBanner) {
-    muralBanner.style.cursor = 'zoom-in';
-    muralBanner.addEventListener('click', () => lbOpen(muralBanner.src, muralBanner.alt));
-  }
 });
 
 // ── Feria tabs ──
