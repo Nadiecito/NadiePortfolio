@@ -1595,9 +1595,11 @@ h3 {
   align-items: center;
   justify-content: center;
   transition: border-color var(--t);
+  cursor: zoom-in;
 }
 
 .ch-photo:hover { opacity: 0.85; }
+
 
 .ch-photo img {
   width: 100%;

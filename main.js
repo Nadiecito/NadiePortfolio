@@ -78,14 +78,16 @@ function addDragScroll(selector) {
       active = true;
       startX = e.clientX;
       scrollLeft = el.scrollLeft;
+      delete el.dataset.dragged;
       el.setPointerCapture(e.pointerId);
     });
     el.addEventListener('pointermove', e => {
       if (!active) return;
+      if (Math.abs(e.clientX - startX) > 5) el.dataset.dragged = '1';
       el.scrollLeft = scrollLeft - (e.clientX - startX);
     });
-    el.addEventListener('pointerup',     () => { active = false; });
-    el.addEventListener('pointercancel', () => { active = false; });
+    el.addEventListener('pointerup',     () => { active = false; setTimeout(() => delete el.dataset.dragged, 0); });
+    el.addEventListener('pointercancel', () => { active = false; delete el.dataset.dragged; });
   });
 }
 

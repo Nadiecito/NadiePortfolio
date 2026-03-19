@@ -2122,15 +2122,26 @@
     }
   });
 
-  /* ── Lightbox for chronicle ch-photo elements ── */
-  document.querySelectorAll('.ch-photo img').forEach(function (img) {
-    if (!img.src) return;
+  /* ── Lightbox for .ch-photos strips (chronicle, feria, mural) ── */
+  document.querySelectorAll('.ch-photos').forEach(function (strip) {
+    var items = Array.from(strip.querySelectorAll('.ch-photo img, .ch-photo video'));
+    if (!items.length) return;
+    var srcs = items.map(function (el) { return el.src || el.currentSrc || ''; });
+    items.forEach(function (el, idx) {
+      var isVideo = el.tagName === 'VIDEO';
+      el.style.cursor = 'zoom-in';
+      el.addEventListener('click', function (e) {
+        if (strip.dataset.dragged) return;
+        e.stopPropagation();
+        lbOpen(srcs[idx], isVideo, srcs, idx);
+      });
+    });
+  });
+
+  /* ── Lightbox for mural full-width banner ── */
+  document.querySelectorAll('#mural img[src*="banner"]').forEach(function (img) {
     img.style.cursor = 'zoom-in';
     img.addEventListener('click', function () { lbOpen(img.src, false); });
-  });
-  document.querySelectorAll('.ch-photo video').forEach(function (vid) {
-    vid.style.cursor = 'zoom-in';
-    vid.addEventListener('click', function () { lbOpen(vid.src, true); });
   });
 
 })();
