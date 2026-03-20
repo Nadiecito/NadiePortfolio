@@ -2127,14 +2127,16 @@
     var items = Array.from(strip.querySelectorAll('.ch-photo img, .ch-photo video'));
     if (!items.length) return;
     var srcs = items.map(function (el) { return el.src || el.currentSrc || ''; });
-    items.forEach(function (el, idx) {
-      var isVideo = el.tagName === 'VIDEO';
-      el.style.cursor = 'zoom-in';
-      el.addEventListener('click', function (e) {
-        if (strip.dataset.dragged) return;
-        e.stopPropagation();
-        lbOpen(srcs[idx], isVideo, srcs, idx);
-      });
+    items.forEach(function (el) { el.style.cursor = 'zoom-in'; });
+    // Listen on the container: addDragScroll uses setPointerCapture which
+    // redirects click to the .ch-photos element, so img-level listeners never fire.
+    strip.addEventListener('click', function (e) {
+      if (strip.dataset.dragged) return;
+      var target = e.target.closest('.ch-photo img, .ch-photo video');
+      if (!target) return;
+      var idx = items.indexOf(target);
+      if (idx === -1) return;
+      lbOpen(srcs[idx], target.tagName === 'VIDEO', srcs, idx);
     });
   });
 
