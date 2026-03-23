@@ -169,6 +169,8 @@ window.GALLERY_CONFIG = [
       "1848.png",
       "1849.png",
       "1850.png",
+      "1851.png",
+      "1852.png",
       "aaeeea.png",
       "Believe in SomETHing nounish.gif",
       "Believe in SomETHing.gif",
